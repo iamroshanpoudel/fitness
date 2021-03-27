@@ -37,8 +37,9 @@ body {
 
 #calendar {
 	display: flex;
+	width: 600px;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	font-size: large;
 }
@@ -55,5 +56,95 @@ a {
 
 #date-before,
 #date-after {
-	font-size: 35px;
+	font-size: 30px;
+}
+
+.form-row {
+	width: 600px;
+	background-color: var(--standardBackgroundColor);
+	border-radius: 5px;
+	border-color: var(--moderateColor);
+	margin: 20px;
+	padding: 5px;
+}
+.form-row div {
+	padding: 5px;
+}
+
+#body-items {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#save-button {
+	width: 100px;
+	padding: 10px;
+	margin: 0px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--actionBackgroundColor);
+	color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline-color: var(--activeColor);
+}
+
+select {
+	border-color: var(--moderateColor);
+}
+
+input[type="text"],
+input[type="number"] {
+	border-color: var(--lightColor);
+	border-radius: 5px;
+	height: 25px;
+}
+
+input[type="text"] {
+	width: 97%;
+}
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button,
+svg:hover {
+	transform: scale(1.1);
+}
+
+.boolean-selectors {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+}
+
+.multiple-selectors {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+}
+
+@media only screen and (max-width: 600px) {
+	.logo {
+		display: none;
+	}
+
+	#form-section {
+		width: 100vw !important;
+	}
+
+	.form-row {
+		width: 100vw !important;
+	}
+	#calendar {
+		width: 100vw !important;
+	}
+
+	#calendar h2,
+	#save {
+		padding-left: 15px !important;
+	}
 }
