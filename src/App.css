@@ -1,37 +1,59 @@
 :root {
-  --actionBackgroundColor: #f76b8a;
-  --actionTextColor: white;
-  --activeColor: #66bfbf;
-  --standardBackgroundColor: #fcfefe;
-  --alternativeBackgroundColor: #eaf6f6;
-  --standardTextColor: black;
-  --lightColor: lightgray;
-  --moderateColor: darkgray;
+	--actionBackgroundColor: #f76b8a;
+	--actionTextColor: white;
+	--activeColor: #66bfbf;
+	--standardBackgroundColor: #fcfefe;
+	--alternativeBackgroundColor: #eaf6f6;
+	--standardTextColor: black;
+	--lightColor: lightgray;
+	--moderateColor: darkgray;
 }
 
-body{
-  background-color: var(--alternativeBackgroundColor);
+body {
+	background-color: var(--alternativeBackgroundColor);
 }
 
 #nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  height: 64px;
-  padding: 20px;
-  background-color: var(--actionTextColor);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	height: 64px;
+	padding: 20px;
+	background-color: var(--actionTextColor);
 }
 
-
-#links{
-display: flex;
-flex-direction: row;
-flex: 50%;
-justify-content: space-around;
-align-items: center;
+#links {
+	display: flex;
+	flex-direction: row;
+	flex: 50%;
+	justify-content: space-around;
+	align-items: center;
 }
 
-#image{
-  border-radius: 50%;
-  height: auto;
+#image {
+	border-radius: 50%;
+	height: auto;
+}
+
+#calendar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size: large;
+}
+
+#calendar div {
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+a {
+	text-decoration: none;
+	color: var(--standardTextColor);
+}
+
+#date-before,
+#date-after {
+	font-size: 35px;
 }
