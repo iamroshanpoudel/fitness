@@ -11,13 +11,14 @@
 
 body {
 	background-color: var(--alternativeBackgroundColor);
+	margin: 0px, 0px, 50px, 0px;
 }
 
 #nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	height: 64px;
+	height: 55px;
 	padding: 20px;
 	background-color: var(--actionTextColor);
 }
