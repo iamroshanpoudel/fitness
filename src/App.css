@@ -65,7 +65,7 @@ a {
 	background-color: var(--standardBackgroundColor);
 	border-radius: 5px;
 	border-color: var(--moderateColor);
-	margin: 20px;
+	margin: 10px;
 	padding: 5px;
 }
 .form-row div {
@@ -127,7 +127,33 @@ svg:hover {
 	flex-direction: column;
 	justify-content: start;
 }
+.form-row-second {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 
+.form-row-second select {
+	padding: 5px;
+	width: fit-content;
+	border-radius: 5px;
+	border-style: solid;
+	border-radius: 5px;
+}
+
+#add-btn {
+	border: none;
+	background-color: transparent;
+	font-size: 35px;
+	margin: 10px;
+}
+#questions-title {
+	width: 600px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-self: center;
+}
 @media only screen and (max-width: 600px) {
 	.logo {
 		display: none;

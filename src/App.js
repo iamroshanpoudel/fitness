@@ -1,8 +1,9 @@
 import "./App.css";
 import Nav from "./Nav";
-import Calendar from "./Calendar";
-import FormRow from "./FormRow";
+import Log from "./Log";
 import React, { useState } from "react";
+import Questions from "./Questions";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
 	const [questionState, setQuestionState] = useState([
@@ -26,22 +27,27 @@ function App() {
 			options: ["Ok day", "Bad day", "Great day"],
 		},
 	]);
+
 	return (
 		<div className="App">
-			<Nav />
-			<div id="body-items">
-				<Calendar />
-				<form action="" method="POST">
-					<div id="form-section">
-						{questionState.map((question) => {
-							return <FormRow question={question} />;
-						})}
-					</div>
-					<div>
-						<input type="submit" value="Save" id="save-button"></input>
-					</div>
-				</form>
-			</div>
+			<Switch>
+				<Route
+					path="/"
+					exact
+					render={(props) => <Log {...props} questionState={questionState} />}
+				/>
+				<Route
+					path="/questions"
+					exact
+					render={(props) => (
+						<Questions
+							{...props}
+							questionState={questionState}
+							setQuestionState={setQuestionState}
+						/>
+					)}
+				/>
+			</Switch>
 		</div>
 	);
 }
