@@ -9,14 +9,19 @@ const Log = (props) => {
 			<Nav />
 			<div id="body-items">
 				<Calendar />
-				<form action="" method="POST">
+				<form action="#" method="">
 					<div id="form-section">
 						{props.questionState.map((question, index) => {
 							return <FormRow question={question} key={index} />;
 						})}
 					</div>
 					<div>
-						<input type="submit" value="Save" id="save-button"></input>
+						<input
+							type="submit"
+							value="Save"
+							id="save-button"
+							onClick={() => alert("The form isn't connected to backend!!")}
+						/>
 					</div>
 				</form>
 			</div>
