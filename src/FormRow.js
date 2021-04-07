@@ -36,7 +36,7 @@ const FormRow = (props) => {
 		}
 	};
 	return (
-		<div className="form-row">
+		<div className="form-row" key={props.index}>
 			<div>{props.question.question}</div>
 			<div>{getInputFormat()}</div>
 		</div>
