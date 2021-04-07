@@ -93,6 +93,13 @@ input {
 	color: white;
 }
 
+.inactive-link {
+	text-decoration: none;
+}
+.active-link {
+	color: var(--activeColor);
+	text-decoration: underline;
+}
 input:focus,
 select:focus,
 textarea:focus,

@@ -1,15 +1,21 @@
 import React from "react";
 import Image from "./images/image.jpeg";
-import { Route, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Nav = (props) => {
 	return (
 		<div id="nav">
 			<h2 className="logo">Day Logger</h2>
 			<div id="links">
-				<Link to="/">Log Day</Link>
-				<Link to="questions">Edit Questions</Link>
-				<Link to="/">View Data</Link>
+				<NavLink to="/" activeClassName="active-link" exact>
+					Log Day
+				</NavLink>
+				<NavLink to="questions" activeClassName="active-link" exact>
+					Edit Questions
+				</NavLink>
+				<NavLink to="/log" activeClassName="active-link" exact>
+					View Data
+				</NavLink>
 			</div>
 			<img src={Image} id="image" alt="Logger" />
 		</div>

@@ -47,6 +47,11 @@ function App() {
 						/>
 					)}
 				/>
+				<Route
+					path="/log"
+					exact
+					render={(props) => <Log {...props} questionState={questionState} />}
+				/>
 			</Switch>
 		</div>
 	);
