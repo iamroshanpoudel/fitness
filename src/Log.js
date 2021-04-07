@@ -11,7 +11,7 @@ const Log = (props) => {
 				<Calendar />
 				<form action="" method="POST">
 					<div id="form-section">
-						{props.questionState.map((question) => {
+						{props.questionState.map((question, index) => {
 							return <FormRow question={question} />;
 						})}
 					</div>

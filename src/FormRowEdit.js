@@ -2,6 +2,13 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import React from "react";
 
 const FormRowEdit = (props) => {
+	// Handles deleting of a question from Edit questions
+	const deleteBtnHandler = (e, index) => {
+		let currentState = [...props.questionState];
+		currentState.splice(index, 1); // delete item from array
+		props.setQuestionState(currentState);
+	};
+
 	// Takes a question type and returns JSX for select options with
 	// given input type selected (at the top)
 	const getOptionTypes = (questionType) => {
@@ -16,7 +23,9 @@ const FormRowEdit = (props) => {
 							<option value="boolean">Boolean</option>
 							<option value="multiple-choice">Multiple Choice</option>
 						</select>
-						<DeleteOutlineIcon />
+						<DeleteOutlineIcon
+							onClick={(e) => deleteBtnHandler(e, props.index)}
+						/>
 					</div>
 				);
 			case "text":
@@ -28,7 +37,9 @@ const FormRowEdit = (props) => {
 							<option value="boolean">Boolean</option>
 							<option value="multiple-choice">Multiple Choice</option>
 						</select>
-						<DeleteOutlineIcon />
+						<DeleteOutlineIcon
+							onClick={(e) => deleteBtnHandler(e, props.index)}
+						/>
 					</div>
 				);
 			case "boolean":
@@ -40,7 +51,9 @@ const FormRowEdit = (props) => {
 							<option value="number">Number</option>
 							<option value="multiple-choice">Multiple Choice</option>
 						</select>
-						<DeleteOutlineIcon />
+						<DeleteOutlineIcon
+							onClick={(e) => deleteBtnHandler(e, props.index)}
+						/>
 					</div>
 				);
 			default:
@@ -52,7 +65,9 @@ const FormRowEdit = (props) => {
 							<option value="number">Number</option>
 							<option value="boolean">Boolean</option>
 						</select>
-						<DeleteOutlineIcon />
+						<DeleteOutlineIcon
+							onClick={(e) => deleteBtnHandler(e, props.index)}
+						/>
 					</div>
 				);
 		}
