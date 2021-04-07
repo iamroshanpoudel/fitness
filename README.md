@@ -7,6 +7,8 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 
-## [http://localhost:3000](LIVE DEMO ONLINE) to demo it without downloading
+## [LIVE DEMO ONLINE](https://iamroshanpoudel.github.io/CSE316/)
+
+Click on the link above to demo it without downloading
