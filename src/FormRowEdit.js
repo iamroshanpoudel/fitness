@@ -22,7 +22,7 @@ const FormRowEdit = (props) => {
 		currentState[index].type = e.target.value;
 		if (
 			e.target.value === "multiple-choice" &&
-			currentState[index].options.length != 3
+			currentState[index].options.length !== 3
 		) {
 			currentState[index].options = ["Option 1", "Option 2", "Option 3"];
 		}
@@ -58,7 +58,7 @@ const FormRowEdit = (props) => {
 					<div className="multiple-selectors">
 						{props.question.options.map((option, index) => {
 							return (
-								<div className="multiple-radio-selectors">
+								<div className="multiple-radio-selectors" key={index}>
 									<input
 										type="radio"
 										value={option}

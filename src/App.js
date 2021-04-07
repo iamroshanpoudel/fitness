@@ -1,5 +1,4 @@
 import "./App.css";
-import Nav from "./Nav";
 import Log from "./Log";
 import React, { useState } from "react";
 import Questions from "./Questions";

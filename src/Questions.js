@@ -13,7 +13,6 @@ const Questions = (props) => {
 		};
 		currentState.push(newQuestion);
 		props.setQuestionState(currentState);
-		console.log(props.questionState);
 	};
 
 	return (

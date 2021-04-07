@@ -23,9 +23,9 @@ const FormRow = (props) => {
 		} else {
 			return (
 				<div className="multiple-selectors">
-					{props.question.options.map((option) => {
+					{props.question.options.map((option, index) => {
 						return (
-							<div>
+							<div key={index}>
 								<input type="radio" value={option} name="radio-btn" />
 								{option}
 							</div>
@@ -36,7 +36,7 @@ const FormRow = (props) => {
 		}
 	};
 	return (
-		<div className="form-row" key={props.index}>
+		<div className="form-row">
 			<div>{props.question.question}</div>
 			<div>{getInputFormat()}</div>
 		</div>
