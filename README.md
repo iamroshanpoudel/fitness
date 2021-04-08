@@ -9,6 +9,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.
 
-## [LIVE DEMO ONLINE](https://iamroshanpoudel.github.io/CSE316/)
+## [LIVE DEMO ONLINE](https://iamroshanpoudel.github.io/cse316/)
 
 Click on the link above to demo it without downloading
