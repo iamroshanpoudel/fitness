@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "./images/image.jpeg";
+import Image from "../../images/image.jpeg";
 import { NavLink } from "react-router-dom";
 
 const Nav = (props) => {

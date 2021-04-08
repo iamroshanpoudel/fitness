@@ -1,7 +1,7 @@
 import "./App.css";
-import Log from "./Log";
+import Log from "./Components/LogDay/Log";
 import React, { useState } from "react";
-import Questions from "./Questions";
+import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
 
 function App() {

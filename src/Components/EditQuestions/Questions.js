@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./Nav";
+import Nav from "../Nav/Nav";
 import FormRowEdit from "./FormRowEdit";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 const Questions = (props) => {
