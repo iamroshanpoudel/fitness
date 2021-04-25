@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
 import { getQuestionsAPIMethod } from "./api/client.js";
+import Data from "./Components/Data";
 
 function App() {
 	const [questionState, setQuestionState] = useState([]);
@@ -12,7 +13,6 @@ function App() {
 	useEffect(() => {
 		getQuestionsAPIMethod((questions) => {
 			setQuestionState(questions);
-			console.log("Use effect just worked");
 		});
 	}, [isDataState]);
 
@@ -40,7 +40,7 @@ function App() {
 				<Route
 					path="/log"
 					exact
-					render={(props) => <Log {...props} questionState={questionState} />}
+					render={(props) => <Data {...props} questionState={questionState} />}
 				/>
 			</Switch>
 		</div>

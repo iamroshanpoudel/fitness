@@ -7,13 +7,23 @@ const Nav = (props) => {
 		<div id="nav">
 			<h2 className="logo">Day Logger</h2>
 			<div id="links">
-				<NavLink to="/" activeClassName="active-link" exact>
+				<NavLink to="/" activeClassName="active-link" className="alink" exact>
 					Log Day
 				</NavLink>
-				<NavLink to="questions" activeClassName="active-link" exact>
+				<NavLink
+					to="questions"
+					activeClassName="active-link"
+					className="alink"
+					exact
+				>
 					Edit Questions
 				</NavLink>
-				<NavLink to="/log" activeClassName="active-link" exact>
+				<NavLink
+					to="/log"
+					activeClassName="active-link link"
+					className="alink"
+					exact
+				>
 					View Data
 				</NavLink>
 			</div>

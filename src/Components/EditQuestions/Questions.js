@@ -6,7 +6,7 @@ import { createQuestionAPIMethod } from "../../api/client.js";
 
 const Questions = (props) => {
 	// Adds a question to the form
-	const addBtnHandler = () => {
+	const addBtnHandler = async () => {
 		let currentState = [...props.questionState];
 		let newQuestion = {
 			answerType: "multiple-choice",
@@ -17,7 +17,7 @@ const Questions = (props) => {
 		createQuestionAPIMethod(newQuestion, (response) => {
 			console.log();
 		});
-		// change state after 10 ms to account for delay in db communication
+		// change state after 50 ms to account for delay in db communication
 		setTimeout(() => {
 			props.setIsDataStale(!props.isDataState);
 		}, 50);
