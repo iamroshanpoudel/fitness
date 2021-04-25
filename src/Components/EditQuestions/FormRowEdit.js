@@ -1,49 +1,73 @@
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import React from "react";
+import {
+	deleteQuestionByIdAPIMethod,
+	updateQuestionByIdAPIMethod,
+} from "../../api/client.js";
 
 const FormRowEdit = (props) => {
 	// Handles deleting of a question from Edit questions
 	const deleteBtnHandler = (e, index) => {
-		let currentState = [...props.questionState];
+		const currentState = [...props.questionState];
+		const questionId = currentState[index]._id;
+		deleteQuestionByIdAPIMethod(questionId, (response) => {
+			console.log();
+		});
 		currentState.splice(index, 1); // delete item from array
 		props.setQuestionState(currentState);
 	};
 
 	// Handles changing of question as user types
 	const editQuestionHandler = (e, index) => {
-		let currentState = [...props.questionState];
-		currentState[index].question = e.target.value;
+		const currentState = [...props.questionState];
+		const questionToEdit = currentState[index];
+		questionToEdit.text = e.target.value;
+		updateQuestionByIdAPIMethod(questionToEdit, (response) => {
+			console.log();
+		});
 		props.setQuestionState(currentState);
 	};
 
 	// Handles changing of question types
 	const editQuestionTypeHandler = (e, index) => {
-		let currentState = [...props.questionState];
-		currentState[index].type = e.target.value;
-		if (
-			e.target.value === "multiple-choice" &&
-			currentState[index].options.length !== 3
-		) {
-			currentState[index].options = ["Option 1", "Option 2", "Option 3"];
+		const currentState = [...props.questionState];
+		const questionToEdit = currentState[index];
+		questionToEdit.answerType = e.target.value;
+		if (e.target.value === "multiple-choice") {
+			questionToEdit.multipleChoiceResponses = [
+				"Option 1",
+				"Option 2",
+				"Option 3",
+			];
+		} else {
+			questionToEdit.multipleChoiceResponses = [];
 		}
+		updateQuestionByIdAPIMethod(questionToEdit, (response) => {
+			console.log();
+		});
+
 		props.setQuestionState(currentState);
 	};
 	// Handles changing of options for mcq types
 	const mcqOptionChangeHandler = (e, indexArray, indexOption) => {
-		let currentState = [...props.questionState];
-		currentState[indexArray].options[indexOption] = e.target.value;
+		const currentState = [...props.questionState];
+		const questionToEdit = currentState[indexArray];
+		questionToEdit.multipleChoiceResponses[indexOption] = e.target.value;
+		updateQuestionByIdAPIMethod(questionToEdit, (response) => {
+			console.log();
+		});
 		props.setQuestionState(currentState);
 	};
 
 	const getQuestionOptions = () => {
-		if (props.question.type === "multiple-choice") {
+		if (props.question.answerType === "multiple-choice") {
 			return (
 				<div>
 					<div className="form-row-second">
 						<select
 							name="answer-type"
 							onChange={(e) => editQuestionTypeHandler(e, props.index)}
-							value={props.question.type}
+							value={props.question.answerType}
 						>
 							<option value="multiple-choice">Multiple Choice</option>
 							<option value="text">Text</option>
@@ -56,7 +80,7 @@ const FormRowEdit = (props) => {
 					</div>
 
 					<div className="multiple-selectors">
-						{props.question.options.map((option, index) => {
+						{props.question.multipleChoiceResponses.map((option, index) => {
 							return (
 								<div className="multiple-radio-selectors" key={index}>
 									<input
@@ -85,7 +109,7 @@ const FormRowEdit = (props) => {
 					<select
 						name="answer-type"
 						onChange={(e) => editQuestionTypeHandler(e, props.index)}
-						value={props.question.type}
+						value={props.question.answerType}
 					>
 						<option value="multiple-choice">Multiple Choice</option>
 						<option value="text">Text</option>
@@ -106,7 +130,7 @@ const FormRowEdit = (props) => {
 				{
 					<input
 						type="text"
-						value={props.question.question}
+						value={props.question.text}
 						onChange={(e) => editQuestionHandler(e, props.index)}
 					/>
 				}

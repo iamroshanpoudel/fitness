@@ -3,9 +3,9 @@ import React from "react";
 const FormRow = (props) => {
 	// Returns JSX with appropriate input options according to type
 	const getInputFormat = () => {
-		if (props.question.type === "text") {
+		if (props.question.answerType === "text") {
 			return <input type="text"></input>;
-		} else if (props.question.type === "boolean") {
+		} else if (props.question.answerType === "boolean") {
 			return (
 				<div className="boolean-selectors">
 					<div>
@@ -18,12 +18,12 @@ const FormRow = (props) => {
 					</div>
 				</div>
 			);
-		} else if (props.question.type === "number") {
+		} else if (props.question.answerType === "number") {
 			return <input type="number"></input>;
 		} else {
 			return (
 				<div className="multiple-selectors">
-					{props.question.options.map((option, index) => {
+					{props.question.multipleChoiceResponses.map((option, index) => {
 						return (
 							<div key={index}>
 								<input type="radio" value={option} name="radio-btn" />
@@ -37,7 +37,7 @@ const FormRow = (props) => {
 	};
 	return (
 		<div className="form-row">
-			<div>{props.question.question}</div>
+			<div>{props.question.text}</div>
 			<div>{getInputFormat()}</div>
 		</div>
 	);

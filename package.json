@@ -3,6 +3,7 @@
 	"homepage": "https://iamroshanpoudel.github.io/cse316",
 	"version": "0.2.0",
 	"private": true,
+	"proxy":"http://localhost:8888",
 	"dependencies": {
 		"@material-ui/core": "^4.11.3",
 		"@material-ui/icons": "^4.11.2",

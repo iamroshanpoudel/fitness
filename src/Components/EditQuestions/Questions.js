@@ -2,17 +2,25 @@ import React from "react";
 import Nav from "../Nav/Nav";
 import FormRowEdit from "./FormRowEdit";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { createQuestionAPIMethod } from "../../api/client.js";
+
 const Questions = (props) => {
+	// Adds a question to the form
 	const addBtnHandler = () => {
 		let currentState = [...props.questionState];
 		let newQuestion = {
-			type: "multiple-choice",
-			question: "Add your question here",
-			answer: "",
-			options: ["Option 1", "Option 2", "Option 3"],
+			answerType: "multiple-choice",
+			text: "Add your question here",
+			multipleChoiceResponses: ["Option 1", "Option 2", "Option 3"],
 		};
 		currentState.push(newQuestion);
-		props.setQuestionState(currentState);
+		createQuestionAPIMethod(newQuestion, (response) => {
+			console.log();
+		});
+		// change state after 10 ms to account for delay in db communication
+		setTimeout(() => {
+			props.setIsDataStale(!props.isDataState);
+		}, 50);
 	};
 
 	return (
@@ -37,14 +45,6 @@ const Questions = (props) => {
 								/>
 							);
 						})}
-					</div>
-					<div>
-						<input
-							type="submit"
-							value="Save"
-							id="save-button"
-							onClick={() => alert("The form isn't connected to backend")}
-						/>
 					</div>
 				</form>
 			</div>
