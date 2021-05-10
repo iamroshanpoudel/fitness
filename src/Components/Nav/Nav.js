@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 const Nav = (props) => {
 	return (
 		<div id="nav">
-			<h2 className="logo">Day Logger</h2>
 			<div id="links">
+				<h2 className="logo">Day Logger</h2>
 				<NavLink to="/" activeClassName="active-link" className="alink" exact>
 					Log Day
 				</NavLink>
@@ -26,8 +26,10 @@ const Nav = (props) => {
 				>
 					View Data
 				</NavLink>
+				<NavLink to="/profile" exact>
+					<img src={Image} id="image" alt="User Image" />
+				</NavLink>
 			</div>
-			<img src={Image} id="image" alt="Logger" />
 		</div>
 	);
 };

@@ -56,7 +56,7 @@ const Log = (props) => {
 						})}
 					</div>
 					<div>
-						<input type="submit" value="Save" id="save-button" />
+						<input type="submit" value="Save" className="save-button" />
 					</div>
 				</form>
 			</div>

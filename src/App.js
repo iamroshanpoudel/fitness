@@ -5,6 +5,7 @@ import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
 import { getQuestionsAPIMethod } from "./api/client.js";
 import Data from "./Components/Data";
+import Profile from "./Components/Profile/Profile";
 
 function App() {
 	const [questionState, setQuestionState] = useState([]);
@@ -42,6 +43,7 @@ function App() {
 					exact
 					render={(props) => <Data {...props} questionState={questionState} />}
 				/>
+				<Route path="/profile" exact component={Profile} />
 			</Switch>
 		</div>
 	);
