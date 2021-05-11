@@ -39,7 +39,7 @@ const Log = (props) => {
 
 	return (
 		<div>
-			<Nav />
+			<Nav userState={props.userState} />
 			<div id="body-items">
 				<Calendar dateState={dateState} setDateState={setDateState} />
 				<form onSubmit={formSubmitHandler}>
@@ -54,9 +54,9 @@ const Log = (props) => {
 								/>
 							);
 						})}
-					</div>
-					<div>
-						<input type="submit" value="Save" className="save-button" />
+						<div>
+							<input type="submit" value="Save" className="save-button right" />
+						</div>
 					</div>
 				</form>
 			</div>

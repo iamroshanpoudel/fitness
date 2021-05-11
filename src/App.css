@@ -36,6 +36,7 @@ body {
 #image {
 	border-radius: 50%;
 	height: 70px;
+	width: 75px;
 }
 
 #calendar {
@@ -123,17 +124,21 @@ select {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="number"] {
 	border-color: var(--lightColor);
 	border-radius: 5px;
 	height: 25px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="email"] {
 	width: 97%;
 }
 input[type="submit"]:hover,
 input[type="button"]:hover,
+label:hover,
+a:hover,
 button,
 svg:hover {
 	transform: scale(1.1);
@@ -219,12 +224,24 @@ svg:hover {
 	align-items: center;
 }
 
-#image-chooser-btn {
-	background-color: var(--activeColor);
-	border: none;
-	border-radius: 5%;
+#profile-logout {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-right: 15px;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+label {
+	color: black;
+	height: 30px;
+	padding: 5px;
 	width: fit-content;
-	height: 35px;
+	border-radius: 7px;
+	background-color: var(--activeColor);
 }
 
 @media only screen and (max-width: 600px) {

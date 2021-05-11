@@ -1,8 +1,9 @@
 import React from "react";
-import Image from "../../images/image.jpeg";
 import { NavLink } from "react-router-dom";
 
 const Nav = (props) => {
+	const defaultImage =
+		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
 	return (
 		<div id="nav">
 			<div id="links">
@@ -27,7 +28,11 @@ const Nav = (props) => {
 					View Data
 				</NavLink>
 				<NavLink to="/profile" exact>
-					<img src={Image} id="image" alt="User Image" />
+					{props.userState.profileImageURL ? (
+						<img src={props.userState.profileImageURL} id="image" alt="User" />
+					) : (
+						<img src={defaultImage} id="image" alt="User" />
+					)}
 				</NavLink>
 			</div>
 		</div>

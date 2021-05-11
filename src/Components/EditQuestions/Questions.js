@@ -25,10 +25,10 @@ const Questions = (props) => {
 
 	return (
 		<div>
-			<Nav />
+			<Nav userState={props.userState} />
 			<div id="body-items">
 				<div id="questions-title">
-					<h2>Roshan's Questions</h2>
+					<h2>{props.userState.name}'s Questions</h2>
 					<AddCircleOutlineIcon id="add-btn" onClick={addBtnHandler} />
 				</div>
 

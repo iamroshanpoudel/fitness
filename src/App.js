@@ -3,17 +3,32 @@ import Log from "./Components/LogDay/Log";
 import React, { useState, useEffect } from "react";
 import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
-import { getQuestionsAPIMethod } from "./api/client.js";
+import { getQuestionsAPIMethod, getUserByAPIMethod } from "./api/client.js";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
 
 function App() {
+	const defaultUser = {
+		name: "",
+		email: "",
+		address: [
+			{
+				streetAddress: "",
+				fullAddress: "",
+			},
+		],
+		profileImageURL: "",
+	};
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
+	const [userState, setUserState] = useState(defaultUser);
 
 	useEffect(() => {
 		getQuestionsAPIMethod((questions) => {
 			setQuestionState(questions);
+		});
+		getUserByAPIMethod((user) => {
+			setUserState(user);
 		});
 	}, [isDataState]);
 
@@ -23,7 +38,14 @@ function App() {
 				<Route
 					path="/"
 					exact
-					render={(props) => <Log {...props} questionState={questionState} />}
+					render={(props) => (
+						<Log
+							{...props}
+							questionState={questionState}
+							userState={userState}
+							setUserState={setUserState}
+						/>
+					)}
 				/>
 				<Route
 					path="/questions"
@@ -35,15 +57,36 @@ function App() {
 							setQuestionState={setQuestionState}
 							isDataState={isDataState}
 							setIsDataStale={setIsDataStale}
+							userState={userState}
+							setUserState={setUserState}
 						/>
 					)}
 				/>
 				<Route
 					path="/log"
 					exact
-					render={(props) => <Data {...props} questionState={questionState} />}
+					render={(props) => (
+						<Data
+							{...props}
+							questionState={questionState}
+							userState={userState}
+							setUserState={setUserState}
+						/>
+					)}
 				/>
-				<Route path="/profile" exact component={Profile} />
+				<Route
+					path="/profile"
+					exact
+					render={(props) => (
+						<Profile
+							{...props}
+							userState={userState}
+							setUserState={setUserState}
+							isDataState={isDataState}
+							setIsDataStale={setIsDataStale}
+						/>
+					)}
+				/>
 			</Switch>
 		</div>
 	);

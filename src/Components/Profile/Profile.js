@@ -1,72 +1,177 @@
 import React from "react";
 import Nav from "../Nav/Nav";
-import Image from "../../images/image.jpeg";
+import {
+	uploadImageToCloudinaryAPIMethod,
+	updateUserByAPIMethod,
+} from "../../api/client";
 
-const Profile = () => {
+const Profile = (props) => {
+	const defaultImage =
+		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
+
+	const onSubmitHandler = (e) => {
+		e.preventDefault();
+		updateUserByAPIMethod(props.userState, (response) => {
+			console.log();
+		});
+	};
+
+	const imageChangeHandler = (e) => {
+		e.preventDefault();
+		if (e.target.files && e.target.files[0]) {
+			const selectedFile = e.target.files[0];
+			const formData = new FormData();
+
+			const unsignedUploadPreset = "jackSparrow";
+			formData.append("file", selectedFile);
+			formData.append("upload_preset", unsignedUploadPreset);
+
+			uploadImageToCloudinaryAPIMethod(formData, (response) => {
+				console.log("Upload success");
+
+				// Now the URL gets saved to the author
+				const updatedUser = {
+					...props.userState,
+					profileImageURL: response.url,
+				};
+				props.setUserState(updatedUser);
+				console.log(updatedUser);
+				// Now we want to make sure this is updated on the server – either the
+				// user needs to click the submit button, or we could trigger the server call here
+			});
+		}
+	};
+
+	const removeImageHandler = (e) => {
+		e.preventDefault();
+		const updatedUser = {
+			...props.userState,
+			profileImageURL: defaultImage,
+		};
+		props.setUserState(updatedUser);
+	};
+
+	const nameChangeHandler = (e) => {
+		const updatedUser = {
+			...props.userState,
+			name: e.target.value,
+		};
+		props.setUserState(updatedUser);
+	};
+
+	const emailChangeHandler = (e) => {
+		const updatedUser = {
+			...props.userState,
+			email: e.target.value,
+		};
+		props.setUserState(updatedUser);
+	};
+
+	const streetAddressChangeHandler = (e) => {
+		const updatedUser = {
+			...props.userState,
+		};
+		updatedUser.address[0].streetAddress = e.target.value;
+		props.setUserState(updatedUser);
+	};
+
+	const fullAddressChangeHandler = (e) => {
+		const updatedUser = {
+			...props.userState,
+		};
+		updatedUser.address[0].fullAddress = e.target.value;
+		props.setUserState(updatedUser);
+	};
+
 	return (
 		<div>
-			<Nav />
+			<Nav userState={props.userState} />
 			<div id="body-items">
 				<div id="questions-title">
 					<h2>Edit Profile</h2>
 				</div>
 				<div id="form-section">
-					<div className="form-row">
-						<div>
-							<h3>Profile Photo</h3>
-						</div>
-						<div id="edit-image">
-							<img src={Image} id="image" alt="User Image" />
-							<input
-								type="submit"
-								value="Choose new image"
-								id="image-chooser-btn"
-							/>
+					<form onSubmit={onSubmitHandler}>
+						<div className="form-row">
+							<div>
+								<h3>Profile Photo</h3>
+							</div>
+							<div id="edit-image">
+								<img
+									src={props.userState.profileImageURL || defaultImage}
+									id="image"
+									alt="User"
+								/>
+								<label htmlFor="file">Choose new image</label>
+								<input
+									type="file"
+									name="file"
+									accept="image/*"
+									onChange={imageChangeHandler}
+									id="file"
+								/>
 
-							<a className="underlined">Remove Image</a>
+								<div className="underlined" onClick={removeImageHandler}>
+									Remove Image
+								</div>
+							</div>
 						</div>
-					</div>
-					<div className="form-row">
-						<h3>Name</h3>
-						<input
-							type="text"
-							name="user-name"
-							placeholder="Your Name"
-							required
-						></input>
-					</div>
-					<div className="form-row">
-						<h3>Email</h3>
-						<input
-							type="text"
-							name="user-email"
-							placeholder="Your Email Address"
-							required
-						></input>
-					</div>
-					<div className="form-row">
-						<div>
-							<h3>Address</h3>
-						</div>
-						<div>
+						<div className="form-row">
+							<h3>Name</h3>
 							<input
 								type="text"
-								name="street-addr"
-								placeholder="Street Address"
+								name="user-name"
+								value={props.userState.name || ""}
+								placeholder="Your Name"
+								onChange={nameChangeHandler}
 								required
 							></input>
 						</div>
-
-						<div className="form-row-second">
+						<div className="form-row">
+							<h3>Email</h3>
 							<input
-								type="text"
-								name="street-addr"
-								placeholder="Full Address"
+								type="email"
+								name="user-email"
+								className="input"
+								value={props.userState.email || ""}
+								placeholder="Your Email Address"
+								onChange={emailChangeHandler}
 								required
 							></input>
 						</div>
-					</div>
-					<input type="submit" value="Save" className="save-button" />
+						<div className="form-row">
+							<div>
+								<h3>Address</h3>
+							</div>
+							<div>
+								<input
+									type="text"
+									name="street-addr"
+									placeholder="Street Address"
+									value={props.userState.address[0].streetAddress || ""}
+									onChange={streetAddressChangeHandler}
+									required
+								></input>
+							</div>
+
+							<div className="form-row-second">
+								<input
+									type="text"
+									name="street-addr"
+									placeholder="Full Address"
+									value={props.userState.address[0].fullAddress || ""}
+									onChange={fullAddressChangeHandler}
+									required
+								></input>
+							</div>
+						</div>
+						<div id="profile-logout">
+							<input type="submit" value="Save" className="save-button" />
+							<a href="https://google.com" className="underlined">
+								Logout
+							</a>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
