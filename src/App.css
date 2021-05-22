@@ -286,3 +286,6 @@ label {
 h3 {
 	margin: 10px;
 }
+#googleHide{
+	display:none;
+}

@@ -4,6 +4,7 @@ import {
 	uploadImageToCloudinaryAPIMethod,
 	updateUserByAPIMethod,
 } from "../../api/client";
+import {GoogleLogout} from "react-google-login";
 
 const Profile = (props) => {
 	const defaultImage =
@@ -15,7 +16,11 @@ const Profile = (props) => {
 			console.log();
 		});
 	};
-
+	const userData = JSON.parse(sessionStorage.getItem('userData'));
+	const logout = (res) =>{
+		sessionStorage.clear();
+		window.location.href = '/';
+	}
 	const imageChangeHandler = (e) => {
 		e.preventDefault();
 		if (e.target.files && e.target.files[0]) {
@@ -98,7 +103,7 @@ const Profile = (props) => {
 							</div>
 							<div id="edit-image">
 								<img
-									src={props.userState.profileImageURL || defaultImage}
+									src={ userData.imageUrl || defaultImage}
 									id="image"
 									alt="User"
 								/>
@@ -121,7 +126,7 @@ const Profile = (props) => {
 							<input
 								type="text"
 								name="user-name"
-								value={props.userState.name || ""}
+								value={userData.name || ""}
 								placeholder="Your Name"
 								onChange={nameChangeHandler}
 								required
@@ -133,7 +138,7 @@ const Profile = (props) => {
 								type="email"
 								name="user-email"
 								className="input"
-								value={props.userState.email || ""}
+								value={ userData.email || ""}
 								placeholder="Your Email Address"
 								onChange={emailChangeHandler}
 								required
@@ -167,9 +172,14 @@ const Profile = (props) => {
 						</div>
 						<div id="profile-logout">
 							<input type="submit" value="Save" className="save-button" />
-							<a href="https://google.com" className="underlined">
-								Logout
-							</a>
+								<GoogleLogout
+									clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
+									buttonText="Logout"
+									style="display:none"
+									className="logout"
+									onLogoutSuccess={logout}
+								>
+								</GoogleLogout>
 						</div>
 					</form>
 				</div>
