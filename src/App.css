@@ -22,8 +22,9 @@ body {
 	justify-content: space-evenly;
 	height: 55px;
 	padding: 15px;
-	background-color: var(--actionTextColor);
+	background-color: #333;
 }
+
 
 #links {
 	display: flex;
@@ -59,8 +60,7 @@ a {
 	color: var(--standardTextColor);
 }
 
-#date-before,
-#date-after {
+#date-before, #date-after {
 	font-size: 30px;
 }
 
@@ -79,6 +79,7 @@ a {
 	margin: 10px;
 	padding: 5px !important;
 }
+
 .form-row div {
 	padding: 5px;
 }
@@ -107,15 +108,11 @@ input {
 
 .inactive-link {
 	text-decoration: none;
+	color: white;
 }
-.active-link {
-	color: var(--activeColor);
-	text-decoration: underline;
-}
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
+
+
+input:focus, select:focus, textarea:focus, button:focus {
 	outline-color: var(--activeColor);
 }
 
@@ -123,24 +120,17 @@ select {
 	border-color: var(--moderateColor);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="number"] {
+input[type="text"], input[type="email"], input[type="number"] {
 	border-color: var(--lightColor);
 	border-radius: 5px;
 	height: 25px;
 }
 
-input[type="text"],
-input[type="email"] {
+input[type="text"], input[type="email"] {
 	width: 97%;
 }
-input[type="submit"]:hover,
-input[type="button"]:hover,
-label:hover,
-a:hover,
-button,
-svg:hover {
+
+input[type="submit"]:hover, input[type="button"]:hover, label:hover, a:hover, button, svg:hover {
 	transform: scale(1.1);
 }
 
@@ -155,6 +145,7 @@ svg:hover {
 	flex-direction: column;
 	justify-content: flex-start;
 }
+
 .form-row-second {
 	display: flex;
 	flex-direction: row;
@@ -175,6 +166,7 @@ svg:hover {
 	font-size: 35px;
 	margin: 10px;
 }
+
 #questions-title {
 	width: 600px;
 	display: flex;
@@ -207,8 +199,17 @@ svg:hover {
 	align-items: center;
 }
 
+.alink {
+	color: white;
+}
+
 .alink:hover {
 	transform: scale(1.1);
+}
+
+.active-link {
+	color: var(--activeColor);
+	text-decoration: underline;
 }
 
 #temp-page {
@@ -247,12 +248,11 @@ label {
 @media only screen and (max-width: 600px) {
 	.logo {
 		display: none;
-	}
 
+	}
 	#form-section {
 		width: 100vw !important;
 	}
-
 	#questions-title {
 		width: 100% !important;
 		margin-left: 20px !important;
@@ -263,12 +263,9 @@ label {
 	#calendar {
 		width: 100vw !important;
 	}
-
-	#calendar h2,
-	#save {
+	#calendar h2, #save {
 		padding-left: 15px !important;
 	}
-
 	#nav {
 		width: 100vw !important;
 	}
@@ -286,6 +283,36 @@ label {
 h3 {
 	margin: 10px;
 }
-#googleHide{
-	display:none;
+
+#googleHide {
+	display: none;
+}
+
+/* Main Page */
+
+.main_photo {
+	width: 100%;
+	height: 50%;
+}
+
+.mainPage {
+	min-height: 380px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("./images/main_img.jpg");
+	position: relative;
+	height: 1000px;
+}
+
+.container {
+	position: absolute;
+	margin: 20px;
+}
+
+.main_body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
 }

@@ -7,6 +7,7 @@ import { getQuestionsAPIMethod, getUserByAPIMethod } from "./api/client.js";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
 import {isLoggedIn, loginAlert} from "./util/googleLogin";
+import Main from "./Components/Main";
 
 function App() {
 	const defaultUser = {
@@ -36,6 +37,14 @@ function App() {
 	return (
 		<div className="App">
 			<Switch>
+				<Route 
+					path="/main" 
+					exact 
+					render={(props) => (
+						<Main {...props}
+						/>
+					)} 
+				/>
 				<Route
 					path="/"
 					exact

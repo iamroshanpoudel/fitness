@@ -41,7 +41,7 @@ const Nav = (props) => {
 	return (
 		<div id="nav">
 			<div id="links">
-				<h2 className="logo">Day Logger</h2>
+				<NavLink to="/main" activeClassName="active-link" className="logo alink">Fitness</NavLink>
 				<NavLink to="/" activeClassName="active-link" className="alink" exact>
 					Log Day
 				</NavLink>
