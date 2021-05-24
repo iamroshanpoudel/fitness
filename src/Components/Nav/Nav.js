@@ -1,30 +1,42 @@
 import React,{ useState } from "react";
 import { NavLink } from "react-router-dom";
-import {GoogleLogin, GoogleLogout }from 'react-google-login';
+import {GoogleLogin, useGoogleLogout }from 'react-google-login';
+import { responseFailGoogle,logout} from "../../util/googleLogin";
+
 
 const Nav = (props) => {
 	const defaultImage =
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
 	///////////////////////////////////////Google Login Function////////////////////////////////////////////////
 	const [image, setImage] = useState();
-
-	const loginStatus = () =>{
-		const failureText= document.getElementById('failure')
-		failureText.innerText = 'Login Failure';
-		const removeText =failureText.childNodes[0];
-		setTimeout(function(){removeText.remove()},2000);
-	}
+	//sign out hook
+	const { signOut, signOutLoaded } = useGoogleLogout({
+		clientId:"547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com",
+		buttonText:"Logout",
+		Style:"display:none",
+		className:"logout",
+		onLogoutSuccess:{logout}
+	})
+	//signIn response
 	const responseGoogle = (response) => {
 		document.getElementById('googleLogin').style= 'display:none'
 		document.getElementById('googleHide').style ='display:block'
-		sessionStorage.setItem('userData', JSON.stringify(response.profileObj))
 		setImage(response.profileObj.imageUrl);
+		//Timing to renew access token
+		let expired_at = 24 * 60 * 1000; //One Day
+		//add expiration information
+		response.profileObj.expired_at = expired_at;
+		//store in session Storage
+		sessionStorage.setItem('userData', JSON.stringify(response.profileObj))
+		const timeOut = async () =>{
+			const sessionClear = () =>sessionStorage.removeItem('userData');
+			await setTimeout(sessionClear,expired_at);
+			await setTimeout(signOut,expired_at);
+		}
+		//start Counting
+		timeOut().then(r =>{ console.log("session started")});
 	}
 
-	const responseFailGoogle = (r) =>{
-		console.log(r);
-		loginStatus("Login Failed");
-	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	return (
 		<div id="nav">
@@ -50,20 +62,20 @@ const Nav = (props) => {
 					View Data
 				</NavLink>
 				<div id='googleLogin'>
-				<GoogleLogin
-					clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
-					buttonText="Login"
-					onSuccess={responseGoogle}
-					onFailure={responseFailGoogle}
-					cookiePolicy={'single_host_origin'}
-					className='login'
-					isSignedIn={true}
-				/>
+					<GoogleLogin
+						clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
+						buttonText="Login"
+						onSuccess={responseGoogle}
+						onFailure={responseFailGoogle}
+						cookiePolicy={'single_host_origin'}
+						className='login'
+						isSignedIn={true}
+					/>
 				</div>
 				<p id='failure'></p>
 				<div id='googleHide'>
 				<NavLink to="/profile" exact>
-					{image == undefined ? (
+					{image === undefined ? (
 						<img src={defaultImage} id="image" alt="User" />
 					) : (
 						<img src={image} id="image" alt="User" />

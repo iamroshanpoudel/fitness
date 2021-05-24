@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import { getQuestionsAPIMethod, getUserByAPIMethod } from "./api/client.js";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
+import {isLoggedIn, loginAlert} from "./util/googleLogin";
 
 function App() {
 	const defaultUser = {
@@ -51,6 +52,7 @@ function App() {
 					path="/questions"
 					exact
 					render={(props) => (
+						isLoggedIn() ?
 						<Questions
 							{...props}
 							questionState={questionState}
@@ -60,24 +62,28 @@ function App() {
 							userState={userState}
 							setUserState={setUserState}
 						/>
+						:  loginAlert()
 					)}
 				/>
 				<Route
 					path="/log"
 					exact
 					render={(props) => (
+						isLoggedIn() ?
 						<Data
 							{...props}
 							questionState={questionState}
 							userState={userState}
 							setUserState={setUserState}
 						/>
+						: loginAlert()
 					)}
 				/>
 				<Route
 					path="/profile"
 					exact
 					render={(props) => (
+						isLoggedIn() ?
 						<Profile
 							{...props}
 							userState={userState}
@@ -85,6 +91,7 @@ function App() {
 							isDataState={isDataState}
 							setIsDataStale={setIsDataStale}
 						/>
+						:  loginAlert()
 					)}
 				/>
 			</Switch>
