@@ -1,7 +1,7 @@
 import { ExpansionPanelSummary } from "@material-ui/core";
 import React from "react";
 import Nav from "./Nav/Nav";
-import main_img from "../images/main_img.jpg"
+
 
 function Main() {
 
@@ -12,10 +12,11 @@ function Main() {
                 {/* <img src={main_img} alt="main_photo" className="main_photo" /> */}
             </div>
             <div className="main_body">
-                <p>Manage Your Day,</p>
-                <p>Manage Your Life</p>
-                <button>Join Us</button>
+                <h1 className="mainText">Manage Your Day,</h1>
+                <h1 className="mainText">Manage Your Life</h1>
+                <img id='fitIcon' src="https://buyflow-web-assets.noom.com/buyflow-client/9d981dcc24d0a1cee191bba67bd720884a7746c9/static/146f083a4184650bcac910747b113b38.png"/>
             </div>
+
         </div>  
     );
 }
