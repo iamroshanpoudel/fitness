@@ -25,7 +25,6 @@ body {
 	background-color: #333;
 }
 
-
 #links {
 	display: flex;
 	flex-direction: row;
@@ -110,7 +109,6 @@ input {
 	text-decoration: none;
 	color: white;
 }
-
 
 input:focus, select:focus, textarea:focus, button:focus {
 	outline-color: var(--activeColor);
@@ -248,7 +246,6 @@ label {
 @media only screen and (max-width: 600px) {
 	.logo {
 		display: none;
-
 	}
 	#form-section {
 		width: 100vw !important;
@@ -316,3 +313,65 @@ h3 {
 	justify-content: center;
 	text-align: center;
 }
+
+.paragraph {
+	margin-top: 200px;
+	font-size: 36px;
+}
+
+.mainPage2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	height: 1000px;
+}
+
+.main_button {
+	color: #a9cfee;
+	transition: all 0.5s;
+	position: relative;
+}
+
+.main_button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: #a9cfee;
+	transition: all 0.3s;
+  }
+
+  .main_button:hover::before {
+	opacity: 0 ;
+	transform: scale(0.5,0.5);
+  }
+  .main_button::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	transition: all 0.3s;
+	border: 1px solid rgba(32, 90, 218, 0.5);
+	transform: scale(1.2,1.2);
+  }
+  .main_button:hover::after {
+	opacity: 1;
+	transform: scale(1,1);
+  }
+
+  .btn {
+	line-height: 50px;
+	height: 50px;
+	text-align: center;
+	width: 200px;
+	cursor: pointer;
+	color: black;
+  }

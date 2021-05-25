@@ -6,17 +6,29 @@ import main_img from "../images/main_img.jpg"
 function Main() {
 
     return (
-        <div className="mainPage">
-            <div className="top">
-                <Nav className="topNav" />
-                {/* <img src={main_img} alt="main_photo" className="main_photo" /> */}
+        <div>
+            <div className="mainPage">
+                <div className="top">
+                    <Nav className="topNav" />
+                    {/* <img src={main_img} alt="main_photo" className="main_photo" /> */}
+                </div>
+                <div className="main_body">
+                    <div className="paragraph">
+                        <p>Manage Your Day,</p>
+                        <p>Manage Your Life</p>
+                    </div>
+                    <div>
+                        <button className="btn main_button">Join Us</button>
+                    </div>
+
+                </div>
             </div>
-            <div className="main_body">
-                <p>Manage Your Day,</p>
-                <p>Manage Your Life</p>
-                <button>Join Us</button>
+            <div>
+                <h1 className="mainPage2">Manage Your Daliy Calorie</h1>
             </div>
-        </div>  
+        </div>
+
+
     );
 }
 
