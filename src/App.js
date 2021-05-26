@@ -25,7 +25,8 @@ function App() {
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
 	const [userState, setUserState] = useState(defaultUser);
-/*
+
+
 	useEffect(() => {
 		getQuestionsAPIMethod((questions) => {
 			setQuestionState(questions);
@@ -34,7 +35,7 @@ function App() {
 			setUserState(user);
 		});
 	}, [isDataState]);
-*/
+
 
 	return (
 		<div className="App">
