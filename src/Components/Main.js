@@ -1,7 +1,6 @@
-import { ExpansionPanelSummary } from "@material-ui/core";
 import React from "react";
 import Nav from "./Nav/Nav";
-import main_img from "../images/main_img.jpg"
+
 
 function Main() {
 
@@ -17,18 +16,14 @@ function Main() {
                         <p>Manage Your Day,</p>
                         <p>Manage Your Life</p>
                     </div>
-                    <div>
-                        <button className="btn main_button">Join Us</button>
-                    </div>
-
                 </div>
             </div>
-            <div>
-                <h1 className="mainPage2">Manage Your Daliy Calorie</h1>
+            <div className="main_body">
+                <h1 className="mainText">Manage Your Day,</h1>
+                <h1 className="mainText">Manage Your Life</h1>
             </div>
-        </div>
 
-
+        </div>  
     );
 }
 

@@ -22,7 +22,8 @@ body {
 	justify-content: space-evenly;
 	height: 55px;
 	padding: 15px;
-	background-color: #333;
+	color:white
+	/*background-color: #333;*/
 }
 
 #links {
@@ -199,6 +200,7 @@ input[type="submit"]:hover, input[type="button"]:hover, label:hover, a:hover, bu
 
 .alink {
 	color: white;
+	font-weight: bold;
 }
 
 .alink:hover {
@@ -293,13 +295,24 @@ h3 {
 }
 
 .mainPage {
-	min-height: 380px;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-image: url("./images/main_img.jpg");
+	width: 100%;
+	height: 100%;
+	text-align: center;
 	position: relative;
-	height: 1000px;
+	z-index: 1;
+}
+
+.mainPage::after{
+	width: 100%;
+	height: 100%;
+	content: "";
+	background: url("https://buyflow-web-assets.noom.com/buyflow-client/0186451bba312076640934e2d8671f38acc5f2dc/static/95b5ce1b2a6053af5253d02a8ad3c9cb.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
 }
 
 .container {
@@ -312,66 +325,30 @@ h3 {
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
+	padding-top:30%;
+	padding-bottom:30%;
 }
 
-.paragraph {
-	margin-top: 200px;
-	font-size: 36px;
-}
-
-.mainPage2 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+.mainText{
+	color:white;
+	font-size: 30px;
+	letter-spacing: .2px;
+	line-height: 1.23;
+	margin-bottom: 0;
+	margin-top: 1em;
+	font-weight: 700;
 	text-align: center;
-	height: 1000px;
+	font-family: Roboto,Arial,Helvetica,sans-serif;
+	text-shadow: 0 0 10px rgb(0 0 0);
 }
 
-.main_button {
-	color: #a9cfee;
-	transition: all 0.5s;
-	position: relative;
+#fitIcon{
+	height: 100px;
+	width: 100px;
+	margin-top:10%;
+	margin-left: 47.5%;
 }
-
-.main_button::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	background-color: #a9cfee;
-	transition: all 0.3s;
-  }
-
-  .main_button:hover::before {
-	opacity: 0 ;
-	transform: scale(0.5,0.5);
-  }
-  .main_button::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	opacity: 0;
-	transition: all 0.3s;
-	border: 1px solid rgba(32, 90, 218, 0.5);
-	transform: scale(1.2,1.2);
-  }
-  .main_button:hover::after {
-	opacity: 1;
-	transform: scale(1,1);
-  }
-
-  .btn {
-	line-height: 50px;
-	height: 50px;
-	text-align: center;
-	width: 200px;
-	cursor: pointer;
-	color: black;
-  }
+#fitIcon:hover{
+	transform: scale(1.1);
+	cursor:pointer;
+}

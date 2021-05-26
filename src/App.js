@@ -1,4 +1,5 @@
 import "./App.css";
+
 import Log from "./Components/LogDay/Log";
 import React, { useState, useEffect } from "react";
 import Questions from "./Components/EditQuestions/Questions";
@@ -24,7 +25,7 @@ function App() {
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
 	const [userState, setUserState] = useState(defaultUser);
-
+/*
 	useEffect(() => {
 		getQuestionsAPIMethod((questions) => {
 			setQuestionState(questions);
@@ -33,6 +34,7 @@ function App() {
 			setUserState(user);
 		});
 	}, [isDataState]);
+*/
 
 	return (
 		<div className="App">
