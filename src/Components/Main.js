@@ -1,4 +1,4 @@
-import { ExpansionPanelSummary } from "@material-ui/core";
+
 import React from "react";
 import Nav from "./Nav/Nav";
 
@@ -9,7 +9,7 @@ function Main() {
         <div className="mainPage">
             <div className="top">
                 <Nav className="topNav" />
-                {/* <img src={main_img} alt="main_photo" className="main_photo" /> */}
+
             </div>
             <div className="main_body">
                 <h1 className="mainText">Manage Your Day,</h1>

@@ -25,14 +25,14 @@ function App() {
 	const [isDataState, setIsDataStale] = useState(false);
 	const [userState, setUserState] = useState(defaultUser);
 
-	useEffect(() => {
-		getQuestionsAPIMethod((questions) => {
-			setQuestionState(questions);
-		});
-		getUserByAPIMethod((user) => {
-			setUserState(user);
-		});
-	}, [isDataState]);
+	// useEffect(() => {
+	// 	getQuestionsAPIMethod((questions) => {
+	// 		setQuestionState(questions);
+	// 	});
+	// 	getUserByAPIMethod((user) => {
+	// 		setUserState(user);
+	// 	});
+	// }, [isDataState]);
 
 	return (
 		<div className="App">
