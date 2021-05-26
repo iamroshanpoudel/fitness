@@ -24,7 +24,8 @@ function App() {
 	};
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
-	const [userState, setUserState] = useState(defaultUser);
+	const [userState, setUserState] = useState(isLoggedIn()? JSON.parse(sessionStorage.getItem('userData')):defaultUser);
+
 
 
 	// useEffect(() => {
@@ -40,13 +41,13 @@ function App() {
 	return (
 		<div className="App">
 			<Switch>
-				<Route 
-					path="/main" 
-					exact 
+				<Route
+					path="/main"
+					exact
 					render={(props) => (
 						<Main {...props}
 						/>
-					)} 
+					)}
 				/>
 				<Route
 					path="/log"

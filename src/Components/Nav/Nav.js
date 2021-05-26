@@ -4,9 +4,19 @@ import {GoogleLogin, useGoogleLogout }from 'react-google-login';
 import { responseFailGoogle,logout} from "../../util/googleLogin";
 import logo from '../../images/logo.png'
 
-const Nav = (props) => {
+const Nav = () => {
+
+	const headerColor = () =>{
+		if(window.location.pathname == '/cse316/main' || window.location.pathname == '/main'){
+			return 'navMain'
+		}else{
+			return 'nav'
+		}
+	}
+
 	const defaultImage =
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
+
 	///////////////////////////////////////Google Login Function////////////////////////////////////////////////
 	const [image, setImage] = useState();
 	//sign out hook
@@ -39,7 +49,7 @@ const Nav = (props) => {
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	return (
-		<div id="nav">
+		<div id={headerColor()}>
 			<div id="links">
 				<NavLink to="/main" activeClassName="active-link" className="logo alink"><img id='logo' src={logo}/></NavLink>
 				<NavLink to="/log" activeClassName="active-link" className="alink" exact>

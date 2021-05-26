@@ -4,7 +4,7 @@
 	--activeColor: #66bfbf;
 	/* --standardBackgroundColor: #fcfefe; */
 	--standardBackgroundColor: #fbfeff;
-	--alternativeBackgroundColor: #eaf6f6;
+	--alternativeBackgroundColor: white;
 	--standardTextColor: black;
 	--lightColor: lightgray;
 	--moderateColor: darkgray;
@@ -22,8 +22,8 @@ body {
 	justify-content: space-evenly;
 	height: 55px;
 	padding: 15px;
-	color:white
-	/*background-color: #333;*/
+	color:white;
+	background-color: lightgreen;
 }
 
 #links {
@@ -357,6 +357,14 @@ h3 {
 	margin-top: 30px;
 }
 #logo{
-	width:150px;
-
+	width:100px;
+}
+#navMain{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	height: 55px;
+	padding: 15px;
+	color:white;
+	background-color: transparent;
 }
