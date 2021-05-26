@@ -27,14 +27,14 @@ function App() {
 	const [userState, setUserState] = useState(defaultUser);
 
 
-	useEffect(() => {
-		getQuestionsAPIMethod((questions) => {
-			setQuestionState(questions);
-		});
-		getUserByAPIMethod((user) => {
-			setUserState(user);
-		});
-	}, [isDataState]);
+	// useEffect(() => {
+	// 	getQuestionsAPIMethod((questions) => {
+	// 		setQuestionState(questions);
+	// 	});
+	// 	getUserByAPIMethod((user) => {
+	// 		setUserState(user);
+	// 	});
+	// }, [isDataState]);
 
 
 	return (
@@ -49,7 +49,7 @@ function App() {
 					)} 
 				/>
 				<Route
-					path="/"
+					path="/log"
 					exact
 					render={(props) => (
 						<Log
@@ -78,7 +78,7 @@ function App() {
 					)}
 				/>
 				<Route
-					path="/log"
+					path="/view"
 					exact
 					render={(props) => (
 						isLoggedIn() ?

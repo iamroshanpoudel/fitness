@@ -2,7 +2,7 @@ import React,{ useState } from "react";
 import { NavLink } from "react-router-dom";
 import {GoogleLogin, useGoogleLogout }from 'react-google-login';
 import { responseFailGoogle,logout} from "../../util/googleLogin";
-
+import logo from '../../images/logo.png'
 
 const Nav = (props) => {
 	const defaultImage =
@@ -41,8 +41,8 @@ const Nav = (props) => {
 	return (
 		<div id="nav">
 			<div id="links">
-				<NavLink to="/main" activeClassName="active-link" className="logo alink">Fitness</NavLink>
-				<NavLink to="/" activeClassName="active-link" className="alink" exact>
+				<NavLink to="/main" activeClassName="active-link" className="logo alink"><img id='logo' src={logo}/></NavLink>
+				<NavLink to="/log" activeClassName="active-link" className="alink" exact>
 					Log Day
 				</NavLink>
 				<NavLink
@@ -54,7 +54,7 @@ const Nav = (props) => {
 					Edit Questions
 				</NavLink>
 				<NavLink
-					to="/log"
+					to="/view"
 					activeClassName="active-link link"
 					className="alink"
 					exact

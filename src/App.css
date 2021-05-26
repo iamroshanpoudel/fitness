@@ -346,7 +346,7 @@ h3 {
 	height: 100px;
 	width: 100px;
 	margin-top:10%;
-	margin-left: 47.5%;
+
 }
 #fitIcon:hover{
 	transform: scale(1.1);
@@ -355,4 +355,8 @@ h3 {
 
 .b2 {
 	margin-top: 30px;
+}
+#logo{
+	width:150px;
+
 }
