@@ -35,9 +35,12 @@ body {
 }
 
 #image {
+	position:absolute;
 	border-radius: 50%;
-	height: 70px;
-	width: 75px;
+	height: 50px;
+	width: 50px;
+	top:10px;
+	right:50px;
 }
 
 #calendar {
@@ -357,7 +360,9 @@ h3 {
 	margin-top: 30px;
 }
 #logo{
-	width:100px;
+	width:50px;
+	margin-left:30px;
+	margin-right:30px;
 }
 #navMain{
 	display: flex;
@@ -367,4 +372,9 @@ h3 {
 	padding: 15px;
 	color:white;
 	background-color: transparent;
+}
+#googleLogin{
+	position:absolute;
+	top:10px;
+	right:50px;
 }
