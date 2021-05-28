@@ -14,7 +14,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
-import logo from '../../images/logo.png'
+import logo from '../../images/logo-2.jpg'
 // core components
 import CustomDropdown from "./CustomDropdown.js";
 import Button from "./Button.js";
@@ -63,11 +63,16 @@ export default function HeaderLinks(props) {
     console.log(headerStyle.primary)
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     const classes = useStyles();
+
+    const style = {
+        height: "50px",
+        borderRadius: "10px",    
+    }
     return (
         <>
         <List className={classes.list}>
             <ListItem className={classes.listItem}>
-                <NavLink to="/main" activeClassName="active-link" className="logo alink"><img id='logo' src={logo}/></NavLink>
+                <NavLink to="/main" activeClassName="active-link" className="logo alink"><img id='logo' style={style} src={logo} /></NavLink>
             </ListItem>
             <ListItem className={classes.listItem}>
                 <Button

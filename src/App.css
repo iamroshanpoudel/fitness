@@ -306,8 +306,8 @@ h3 {
 }
 
 .mainPage::after{
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 150vh;
 	content: "";
 	background: url("https://buyflow-web-assets.noom.com/buyflow-client/0186451bba312076640934e2d8671f38acc5f2dc/static/95b5ce1b2a6053af5253d02a8ad3c9cb.jpg");
 	background-repeat: no-repeat;
@@ -324,12 +324,7 @@ h3 {
 }
 
 .main_body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	padding-top:30%;
-	padding-bottom:30%;
+	margin-top: 150px;
 }
 
 .mainText{

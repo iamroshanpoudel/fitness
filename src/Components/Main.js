@@ -19,12 +19,6 @@ function Main() {
                     </div>
                 </div>
             </div>
-            <div className="b2">
-                <h1>Description</h1>
-                <p>We are living in a so busy days, can't even know what we are eating,</p>
-                <p>we are here for you to support your healthy live.</p>
-                <p>Join us</p>
-            </div>
         </div>
     );
 }
