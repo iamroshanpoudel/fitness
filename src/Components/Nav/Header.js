@@ -19,7 +19,7 @@ import HeaderLinks from "./HeaderLinks";
 
 const useStyles = makeStyles(styles);
 Header.defaultProps = {
-    color: "primary"
+    color: "info"
 };
 Header.propTypes = {
     color: PropTypes.oneOf([

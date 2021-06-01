@@ -6,7 +6,7 @@ import HeaderLinks from "./HeaderLinks";
 const Nav = () => {
 
 	return (
-		<Header props={headerStyle.primary}/>
+		<Header props={headerStyle.info}/>
 	);
 };
 
