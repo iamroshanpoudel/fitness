@@ -11,7 +11,7 @@
 }
 
 body {
-	background-color: var(--alternativeBackgroundColor);
+	background-color: #f7f9fb;
 	margin: 0;
 	padding: 0;
 }
@@ -22,7 +22,7 @@ body {
 	justify-content: space-evenly;
 	height: 55px;
 	padding: 15px;
-	color:white;
+	color: white;
 	background-color: lightgreen;
 }
 
@@ -35,12 +35,12 @@ body {
 }
 
 #image {
-	position:absolute;
+	position: absolute;
 	border-radius: 50%;
 	height: 50px;
 	width: 50px;
-	top:10px;
-	right:50px;
+	top: 10px;
+	right: 50px;
 }
 
 #calendar {
@@ -63,7 +63,8 @@ a {
 	color: var(--standardTextColor);
 }
 
-#date-before, #date-after {
+#date-before,
+#date-after {
 	font-size: 30px;
 }
 
@@ -114,7 +115,10 @@ input {
 	color: white;
 }
 
-input:focus, select:focus, textarea:focus, button:focus {
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
 	outline-color: var(--activeColor);
 }
 
@@ -122,17 +126,23 @@ select {
 	border-color: var(--moderateColor);
 }
 
-input[type="text"], input[type="email"], input[type="number"] {
+input[type="text"],
+input[type="email"],
+input[type="number"] {
 	border-color: var(--lightColor);
 	border-radius: 5px;
 	height: 25px;
 }
 
-input[type="text"], input[type="email"] {
+input[type="text"],
+input[type="email"] {
 	width: 97%;
 }
 
-input[type="submit"]:hover, input[type="button"]:hover, label:hover, a:hover, button, svg:hover {
+input[type="submit"]:hover,
+input[type="button"]:hover,
+a:hover,
+button:hover {
 	transform: scale(1.1);
 }
 
@@ -238,7 +248,7 @@ input[type="submit"]:hover, input[type="button"]:hover, label:hover, a:hover, bu
 input[type="file"] {
 	display: none;
 }
-
+/* 
 label {
 	color: black;
 	height: 30px;
@@ -246,7 +256,7 @@ label {
 	width: fit-content;
 	border-radius: 7px;
 	background-color: var(--activeColor);
-}
+} */
 
 @media only screen and (max-width: 600px) {
 	.logo {
@@ -265,7 +275,8 @@ label {
 	#calendar {
 		width: 100vw !important;
 	}
-	#calendar h2, #save {
+	#calendar h2,
+	#save {
 		padding-left: 15px !important;
 	}
 	#nav {
@@ -305,7 +316,7 @@ h3 {
 	z-index: 1;
 }
 
-.mainPage::after{
+.mainPage::after {
 	width: 100vw;
 	height: 150vh;
 	content: "";
@@ -327,49 +338,51 @@ h3 {
 	margin-top: 150px;
 }
 
-.mainText{
-	color:white;
+.mainText {
+	color: white;
 	font-size: 30px;
-	letter-spacing: .2px;
+	letter-spacing: 0.2px;
 	line-height: 1.23;
 	margin-bottom: 0;
 	margin-top: 1em;
 	font-weight: 700;
 	text-align: center;
-	font-family: Roboto,Arial,Helvetica,sans-serif;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
 	text-shadow: 0 0 10px rgb(0 0 0);
 }
 
-#fitIcon{
+#fitIcon {
 	height: 100px;
 	width: 100px;
-	margin-top:10%;
-
+	margin-top: 10%;
 }
-#fitIcon:hover{
+#fitIcon:hover {
 	transform: scale(1.1);
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .b2 {
 	margin-top: 30px;
 }
-#logo{
-	width:50px;
-	margin-left:30px;
-	margin-right:30px;
+.logo-text {
+	width: 50px;
+	margin-left: 30px;
+	margin-right: 30px;
+	color: white;
+	text-decoration: none;
+	margin: 20px;
 }
-#navMain{
+#navMain {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	height: 55px;
 	padding: 15px;
-	color:white;
+	color: white;
 	background-color: transparent;
 }
-#googleLogin{
-	position:absolute;
-	top:10px;
-	right:50px;
+#googleLogin {
+	position: absolute;
+	top: 10px;
+	right: 50px;
 }

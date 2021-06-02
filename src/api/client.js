@@ -95,6 +95,7 @@ export const getUserByAPIMethod = (success) => {
 		.then(parseJSON)
 		.then(success);
 };
+
 export const updateUserByAPIMethod = (user, success) => {
 	return fetch(`/api/v1/user`, {
 		...defaultHeaders,
@@ -106,6 +107,43 @@ export const updateUserByAPIMethod = (user, success) => {
 		.then(success);
 };
 
+export const getNutritionInfoByFoodAPIMethod = (foodName, success) => {
+	return fetch(
+		`https://api.edamam.com/api/food-database/v2/parser?ingr=${foodName}&app_id=942000ce&app_key=2877d4cdd0895c654f3a65b4ed24ad13`,
+		{
+			...defaultHeaders,
+		}
+	)
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
+
+export const getAutoCompleteByFoodAPIMethod = (searchText, success) => {
+	console.log("making autocomplete request");
+	return fetch(
+		`https://api.edamam.com/auto-complete?q=${searchText}&limit=15&&app_id=942000ce&app_key=2877d4cdd0895c654f3a65b4ed24ad13`,
+		{
+			...defaultHeaders,
+		}
+	)
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
+export const getRestaurantMenuByAPIMethod = (searchText, zip, success) => {
+	console.log("making Restautant menu request");
+
+	return fetch(
+		`https://api.edamam.com/api/menu-items/v2/search?q=${searchText}&postal=${zip}&dist=10&app_id=942000ce&app_key=2877d4cdd0895c654f3a65b4ed24ad13`,
+		{
+			...defaultHeaders,
+		}
+	)
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
 function checkStatus(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response;

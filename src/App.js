@@ -1,14 +1,14 @@
-	import "./App.css";
+import "./App.css";
 
 import Log from "./Components/LogDay/Log";
 import React, { useState, useEffect } from "react";
 import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
-import { getQuestionsAPIMethod, getUserByAPIMethod } from "./api/client.js";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
-import {isLoggedIn, loginAlert} from "./util/googleLogin";
+import { isLoggedIn, loginAlert } from "./util/googleLogin";
 import Main from "./Components/Main";
+import LogCalories from "./Components/Calories/LogCalories";
 
 function App() {
 	const defaultUser = {
@@ -24,9 +24,9 @@ function App() {
 	};
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
-	const [userState, setUserState] = useState(isLoggedIn()? JSON.parse(sessionStorage.getItem('userData')):defaultUser);
-
-
+	const [userState, setUserState] = useState(
+		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : defaultUser
+	);
 
 	// useEffect(() => {
 	// 	getQuestionsAPIMethod((questions) => {
@@ -37,23 +37,15 @@ function App() {
 	// 	});
 	// }, [isDataState]);
 
-
 	return (
 		<div className="App">
 			<Switch>
+				<Route path="/" exact render={(props) => <Main {...props} />} />
 				<Route
-					path="/main"
+					path="/calories"
 					exact
 					render={(props) => (
-						<Main {...props}
-						/>
-					)}
-				/>
-				<Route
-					path="/log"
-					exact
-					render={(props) => (
-						<Log
+						<LogCalories
 							{...props}
 							questionState={questionState}
 							userState={userState}
@@ -64,48 +56,54 @@ function App() {
 				<Route
 					path="/questions"
 					exact
-					render={(props) => (
-						isLoggedIn() ?
-						<Questions
-							{...props}
-							questionState={questionState}
-							setQuestionState={setQuestionState}
-							isDataState={isDataState}
-							setIsDataStale={setIsDataStale}
-							userState={userState}
-							setUserState={setUserState}
-						/>
-						:  loginAlert()
-					)}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Questions
+								{...props}
+								questionState={questionState}
+								setQuestionState={setQuestionState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								userState={userState}
+								setUserState={setUserState}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 				<Route
 					path="/view"
 					exact
-					render={(props) => (
-						isLoggedIn() ?
-						<Data
-							{...props}
-							questionState={questionState}
-							userState={userState}
-							setUserState={setUserState}
-						/>
-						: loginAlert()
-					)}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Data
+								{...props}
+								questionState={questionState}
+								userState={userState}
+								setUserState={setUserState}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 				<Route
 					path="/profile"
 					exact
-					render={(props) => (
-						isLoggedIn() ?
-						<Profile
-							{...props}
-							userState={userState}
-							setUserState={setUserState}
-							isDataState={isDataState}
-							setIsDataStale={setIsDataStale}
-						/>
-						:  loginAlert()
-					)}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Profile
+								{...props}
+								userState={userState}
+								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 			</Switch>
 		</div>
