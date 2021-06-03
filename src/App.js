@@ -27,6 +27,7 @@ function App() {
 	const [userState, setUserState] = useState(
 		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : defaultUser
 	);
+	const [isUserLoading, setIsUserLoading] = useState(true);
 	// const [userState, setUserState] = useState(
 	// 	JSON.parse(sessionStorage.getItem("userData"))
 	// );
@@ -48,10 +49,16 @@ function App() {
 					setUserState(response);
 				}
 			);
-		} else {
-			alert("you need to login first");
 		}
 	}, []);
+
+	useEffect(() => {
+		if (userState && userState._id) {
+			console.log("userState updated from db");
+			console.log(userState);
+			setIsUserLoading(false);
+		}
+	}, [userState]);
 
 	return (
 		<div className="App">
@@ -65,6 +72,8 @@ function App() {
 							{...props}
 							userState={userState}
 							setUserState={setUserState}
+							isUserLoading={isUserLoading}
+							setIsUserLoading={setIsUserLoading}
 						/>
 					)}
 				/>
@@ -114,6 +123,8 @@ function App() {
 								setUserState={setUserState}
 								isDataState={isDataState}
 								setIsDataStale={setIsDataStale}
+								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
 							/>
 						) : (
 							loginAlert()

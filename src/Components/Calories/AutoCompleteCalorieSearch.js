@@ -1,11 +1,9 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
 	getNutritionInfoByFoodAPIMethod,
 	getAutoCompleteByFoodAPIMethod,
 	getRestaurantMenuByAPIMethod,
 } from "../../api/client.js";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -137,74 +135,6 @@ const AutoCompleteCalorieSearch = (props) => {
 								Fat: {outState ? outState.food.nutrients.FAT : ""}
 								Fiber: {outState ? outState.food.nutrients.FIBTG : ""}
 							</div>
-							{/* <div>
-								<TextField
-									id="standard-full-width"
-									label="What did you eat today?"
-									style={{ margin: 8 }}
-									placeholder="What did you eat today?"
-									helperText=""
-									fullWidth
-									margin="normal"
-									value={foodState}
-									onChange={foodTypingHandler}
-								/>
-							</div> */}
-							{/* <div>
-								<input
-									type="submit"
-									value="Save"
-									className="save-button right"
-								/>
-							</div> */}
-						</div>
-						<div>
-							{/* <Autocomplete
-								id="asynchronous-demo"
-								style={{ width: 300 }}
-								open={open}
-								onOpen={() => {
-									setOpen(true);
-								}}
-								onClose={() => {
-									setOpen(false);
-								}}
-								// getOptionSelected={(option, value) => option === value}
-								getOptionSelected={(option) => option}
-								getOptionLabel={(option) => option}
-								options={options}
-								loading={loading}
-								onChange={(event, newValue) => {
-									console.log("changing food state");
-									setFoodState(newValue);
-									formSubmitHandler(event);
-								}}
-								renderInput={(params) => (
-									<TextField
-										{...params}
-										id="standard-full-width"
-										label="Food name"
-										style={{ margin: 8 }}
-										placeholder="What did you eat today?"
-										helperText=""
-										fullWidth
-										margin="normal"
-										value={foodState}
-										onChange={foodTypingHandler}
-										InputProps={{
-											...params.InputProps,
-											endAdornment: (
-												<React.Fragment>
-													{loading ? (
-														<CircularProgress color="inherit" size={20} />
-													) : null}
-													{params.InputendAdornment}
-												</React.Fragment>
-											),
-										}}
-									/>
-								)}
-							/> */}
 						</div>
 					</form>
 				</CardContent>

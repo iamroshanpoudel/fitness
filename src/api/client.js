@@ -108,6 +108,7 @@ export const updateUserByAPIMethod = (user, success) => {
 };
 
 export const getDailyFoodInfoByAPIMethod = (uid, date, success) => {
+	console.log(`inside get daily food API /api/food/${uid}/${date}`);
 	return fetch(`/api/food/${uid}/${date}`, {
 		...defaultHeaders,
 	})
