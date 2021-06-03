@@ -35,17 +35,21 @@ const Calendar = (props) => {
 	};
 
 	useEffect(async () => {
-		//fetch food data for current date if user id is stored in userState
+		// when date changes, seet current daily food state to empty
+		props.setFoodStateByDate({});
+
+		// fetch food data for current date if user id is stored in userState
 		if (!props.isUserLoading) {
 			props.setIsFoodStateLoading(true);
 			getDailyFoodInfoByAPIMethod(
 				props.userState._id,
 				dashedDate(props.dateState),
 				(response) => {
+					console.log("Response: ");
+					console.log(response);
 					if (response) {
 						console.log(response);
 						props.setFoodStateByDate(response);
-						props.setIsUserLoading(false);
 						props.setIsFoodStateLoading(false);
 					}
 				}

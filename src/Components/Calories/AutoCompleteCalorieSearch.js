@@ -8,18 +8,34 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import _ from "lodash";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import ReactApexChart from "react-apexcharts";
 
 const AutoCompleteCalorieSearch = (props) => {
+	// Gets nutrition info from the db and returns the list
+	const getNutritionInfo = () => {
+		let nutritionList = [0, 0, 0, 0]; // ["Fat", "Fiber", "Protein", "Carbohydrates"]
+		if (JSON.stringify(props.foodStateByDate) !== "{}") {
+			props.foodStateByDate.foodIntake.map((food) => {
+				nutritionList[0] += food.nutrients.FAT;
+				nutritionList[1] += food.nutrients.FIBR;
+				nutritionList[2] += food.nutrients.PRTN;
+				nutritionList[3] += food.nutrients.CARBS;
+			});
+		}
+
+		return nutritionList;
+	};
 	// food state
 	const [outState, setOutState] = useState("");
 	const [options, setOptions] = useState(["Test"]);
 	const [open, setOpen] = React.useState(false);
 	const loading = open && options.length === 0;
-	const [foodState, setFoodState] = useState("");
+	const [foodToAdd, setFoodToAdd] = useState("");
 	const userZip = 11733;
 
-	const [series, setSeries] = useState([44, 55, 67, 83]);
+	const [series, setSeries] = useState(getNutritionInfo());
 
 	const [chartOptions, setChartOptions] = useState({
 		chart: {
@@ -49,11 +65,9 @@ const AutoCompleteCalorieSearch = (props) => {
 		labels: ["Fat", "Fiber", "Protein", "Carbohydrates"],
 	});
 
-	// Date State
-
 	const formSubmitHandler = (event) => {
 		event.preventDefault();
-		getNutritionInfoByFoodAPIMethod(foodState, (response) => {
+		getNutritionInfoByFoodAPIMethod(foodToAdd, (response) => {
 			if (response.parsed[0]) {
 				console.log(response.parsed[0]);
 				setOutState(response.parsed[0]);
@@ -66,7 +80,7 @@ const AutoCompleteCalorieSearch = (props) => {
 
 	const foodTypingHandler = (event) => {
 		event.preventDefault();
-		setFoodState(event.target.value);
+		setFoodToAdd(event.target.value);
 	};
 	const fiterFoodNames = (responseObj) => {
 		const foodList = [];
@@ -108,10 +122,14 @@ const AutoCompleteCalorieSearch = (props) => {
 	}, [open]);
 
 	useEffect(() => {
-		if (foodState !== "") {
-			debouncedAutoCompleteSearch(foodState);
+		if (foodToAdd !== "") {
+			debouncedAutoCompleteSearch(foodToAdd);
 		}
-	}, [foodState]);
+	}, [foodToAdd]);
+
+	useEffect(() => {
+		setSeries(getNutritionInfo());
+	}, [props.foodStateByDate]);
 	return (
 		<div>
 			<Card style={{ backgroundColor: "#fffff", width: "60vw" }}>
@@ -127,14 +145,72 @@ const AutoCompleteCalorieSearch = (props) => {
 					{options ? options : []}
 					<form onSubmit={formSubmitHandler}>
 						<div id="form-section">
-							<div>Food: {foodState}</div>
 							<div>
-								Calories: {outState ? outState.food.nutrients.ENERC_KCAL : ""}
-								Carbs: {outState ? outState.food.nutrients.CHOCDF : ""}
-								Protein: {outState ? outState.food.nutrients.PROCNT : ""}
-								Fat: {outState ? outState.food.nutrients.FAT : ""}
-								Fiber: {outState ? outState.food.nutrients.FIBTG : ""}
+								Food Items in Database for current date: <br />
+								{JSON.stringify(props.foodStateByDate) !== "{}"
+									? props.foodStateByDate.foodIntake.map((food, index) => {
+											return (
+												<div key={index}>
+													food: {food.foodName} calories: {food.calories} <br />
+													CARBS: {food.nutrients.CARBS}
+													PRTN: {food.nutrients.PRTN}
+													FIBR: {food.nutrients.FIBR}
+													FAT: {food.nutrients.FAT}
+												</div>
+											);
+									  })
+									: "Nothing availalbe"}
 							</div>
+							<br />
+							<div>Food to add: {foodToAdd}</div>
+						</div>
+						<div>
+							<Autocomplete
+								id="asynchronous-demo"
+								style={{ width: 300 }}
+								open={open}
+								onOpen={() => {
+									setOpen(true);
+								}}
+								onClose={() => {
+									setOpen(false);
+								}}
+								// getOptionSelected={(option, value) => option === value}
+								getOptionSelected={(option) => option}
+								getOptionLabel={(option) => option}
+								options={options}
+								loading={loading}
+								onChange={(event, newValue) => {
+									console.log("changing food state");
+									setFoodToAdd(newValue);
+									formSubmitHandler(event);
+								}}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										id="standard-full-width"
+										label="Food name"
+										style={{ margin: 8 }}
+										placeholder="What did you eat today?"
+										helperText=""
+										fullWidth
+										margin="normal"
+										value={foodToAdd}
+										onChange={foodTypingHandler}
+										InputProps={{
+											...params.InputProps,
+											endAdornment: (
+												<React.Fragment>
+													{loading ? (
+														<CircularProgress color="inherit" size={20} />
+													) : null}
+													{params.InputendAdornment}
+												</React.Fragment>
+											),
+										}}
+									/>
+								)}
+							/>
 						</div>
 					</form>
 				</CardContent>

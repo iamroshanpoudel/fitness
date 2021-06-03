@@ -50,24 +50,30 @@ const LogCalories = (props) => {
 				{props.isUserLoading || isFoodStateLoading ? (
 					<LoadingCard />
 				) : (
-					<ReactCardFlip
-						isFlipped={isFlipped}
-						flipDirection="vertical"
-						infinite={true}
-					>
-						<AutoCompleteCalorieSearch
-							flipHandler={flipHandler}
-							dateState={dateState}
-							foodStateByDate={foodStateByDate}
-							setFoodStateByDate={setFoodStateByDate}
-						/>
-						<AutoCompleteCalorieSearch
-							flipHandler={flipHandler}
-							dateState={dateState}
-							foodStateByDate={foodStateByDate}
-							setFoodStateByDate={setFoodStateByDate}
-						/>
-					</ReactCardFlip>
+					<AutoCompleteCalorieSearch
+						flipHandler={flipHandler}
+						dateState={dateState}
+						foodStateByDate={foodStateByDate}
+						setFoodStateByDate={setFoodStateByDate}
+					/>
+					// <ReactCardFlip
+					// 	isFlipped={isFlipped}
+					// 	flipDirection="vertical"
+					// 	infinite={true}
+					// >
+					// 	<AutoCompleteCalorieSearch
+					// 		flipHandler={flipHandler}
+					// 		dateState={dateState}
+					// 		foodStateByDate={foodStateByDate}
+					// 		setFoodStateByDate={setFoodStateByDate}
+					// 	/>
+					// 	<AutoCompleteCalorieSearch
+					// 		flipHandler={flipHandler}
+					// 		dateState={dateState}
+					// 		foodStateByDate={foodStateByDate}
+					// 		setFoodStateByDate={setFoodStateByDate}
+					// 	/>
+					// </ReactCardFlip>
 				)}
 			</div>
 		</div>

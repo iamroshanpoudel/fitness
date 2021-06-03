@@ -11,23 +11,23 @@ import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 
 function App() {
-	const defaultUser = {
-		name: "",
-		email: "",
-		address: [
-			{
-				streetAddress: "",
-				fullAddress: "",
-			},
-		],
-		profileImageURL: "",
-	};
+	// const defaultUser = {
+	// 	name: "",
+	// 	email: "",
+	// 	address: [
+	// 		{
+	// 			streetAddress: "",
+	// 			fullAddress: "",
+	// 		},
+	// 	],
+	// 	profileImageURL: "",
+	// };
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
 	const [userState, setUserState] = useState(
-		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : defaultUser
+		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : ""
 	);
-	const [isUserLoading, setIsUserLoading] = useState(true);
+	const [isUserLoading, setIsUserLoading] = useState(true); // is the user information fetched from db ?
 	// const [userState, setUserState] = useState(
 	// 	JSON.parse(sessionStorage.getItem("userData"))
 	// );
@@ -46,6 +46,7 @@ function App() {
 			getUserStateByEmailAPIMethod(
 				JSON.parse(sessionStorage.getItem("userData")).email,
 				(response) => {
+					console.log(response);
 					setUserState(response);
 				}
 			);
