@@ -21,15 +21,19 @@ const LogCalories = (props) => {
 		setIsFlipped(!isFlipped);
 	};
 	const [dateState, setDateState] = useState(addDate());
-	const [isFlipped, setIsFlipped] = useState(false); //card flip state
+	const [isFlipped, setIsFlipped] = useState(false); // card flip state
 	const [foodStateByDate, setFoodStateByDate] = useState(""); // daily food intake state
-	const [isFoodStateLoading, setIsFoodStateLoading] = useState(true); // is daily food info fetched from db?
+	const [isFoodStateLoading, setIsFoodStateLoading] = useState(true); // is daily food info being fetched from db?
 
-	useEffect(() => {
-		if (foodStateByDate !== "") {
-			setIsFoodStateLoading(false);
-		}
-	}, [isFoodStateLoading]);
+	// useEffect(() => {
+	// 	setIsFoodStateLoading(true);
+
+	// 	// if (JSON.stringify(props.foodStateByDate) === "{}") {
+	// 	// 	setIsFoodStateLoading(true);
+	// 	// } else {
+	// 	// 	setIsFoodStateLoading(false);
+	// 	// }
+	// }, [dateState]);
 
 	return (
 		<div>
