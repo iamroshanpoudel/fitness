@@ -159,7 +159,7 @@ const AutoCompleteCalorieSearch = (props) => {
 							</div> */}
 						</div>
 						<div>
-							<Autocomplete
+							{/* <Autocomplete
 								id="asynchronous-demo"
 								style={{ width: 300 }}
 								open={open}
@@ -204,7 +204,7 @@ const AutoCompleteCalorieSearch = (props) => {
 										}}
 									/>
 								)}
-							/>
+							/> */}
 						</div>
 					</form>
 				</CardContent>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import moment from "moment";
+import { getDailyFoodInfoByAPIMethod } from "../../api/client.js";
 
 const Calendar = (props) => {
 	// Increases the date by 1 on right arrow click
@@ -26,6 +28,30 @@ const Calendar = (props) => {
 		props.setDateState(newDate);
 		props.flipHandler(e);
 	};
+
+	// changes 2021/5/4 to 2021-5-4
+	const dashedDate = (date) => {
+		return moment(new Date(date).toISOString()).format("YYYY-MM-DD");
+	};
+
+	useEffect(async () => {
+		if (props.userState._id) {
+			//fetch food data for current date
+			alert(props.userState._id);
+			getDailyFoodInfoByAPIMethod(
+				props.userState._id,
+				dashedDate(props.dateState),
+				(response) => {
+					if (response) {
+						console.log(response);
+						props.setFoodStateByDate(response);
+					}
+				}
+			);
+		} else {
+			alert("No data found");
+		}
+	}, [props.dateState]);
 
 	return (
 		<div id="calendar">

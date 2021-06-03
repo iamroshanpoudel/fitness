@@ -87,8 +87,8 @@ export const uploadImageToCloudinaryAPIMethod = (formData, success) => {
 		.then(success);
 };
 
-export const getUserByAPIMethod = (success) => {
-	return fetch(`/api/v1/user`, {
+export const getUserStateByEmailAPIMethod = (email, success) => {
+	return fetch(`/api/user/${email}`, {
 		...defaultHeaders,
 	})
 		.then(checkStatus)
@@ -101,6 +101,15 @@ export const updateUserByAPIMethod = (user, success) => {
 		...defaultHeaders,
 		method: "PUT", // The method defaults to GET
 		body: JSON.stringify(user),
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
+
+export const getDailyFoodInfoByAPIMethod = (uid, date, success) => {
+	return fetch(`/api/food/${uid}/${date}`, {
+		...defaultHeaders,
 	})
 		.then(checkStatus)
 		.then(parseJSON)

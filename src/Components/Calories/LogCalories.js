@@ -19,6 +19,7 @@ const LogCalories = (props) => {
 	};
 	const [dateState, setDateState] = useState(addDate());
 	const [isFlipped, setIsFlipped] = useState(false); //card flip state
+	const [foodStateByDate, setFoodStateByDate] = useState(""); // daily food intake state
 
 	return (
 		<div>
@@ -28,14 +29,28 @@ const LogCalories = (props) => {
 					dateState={dateState}
 					setDateState={setDateState}
 					flipHandler={flipHandler}
+					foodStateByDate={foodStateByDate}
+					setFoodStateByDate={setFoodStateByDate}
+					userState={props.userState}
+					setUserState={props.setUserState}
 				/>
 				<ReactCardFlip
 					isFlipped={isFlipped}
 					flipDirection="vertical"
 					infinite={true}
 				>
-					<AutoCompleteCalorieSearch flipHandler={flipHandler} />
-					<AutoCompleteCalorieSearch flipHandler={flipHandler} />
+					<AutoCompleteCalorieSearch
+						flipHandler={flipHandler}
+						dateState={dateState}
+						foodStateByDate={foodStateByDate}
+						setFoodStateByDate={setFoodStateByDate}
+					/>
+					<AutoCompleteCalorieSearch
+						flipHandler={flipHandler}
+						dateState={dateState}
+						foodStateByDate={foodStateByDate}
+						setFoodStateByDate={setFoodStateByDate}
+					/>
 				</ReactCardFlip>
 			</div>
 		</div>

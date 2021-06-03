@@ -1,6 +1,5 @@
 import "./App.css";
 
-import Log from "./Components/LogDay/Log";
 import React, { useState, useEffect } from "react";
 import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
@@ -9,6 +8,7 @@ import Profile from "./Components/Profile/Profile";
 import { isLoggedIn, loginAlert } from "./util/googleLogin";
 import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
+import { getUserStateByEmailAPIMethod } from "./api/client.js";
 
 function App() {
 	const defaultUser = {
@@ -27,6 +27,9 @@ function App() {
 	const [userState, setUserState] = useState(
 		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : defaultUser
 	);
+	// const [userState, setUserState] = useState(
+	// 	JSON.parse(sessionStorage.getItem("userData"))
+	// );
 
 	// useEffect(() => {
 	// 	getQuestionsAPIMethod((questions) => {
@@ -36,6 +39,19 @@ function App() {
 	// 		setUserState(user);
 	// 	});
 	// }, [isDataState]);
+
+	useEffect(() => {
+		if (isLoggedIn()) {
+			getUserStateByEmailAPIMethod(
+				JSON.parse(sessionStorage.getItem("userData")).email,
+				(response) => {
+					setUserState(response);
+				}
+			);
+		} else {
+			alert("you need to login first");
+		}
+	}, []);
 
 	return (
 		<div className="App">
@@ -47,7 +63,6 @@ function App() {
 					render={(props) => (
 						<LogCalories
 							{...props}
-							questionState={questionState}
 							userState={userState}
 							setUserState={setUserState}
 						/>

@@ -60,7 +60,6 @@ export default function HeaderLinks(props) {
 			console.log("session started");
 		});
 	};
-	console.log(headerStyle.primary);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
 
