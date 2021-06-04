@@ -11,8 +11,14 @@ import _ from "lodash";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ReactApexChart from "react-apexcharts";
+import moment from "moment";
 
 const AutoCompleteCalorieSearch = (props) => {
+	// changes 2021/5/4 to 2021-5-4
+	const dashedDate = (date) => {
+		return moment(new Date(date).toISOString()).format("YYYY-MM-DD");
+	};
+
 	// Gets nutrition info from the db and returns the list
 	const getNutritionInfo = () => {
 		let nutritionList = [0, 0, 0, 0]; // ["Fat", "Fiber", "Protein", "Carbohydrates"]
@@ -28,12 +34,11 @@ const AutoCompleteCalorieSearch = (props) => {
 		return nutritionList;
 	};
 	// food state
-	const [outState, setOutState] = useState("");
-	const [options, setOptions] = useState(["Test"]);
+	const [newFoodState, setNewFoodState] = useState("");
+	const [options, setOptions] = useState([]);
 	const [open, setOpen] = React.useState(false);
 	const loading = open && options.length === 0;
 	const [foodToAdd, setFoodToAdd] = useState("");
-	const userZip = 11733;
 
 	const [series, setSeries] = useState(getNutritionInfo());
 
@@ -53,7 +58,7 @@ const AutoCompleteCalorieSearch = (props) => {
 					},
 					total: {
 						show: true,
-						label: "Requirements",
+						label: "Food Requirements",
 						formatter: function (w) {
 							// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
 							return "incomplete";
@@ -65,15 +70,13 @@ const AutoCompleteCalorieSearch = (props) => {
 		labels: ["Fat", "Fiber", "Protein", "Carbohydrates"],
 	});
 
-	const formSubmitHandler = (event) => {
+	const formSubmitHandler = (event, newFoodToAdd) => {
 		event.preventDefault();
-		getNutritionInfoByFoodAPIMethod(foodToAdd, (response) => {
+		getNutritionInfoByFoodAPIMethod(newFoodToAdd, (response) => {
 			if (response.parsed[0]) {
-				console.log(response.parsed[0]);
-				setOutState(response.parsed[0]);
+				setNewFoodState(response.parsed[0]);
 			} else {
-				setOutState(response.hints[0]);
-				console.log(response.hints[0]);
+				setNewFoodState(response.hints[0]);
 			}
 		});
 	};
@@ -96,18 +99,22 @@ const AutoCompleteCalorieSearch = (props) => {
 
 	const findAutoCompleteSearches = (searchText) => {
 		// calling autocomplete api
-		console.log("Searching for: " + searchText);
 		let autocompleteArr = [];
 		getAutoCompleteByFoodAPIMethod(searchText, (response) => {
 			autocompleteArr = response;
+
 			// getting autocomplete suggestions from restaurants nearby user location (zip)
-			getRestaurantMenuByAPIMethod(searchText, userZip, (response) => {
-				let restaurantMenus = fiterFoodNames({ ...response });
-				let newList = removeDuplicatesInList(
-					autocompleteArr.concat(restaurantMenus)
-				);
-				setOptions(newList);
-			});
+			getRestaurantMenuByAPIMethod(
+				searchText,
+				props.userState.address.zip,
+				(response) => {
+					let restaurantMenus = fiterFoodNames({ ...response });
+					let newList = removeDuplicatesInList(
+						autocompleteArr.concat(restaurantMenus)
+					);
+					setOptions(newList);
+				}
+			);
 		});
 	};
 	// Debounce the calls to a max of 1 per second
@@ -115,7 +122,7 @@ const AutoCompleteCalorieSearch = (props) => {
 		_.debounce((searchTerm) => findAutoCompleteSearches(searchTerm), 1000)
 	).current;
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (!open) {
 			setOptions([]);
 		}
@@ -130,6 +137,51 @@ const AutoCompleteCalorieSearch = (props) => {
 	useEffect(() => {
 		setSeries(getNutritionInfo());
 	}, [props.foodStateByDate]);
+
+	const foodArrayContainsNewFoodObj = (foodArr, newObj) => {
+		for (let i = 0; i < foodArr.length; i++) {
+			if (foodArr[i].foodName === newObj.foodName) return true;
+		}
+		return false;
+	};
+
+	// when new food is added, add it to current daily food state
+	useEffect(() => {
+		console.log("current state of food dauly:");
+		console.log(props.foodStateByDate);
+		console.log("new food to add");
+		console.log(newFoodState);
+		// if (JSON.stringify(props.foodStateByDate) !== "{}" && newFoodState !== "") {
+		if (newFoodState !== "") {
+			const currFoodState = { ...props.foodStateByDate };
+
+			const newFoodObj = {
+				foodName: newFoodState.food.label || "",
+				calories: newFoodState.food.nutrients.ENERC_KCAL || 0,
+				nutrients: {
+					CARBS: newFoodState.food.nutrients.CHOCDF || 0,
+					PRTN: newFoodState.food.nutrients.PROCNT || 0,
+					FIBR: newFoodState.food.nutrients.FIBTG || 0,
+					FAT: newFoodState.food.nutrients.FAT || 0,
+				},
+			};
+			if (
+				currFoodState.foodIntake &&
+				foodArrayContainsNewFoodObj(currFoodState.foodIntake, newFoodObj)
+			) {
+				// show a notification that new food cannot be added
+				alert("Current Food is already present in db for today");
+			} else {
+				if (currFoodState.foodIntake) currFoodState.foodIntake.push(newFoodObj);
+				else {
+					currFoodState.user = props.userState._id;
+					currFoodState.date = dashedDate(props.dateState);
+					currFoodState.foodIntake = [newFoodObj];
+				}
+			}
+			props.setFoodStateByDate(currFoodState);
+		}
+	}, [newFoodState]);
 	return (
 		<div>
 			<Card style={{ backgroundColor: "#fffff", width: "60vw" }}>
@@ -181,10 +233,10 @@ const AutoCompleteCalorieSearch = (props) => {
 								options={options}
 								loading={loading}
 								onChange={(event, newValue) => {
-									console.log("changing food state");
-									setFoodToAdd(newValue);
-									formSubmitHandler(event);
+									setFoodToAdd("");
+									formSubmitHandler(event, newValue);
 								}}
+								value={foodToAdd}
 								renderInput={(params) => (
 									<TextField
 										{...params}

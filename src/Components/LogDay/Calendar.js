@@ -38,6 +38,7 @@ const Calendar = (props) => {
 		// when date changes, set current daily food state to empty
 		props.setFoodStateByDate({});
 		props.setIsFoodStateLoading(true);
+		props.setChecked(true);
 
 		// fetch food data for current date if user id is stored in userState
 		if (!props.isUserLoading) {
