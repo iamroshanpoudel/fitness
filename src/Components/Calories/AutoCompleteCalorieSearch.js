@@ -3,6 +3,7 @@ import {
 	getNutritionInfoByFoodAPIMethod,
 	getAutoCompleteByFoodAPIMethod,
 	getRestaurantMenuByAPIMethod,
+	addToDailyFoodAPIMethod,
 } from "../../api/client.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Card from "@material-ui/core/Card";
@@ -136,6 +137,11 @@ const AutoCompleteCalorieSearch = (props) => {
 
 	useEffect(() => {
 		setSeries(getNutritionInfo());
+		if (JSON.stringify(props.foodStateByDate) !== "{}") {
+			addToDailyFoodAPIMethod(props.foodStateByDate, (response) => {
+				console.log("updated daily food to db");
+			});
+		}
 	}, [props.foodStateByDate]);
 
 	const foodArrayContainsNewFoodObj = (foodArr, newObj) => {
@@ -147,11 +153,6 @@ const AutoCompleteCalorieSearch = (props) => {
 
 	// when new food is added, add it to current daily food state
 	useEffect(() => {
-		console.log("current state of food dauly:");
-		console.log(props.foodStateByDate);
-		console.log("new food to add");
-		console.log(newFoodState);
-		// if (JSON.stringify(props.foodStateByDate) !== "{}" && newFoodState !== "") {
 		if (newFoodState !== "") {
 			const currFoodState = { ...props.foodStateByDate };
 

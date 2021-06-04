@@ -36,7 +36,6 @@ const Calendar = (props) => {
 
 	useEffect(async () => {
 		// when date changes, set current daily food state to empty
-		props.setFoodStateByDate({});
 		props.setIsFoodStateLoading(true);
 		props.setChecked(true);
 
@@ -46,10 +45,7 @@ const Calendar = (props) => {
 				props.userState._id,
 				dashedDate(props.dateState),
 				(response) => {
-					console.log("Response: ");
-					console.log(response);
 					if (response) {
-						console.log(response);
 						props.setFoodStateByDate(response);
 						props.setIsFoodStateLoading(false);
 					}
