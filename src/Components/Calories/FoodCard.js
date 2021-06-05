@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: 345,
 		margin: "50px",
-		// backgroundColor: "skyblue"
+
+		backgroundColor: "#f7f9fb",
 	},
 	media: {
 		height: 0,
@@ -47,6 +48,19 @@ const FoodCard = (props) => {
 		setExpanded(!expanded);
 	};
 
+	const deleteFoodHandler = () => {
+		let copiedFoodStateByDate = { ...props.foodStateByDate };
+		for (let i = 0; i < copiedFoodStateByDate.foodIntake.length; i++) {
+			if (
+				copiedFoodStateByDate.foodIntake[i].foodName === props.food.foodName
+			) {
+				copiedFoodStateByDate.foodIntake.splice(i, 1);
+				props.setFoodStateByDate(copiedFoodStateByDate);
+				return;
+			}
+		}
+	};
+
 	return (
 		<Card className={classes.root}>
 			<CardHeader
@@ -58,7 +72,7 @@ const FoodCard = (props) => {
 				}
 				action={
 					<IconButton aria-label="delete item">
-						<DeleteIcon />
+						<DeleteIcon onClick={deleteFoodHandler} />
 					</IconButton>
 				}
 			/>

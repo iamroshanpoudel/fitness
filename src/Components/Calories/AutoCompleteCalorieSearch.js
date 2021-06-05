@@ -13,7 +13,6 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ReactApexChart from "react-apexcharts";
 import moment from "moment";
-import Paper from "@material-ui/core/Paper";
 import FoodCard from "./FoodCard";
 
 const AutoCompleteCalorieSearch = (props) => {
@@ -192,7 +191,7 @@ const AutoCompleteCalorieSearch = (props) => {
 	}, [newFoodState]);
 	return (
 		<div>
-			<Card style={{ backgroundColor: "#fffff", width: "60vw" }}>
+			<Card style={{ backgroundColor: "#fffff", width: "50vw" }}>
 				<CardContent>
 					<div id="chart">
 						<ReactApexChart
@@ -204,18 +203,6 @@ const AutoCompleteCalorieSearch = (props) => {
 					</div>
 					{options ? options : []}
 					<form onSubmit={formSubmitHandler}>
-						<div id="form-section">
-							<div>
-								Food Items in Database for current date: <br />
-								{JSON.stringify(props.foodStateByDate) !== "{}"
-									? props.foodStateByDate.foodIntake.map((food, index) => {
-											return <FoodCard food={food} key={index} />;
-									  })
-									: "Nothing availalbe"}
-							</div>
-							<br />
-							<div>Food to add: {foodToAdd}</div>
-						</div>
 						<div>
 							<Autocomplete
 								id="asynchronous-demo"
@@ -265,6 +252,23 @@ const AutoCompleteCalorieSearch = (props) => {
 							/>
 						</div>
 					</form>
+					<div id="form-section">
+						<div>
+							Food Items in Database for current date: <br />
+							{JSON.stringify(props.foodStateByDate) !== "{}"
+								? props.foodStateByDate.foodIntake.map((food, index) => {
+										return (
+											<FoodCard
+												food={food}
+												key={index}
+												foodStateByDate={props.foodStateByDate}
+												setFoodStateByDate={props.setFoodStateByDate}
+											/>
+										);
+								  })
+								: "Nothing availalbe"}
+						</div>
+					</div>
 				</CardContent>
 			</Card>
 		</div>

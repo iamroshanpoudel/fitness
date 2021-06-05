@@ -62,11 +62,8 @@ export default function HeaderLinks(props) {
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
+	
 
-	const style = {
-		height: "50px",
-		borderRadius: "10px",
-	};
 	return (
 		<>
 			<List className={classes.list}>
@@ -106,7 +103,7 @@ export default function HeaderLinks(props) {
 					</Button>
 				</ListItem>
 			</List>
-			<div id="googleLogin">
+			<div id="googleLogin" className="loginButton">
 				<GoogleLogin
 					clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
 					buttonText="Login"
@@ -115,6 +112,8 @@ export default function HeaderLinks(props) {
 					cookiePolicy={"single_host_origin"}
 					className="login"
 					isSignedIn={true}
+					id="google"
+					style={{width:'100px'}}
 				/>
 				<p id="failure"></p>
 			</div>
