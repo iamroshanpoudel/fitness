@@ -80,7 +80,7 @@ function App() {
 						/>
 					)}
 				/>
-				<Route
+				{/* <Route
 					path="/questions"
 					exact
 					render={(props) =>
@@ -98,7 +98,7 @@ function App() {
 							loginAlert()
 						)
 					}
-				/>
+				/> */}
 				<Route
 					path="/view"
 					exact

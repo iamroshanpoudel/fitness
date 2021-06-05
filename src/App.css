@@ -16,16 +16,6 @@ body {
 	padding: 0;
 }
 
-#nav {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	height: 55px;
-	padding: 15px;
-	color: white;
-	background-color: lightgreen;
-}
-
 #links {
 	display: flex;
 	flex-direction: row;
@@ -375,6 +365,7 @@ h3 {
 	text-decoration: none;
 	margin: 20px;
 }
+
 #navMain {
 	display: flex;
 	flex-direction: row;
@@ -388,4 +379,8 @@ h3 {
 	position: absolute;
 	top: 10px;
 	right: 50px;
+}
+
+.makeStyles-appBar-6 {
+	margin: 0 !important;
 }
