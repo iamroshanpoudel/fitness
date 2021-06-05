@@ -33,7 +33,7 @@ export default function HeaderLinks(props) {
 	//sign out hook
 	const { signOut, signOutLoaded } = useGoogleLogout({
 		clientId:
-			"547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com",
+			"547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com",
 		buttonText: "Logout",
 		Style: "display:none",
 		className: "logout",
@@ -105,7 +105,7 @@ export default function HeaderLinks(props) {
 			</List>
 			<div id="googleLogin" className="loginButton">
 				<GoogleLogin
-					clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
+					clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 					buttonText="Login"
 					onSuccess={responseGoogle}
 					onFailure={responseFailGoogle}
