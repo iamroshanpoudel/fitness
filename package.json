@@ -3,7 +3,7 @@
 	"homepage": "https://iamroshanpoudel.github.io/cse316",
 	"version": "0.2.0",
 	"private": true,
-	"proxy": "http://localhost:7777",
+	"proxy": "https://fitness-plus-plus.herokuapp.com",
 	"dependencies": {
 		"@date-io/date-fns": "^2.10.11",
 		"@material-ui/core": "^4.11.4",

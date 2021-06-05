@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "../LogDay/Calendar";
+import Calendar from "../Calendar/Calendar";
 import Nav from "../Nav/Nav";
 import AutoCompleteCalorieSearch from "./AutoCompleteCalorieSearch";
 import { makeStyles } from "@material-ui/core/styles";
