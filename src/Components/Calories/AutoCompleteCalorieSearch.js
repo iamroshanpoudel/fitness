@@ -14,6 +14,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import ReactApexChart from "react-apexcharts";
 import moment from "moment";
 import Paper from "@material-ui/core/Paper";
+import FoodCard from "./FoodCard";
 
 const AutoCompleteCalorieSearch = (props) => {
 	// changes 2021/5/4 to 2021-5-4
@@ -208,19 +209,7 @@ const AutoCompleteCalorieSearch = (props) => {
 								Food Items in Database for current date: <br />
 								{JSON.stringify(props.foodStateByDate) !== "{}"
 									? props.foodStateByDate.foodIntake.map((food, index) => {
-											return (
-												<Paper
-													style={{
-														margin: "40px",
-													}}
-												>
-													food: {food.foodName} calories: {food.calories} <br />
-													CARBS: {food.nutrients.CARBS}
-													PRTN: {food.nutrients.PRTN}
-													FIBR: {food.nutrients.FIBR}
-													FAT: {food.nutrients.FAT}
-												</Paper>
-											);
+											return <FoodCard food={food} key={index} />;
 									  })
 									: "Nothing availalbe"}
 							</div>

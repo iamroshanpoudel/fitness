@@ -1,7 +1,7 @@
 import "./App.css";
 
 import React, { useState, useEffect } from "react";
-import Questions from "./Components/EditQuestions/Questions";
+import Questions from "./Components/Workout/Questions";
 import { Route, Switch } from "react-router-dom";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
@@ -78,7 +78,7 @@ function App() {
 						/>
 					)}
 				/>
-				<Route
+				{/* <Route
 					path="/questions"
 					exact
 					render={(props) =>
@@ -96,7 +96,7 @@ function App() {
 							loginAlert()
 						)
 					}
-				/>
+				/> */}
 				<Route
 					path="/view"
 					exact
