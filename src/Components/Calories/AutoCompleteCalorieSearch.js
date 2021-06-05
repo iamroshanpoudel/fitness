@@ -75,8 +75,10 @@ const AutoCompleteCalorieSearch = (props) => {
 		event.preventDefault();
 		getNutritionInfoByFoodAPIMethod(newFoodToAdd, (response) => {
 			if (response.parsed[0]) {
+				response.parsed[0].label = newFoodToAdd;
 				setNewFoodState(response.parsed[0]);
 			} else {
+				response.hints[0].label = newFoodToAdd;
 				setNewFoodState(response.hints[0]);
 			}
 		});
@@ -171,7 +173,10 @@ const AutoCompleteCalorieSearch = (props) => {
 				foodArrayContainsNewFoodObj(currFoodState.foodIntake, newFoodObj)
 			) {
 				// show a notification that new food cannot be added
-				alert("Current Food is already present in db for today");
+				alert(
+					"Current Food is already present in db for today" +
+						newFoodObj.foodName
+				);
 			} else {
 				if (currFoodState.foodIntake) currFoodState.foodIntake.push(newFoodObj);
 				else {
