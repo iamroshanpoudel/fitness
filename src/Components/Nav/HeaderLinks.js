@@ -94,7 +94,7 @@ export default function HeaderLinks(props) {
 						color="transparent"
 						className={classes.navLink}
 					>
-						Edit Questions
+						Log Workout
 					</Button>
 				</ListItem>
 				<ListItem className={classes.listItem}>

@@ -95,9 +95,18 @@ export const getUserStateByEmailAPIMethod = (email, success) => {
 		.then(parseJSON)
 		.then(success);
 };
-
+export const addToDailyFoodAPIMethod = (newFoodObj, success) => {
+	return fetch(`/api/food`, {
+		...defaultHeaders,
+		method: "POST", // The method defaults to GET
+		body: JSON.stringify(newFoodObj),
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
 export const updateUserByAPIMethod = (user, success) => {
-	return fetch(`/api/v1/user`, {
+	return fetch(`/api/user`, {
 		...defaultHeaders,
 		method: "PUT", // The method defaults to GET
 		body: JSON.stringify(user),
@@ -108,7 +117,6 @@ export const updateUserByAPIMethod = (user, success) => {
 };
 
 export const getDailyFoodInfoByAPIMethod = (uid, date, success) => {
-	console.log(`inside get daily food API /api/food/${uid}/${date}`);
 	return fetch(`/api/food/${uid}/${date}`, {
 		...defaultHeaders,
 	})
@@ -130,7 +138,6 @@ export const getNutritionInfoByFoodAPIMethod = (foodName, success) => {
 };
 
 export const getAutoCompleteByFoodAPIMethod = (searchText, success) => {
-	console.log("making autocomplete request");
 	return fetch(
 		`https://api.edamam.com/auto-complete?q=${searchText}&limit=15&&app_id=942000ce&app_key=2877d4cdd0895c654f3a65b4ed24ad13`,
 		{
@@ -142,8 +149,6 @@ export const getAutoCompleteByFoodAPIMethod = (searchText, success) => {
 		.then(success);
 };
 export const getRestaurantMenuByAPIMethod = (searchText, zip, success) => {
-	console.log("making Restautant menu request");
-
 	return fetch(
 		`https://api.edamam.com/api/menu-items/v2/search?q=${searchText}&postal=${zip}&dist=10&app_id=942000ce&app_key=2877d4cdd0895c654f3a65b4ed24ad13`,
 		{
