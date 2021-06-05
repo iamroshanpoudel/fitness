@@ -1,4 +1,5 @@
 export const responseFailGoogle = (r) => {
+	console.log(r);
 	loginStatus("Login Failed");
 };
 export const loginStatus = () => {
