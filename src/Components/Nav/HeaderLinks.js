@@ -92,8 +92,10 @@ export default function HeaderLinks(props) {
 		color = '#ee0000';
 	}
  	let show = "none";
-	if(profile.address != null){
-		show = "block";
+	if(profile != null){
+		if(profile.address != null){
+			show = "block";
+		}
 	}
 
 	return (
