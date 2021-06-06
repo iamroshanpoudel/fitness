@@ -27,7 +27,7 @@ const Data = (props) => {
 
 	return (
 		<div>
-			<Nav userState={props.userState} />
+			<Nav userState={props.userState} loginState={props.loginState} loginStateFunction ={props.loginStateFunction}/>
 			<div id="temp-page">
 				{responseState.map((response, index) => {
 					return (

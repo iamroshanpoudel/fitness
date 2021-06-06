@@ -78,7 +78,7 @@ const FoodCard = (props) => {
 			/>
 			<CardMedia
 				className={classes.media}
-				image={props.food.image}
+				image="https://images.unsplash.com/photo-1575159240102-4331f59433ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
 				title={props.food.foodName}
 			/>
 

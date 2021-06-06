@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 		strokeWidth: 1,
 	},
 }));
-
 const LogCalories = (props) => {
 	// Returns current date as string
 	const addDate = () => {
@@ -53,7 +52,7 @@ const LogCalories = (props) => {
 
 	return (
 		<div>
-			<Nav userState={props.userState} />
+			<Nav userState={props.userState} loginState={props.loginState} loginStateFunction ={props.loginStateFunction}/>
 			<div id="body-items">
 				<Calendar
 					dateState={dateState}

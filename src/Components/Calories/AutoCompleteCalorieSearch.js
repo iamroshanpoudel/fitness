@@ -4,9 +4,7 @@ import {
 	getAutoCompleteByFoodAPIMethod,
 	getRestaurantMenuByAPIMethod,
 	addToDailyFoodAPIMethod,
-	getPhotoFromUnsplashAPIMethod,
 } from "../../api/client.js";
-
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -76,27 +74,15 @@ const AutoCompleteCalorieSearch = (props) => {
 
 	const formSubmitHandler = (event, newFoodToAdd) => {
 		event.preventDefault();
-		alert("new food " + newFoodToAdd);
-		if (newFoodToAdd && newFoodToAdd !== "") {
-			alert("passed");
-			getNutritionInfoByFoodAPIMethod(newFoodToAdd, (response) => {
-				getPhotoFromUnsplashAPIMethod(newFoodToAdd, (response2) => {
-					if (response.parsed[0]) {
-						response.parsed[0].label = newFoodToAdd;
-						response.parsed[0].image = response2.results[0].links.download;
-						console.log("reponse to save");
-						console.log(response.parsed[0]);
-						setNewFoodState(response.parsed[0]);
-					} else {
-						response.hints[0].label = newFoodToAdd;
-						response.hints[0].image = response2.results[0].links.download;
-						setNewFoodState(response.hints[0]);
-						console.log("reponse to save");
-						console.log(response.hints[0]);
-					}
-				});
-			});
-		}
+		getNutritionInfoByFoodAPIMethod(newFoodToAdd, (response) => {
+			if (response.parsed[0]) {
+				response.parsed[0].label = newFoodToAdd;
+				setNewFoodState(response.parsed[0]);
+			} else {
+				response.hints[0].label = newFoodToAdd;
+				setNewFoodState(response.hints[0]);
+			}
+		});
 	};
 
 	const foodTypingHandler = (event) => {
@@ -176,9 +162,6 @@ const AutoCompleteCalorieSearch = (props) => {
 			const newFoodObj = {
 				foodName: newFoodState.food.label || "",
 				calories: newFoodState.food.nutrients.ENERC_KCAL || 0,
-				image:
-					newFoodState.image ||
-					"https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80",
 				nutrients: {
 					CARBS: newFoodState.food.nutrients.CHOCDF || 0,
 					PRTN: newFoodState.food.nutrients.PROCNT || 0,
