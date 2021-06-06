@@ -38,9 +38,7 @@ const Profile = (props) => {
 
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
-		updateUserByAPIMethod(props.userState, (response) => {
-			sessionStorage.setItem("userData", props.userState);
-		});
+		updateUserByAPIMethod(props.userState, (response) => {});
 	};
 
 	const imageChangeHandler = async (e) => {
