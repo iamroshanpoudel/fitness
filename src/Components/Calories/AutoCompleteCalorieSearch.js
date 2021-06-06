@@ -84,13 +84,13 @@ const AutoCompleteCalorieSearch = (props) => {
 					response.parsed[0].label = newFoodToAdd;
 
 					if (response.parsed[0]) {
-						// response.parsed[0].label = newFoodToAdd;
+						response.parsed[0].label = newFoodToAdd;
 						response.parsed[0].image = response2.results[0].links.download;
 						console.log("reponse to save");
 						console.log(response.parsed[0]);
 						setNewFoodState(response.parsed[0]);
 					} else {
-						// response.hints[0].label = newFoodToAdd;
+						response.hints[0].label = newFoodToAdd;
 						response.hints[0].image = response2.results[0].links.download;
 						setNewFoodState(response.hints[0]);
 						console.log("reponse to save");

@@ -61,6 +61,7 @@ const FoodCard = (props) => {
 		}
 	};
 
+	alert(JSON.stringify(props));
 	return (
 		<Card className={classes.root}>
 			<CardHeader
@@ -78,7 +79,7 @@ const FoodCard = (props) => {
 			/>
 			<CardMedia
 				className={classes.media}
-				image="https://images.unsplash.com/photo-1575159240102-4331f59433ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+				image={props.image}
 				title={props.food.foodName}
 			/>
 
