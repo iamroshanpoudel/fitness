@@ -59,7 +59,6 @@ function App() {
 			console.log("userState updated from db");
 			console.log(userState);
 			setIsUserLoading(false);
-			sessionStorage.setItem("userData", JSON.stringify(userState));
 		}
 	}, [userState]);
 
