@@ -126,16 +126,8 @@ export default function HeaderLinks(props) {
 					</Button>
 				</ListItem>
 			</List>
-
-			{props.loginState ?
-				<div id="googleHide" style={{display:'block'}}>
-						<a href="./profile">
-							<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>
-							<img src={image} id="image" alt="User"/>
-						</a>
-				</div>
-				:
-				<div id="googleLogin" className="loginButton" style={{display:'block'}}>
+			{sessionStorage.getItem('userData') === null ?
+				<div id="googleLogin" className="loginButton" style={{display:'none'}}>
 					<GoogleLogin
 						clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 						buttonText="Login"
@@ -149,6 +141,14 @@ export default function HeaderLinks(props) {
 					/>
 					<p id="failure"></p>
 				</div>
+				:
+				<div id="googleHide" style={{display:'block'}}>
+					<a href="./profile">
+						<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>
+						<img src={image} id="image" alt="User"/>
+					</a>
+				</div>
+
 			}
 		</>
 	);
