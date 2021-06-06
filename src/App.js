@@ -22,7 +22,7 @@ function App() {
 	);
 
 	//loginStatus
-	const [loginState,setLoginState] = useState(false);
+	const [loginState, setLoginState] = useState(false);
 	// is the user information fetched from db ?
 	const [isUserLoading, setIsUserLoading] = useState(true);
 
@@ -45,7 +45,7 @@ function App() {
 				JSON.parse(sessionStorage.getItem("userData")).email,
 				(response) => {
 					console.log(response);
-					if(response !== null){
+					if (response !== null) {
 						setUserState(response);
 						setLoginState(true);
 					}
@@ -54,25 +54,34 @@ function App() {
 		}
 	}, []);
 
-	useEffect( () => {
+	useEffect(() => {
 		if (userState && userState._id) {
 			console.log("userState updated from db");
 			console.log(userState);
 			setIsUserLoading(false);
+			sessionStorage.setItem("userData", JSON.stringify(userState));
 		}
 	}, [userState]);
 
 	//loginStatus function
-	const setLoginStateFunction = (state) =>{setLoginState(state);}
-	
+	const setLoginStateFunction = (state) => {
+		setLoginState(state);
+	};
+
 	return (
 		<div className="App">
 			<Switch>
-				<Route path="/" exact render={(props) => <Main
-					{...props}
-					loginState={loginState}
-					loginStateFunction = {setLoginStateFunction}
-				/>} />
+				<Route
+					path="/"
+					exact
+					render={(props) => (
+						<Main
+							{...props}
+							loginState={loginState}
+							loginStateFunction={setLoginStateFunction}
+						/>
+					)}
+				/>
 				<Route
 					path="/calories"
 					exact
@@ -81,7 +90,7 @@ function App() {
 							{...props}
 							userState={userState}
 							loginState={loginState}
-							loginStateFunction = {setLoginStateFunction}
+							loginStateFunction={setLoginStateFunction}
 							setUserState={setUserState}
 							isUserLoading={isUserLoading}
 							setIsUserLoading={setIsUserLoading}
@@ -96,7 +105,7 @@ function App() {
 							<Questions
 								{...props}
 								loginState={loginState}
-								loginStateFunction = {setLoginStateFunction}
+								loginStateFunction={setLoginStateFunction}
 								questionState={questionState}
 								setQuestionState={setQuestionState}
 								isDataState={isDataState}
@@ -117,7 +126,7 @@ function App() {
 							<Data
 								{...props}
 								loginState={loginState}
-								loginStateFunction = {setLoginStateFunction}
+								loginStateFunction={setLoginStateFunction}
 								questionState={questionState}
 								userState={userState}
 								setUserState={setUserState}
@@ -135,7 +144,7 @@ function App() {
 							<Profile
 								{...props}
 								loginState={loginState}
-								loginStateFunction = {setLoginStateFunction}
+								loginStateFunction={setLoginStateFunction}
 								userState={userState}
 								setUserState={setUserState}
 								isDataState={isDataState}
@@ -155,7 +164,7 @@ function App() {
 							<Getstart
 								{...props}
 								loginState={loginState}
-								loginStateFunction = {setLoginStateFunction}
+								loginStateFunction={setLoginStateFunction}
 								userState={userState}
 								setUserState={setUserState}
 								isDataState={isDataState}
