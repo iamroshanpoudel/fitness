@@ -21,7 +21,10 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from "@material-ui/pickers";
-import {getUserStateByEmailAPIMethod,updateUserByAPIMethod} from '../../api/client'
+import {
+	getUserStateByEmailAPIMethod,
+	updateUserByAPIMethod,
+} from "../../api/client";
 import "date-fns";
 
 export default function Getstart(props) {
@@ -109,17 +112,17 @@ export default function Getstart(props) {
 	};
 
 	// form submit handler
-	const formSubmitHandler = async(e) => {
+	const formSubmitHandler = async (e) => {
 		e.preventDefault();
 		console.log(newUserState);
-		await updateUserByAPIMethod(newUserState).then( (r) =>{
-			sessionStorage.removeItem('userData');
+		await updateUserByAPIMethod(newUserState).then((r) => {
+			sessionStorage.removeItem("userData");
 			console.log(typeof r);
 			const userData = JSON.stringify(r);
-			sessionStorage.setItem('userData',userData);
-			window.location.href = '/';
+			sessionStorage.setItem("userData", userData);
+			window.location.href = "/";
 		});
-	}
+	};
 	return (
 		<div
 			style={{
@@ -248,6 +251,8 @@ export default function Getstart(props) {
 								id="standard-adornment-weight"
 								type="number"
 								required
+								value={newUserState.physicals.weight}
+								onChange={weightChangeHandler}
 								endAdornment={
 									<InputAdornment position="end">Kg</InputAdornment>
 								}

@@ -135,18 +135,6 @@ input[type="number"] {
 	height: 25px;
 }
 
-input[type="text"],
-input[type="email"] {
-	width: 97%;
-}
-
-input[type="submit"]:hover,
-input[type="button"]:hover,
-a:hover,
-button:hover {
-	transform: scale(1.1);
-}
-
 .boolean-selectors {
 	display: flex;
 	flex-direction: row;
