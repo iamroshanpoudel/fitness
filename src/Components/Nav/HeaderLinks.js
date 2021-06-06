@@ -50,32 +50,38 @@ export default function HeaderLinks(props) {
 		document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
 
-		const userProfile = await getUserStateByEmailAPIMethod(response.profileObj.email);
 
-		console.log(userProfile);
-		setImage(response.profileObj.imageUrl);
-		console.log(image);
-		//Timing to renew access token
-		let expired_at = 24 * 60 * 1000; //One Day
-		//add expiration information
-		response.profileObj.expired_at = expired_at;
+
 		//store in session Storage
-		sessionStorage.setItem("userData", JSON.stringify(userProfile === null? response.profileObj : userProfile));
+		await getUserStateByEmailAPIMethod(response.profileObj.email).then( (r) =>{
+			//Timing to renew access token
+			let expired_at = 24 * 60 * 1000; //One Day
+			//add expiration information
+			if(r !== null){
+				r.expired_at = expired_at;
+				setImage(r.imageUrl);
+				sessionStorage.setItem("userData", JSON.stringify(r));
+			}else{
+				response.profileObj.expired_at = expired_at;
+				setImage(response.profileObj.imageUrl);
+				sessionStorage.setItem("userData", JSON.stringify(response.profileObj));
+			}
 
-		const timeOut = async () => {
-			const sessionClear = () => sessionStorage.removeItem("userData");
-			await setTimeout(sessionClear, expired_at);
-			await setTimeout(signOut, expired_at);
-		};
-		//start Counting
-		timeOut().then((r) => {
-			console.log("session started");
+			const timeOut = async () => {
+				const sessionClear = () => sessionStorage.removeItem("userData");
+				await setTimeout(sessionClear, expired_at);
+				await setTimeout(signOut, expired_at);
+			};
+			//start Counting
+			timeOut().then((r) => {
+				console.log("session started");
+			});
+			props.loginStateFunction(true)
+
+			if(r === null){
+				window.location.href = '/getStart';
+			}
 		});
-		props.loginStateFunction(true)
-
-		if(userProfile === null){
-			window.location.href = '/getStart';
-		}
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
