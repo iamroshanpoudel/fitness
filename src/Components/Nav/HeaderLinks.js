@@ -53,8 +53,7 @@ export default function HeaderLinks(props) {
 		//store in session Storage
 		getUserStateByEmailAPIMethod(response.profileObj.email).then( (r) =>{
 			console.log(r);
-
-
+			
 			//Timing to renew access token
 			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information

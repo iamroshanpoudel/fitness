@@ -1,9 +1,8 @@
 const defaultHeaders = {
 	headers: {
-		Accept:
-		"application/json,application/xml, text/plain, text/html,*.*",
-		"Content-Type": "application/x-www-form-urlencoded; application/json; charset=UTF-8",
-	},
+		"Content-Type": "application/json; charset=UTF-8",
+		'Accept': 'application/json'
+	}
 };
 
 export const getQuestionsAPIMethod = (success) => {
@@ -102,7 +101,7 @@ export const getPhotoFromUnsplashAPIMethod = (query, success) => {
 		.then(success);
 };
 export const getUserStateByEmailAPIMethod = (email, success) => {
-	return fetch(`https://fitness-plus-plus.herokuapp.com/api/user/${email}`, {
+	return fetch(`/api/user/${email}`, {
 		...defaultHeaders,
 	})
 		.then(checkStatus)
