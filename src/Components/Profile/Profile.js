@@ -17,6 +17,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import DateFnsUtils from "@date-io/date-fns";
+import CustomizedSnackbars from "../../util/Alert";
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
@@ -353,14 +354,7 @@ const Profile = (props) => {
 										className="logout"
 										onLogoutSuccess={logout}
 									></GoogleLogout>
-									<Button
-										type="submit"
-										variant="contained"
-										color="primary"
-										style={{ "margin-left": "20px", width: "100px" }}
-									>
-										Save
-									</Button>
+									{CustomizedSnackbars()}
 								</div>
 							</form>
 						</div>

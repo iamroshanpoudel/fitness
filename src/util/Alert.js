@@ -38,10 +38,10 @@ export default function CustomizedSnackbars() {
 			<Button
 				variant="outlined"
 				type="submit"
-				value="Save"
-				className="save-button right"
+				variant="contained"
+				color="primary"
 				onClick={handleClick}
-				Style="background-color: #f76b8a;"
+				style={{ "margin-left": "20px", width: "100px",    float: "right"}}
 			>
 				Save
 			</Button>
