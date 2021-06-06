@@ -54,7 +54,7 @@ function App() {
 		}
 	}, []);
 
-	useEffect(() => {
+	useEffect( () => {
 		if (userState && userState._id) {
 			console.log("userState updated from db");
 			console.log(userState);

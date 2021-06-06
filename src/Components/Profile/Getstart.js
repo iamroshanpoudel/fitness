@@ -21,6 +21,7 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from "@material-ui/pickers";
+import {getUserStateByEmailAPIMethod,updateUserByAPIMethod} from '../../api/client'
 import "date-fns";
 
 export default function Getstart(props) {
@@ -108,9 +109,16 @@ export default function Getstart(props) {
 	};
 
 	// form submit handler
-	const formSubmitHandler = (e) => {
+	const formSubmitHandler = async(e) => {
 		e.preventDefault();
-		console.log();
+		console.log(newUserState);
+		await updateUserByAPIMethod(newUserState).then( (r) =>{
+			sessionStorage.removeItem('userData');
+			console.log(typeof r);
+			const userData = JSON.stringify(r);
+			sessionStorage.setItem('userData',userData);
+			window.location.href = '/';
+		});
 	}
 	return (
 		<div

@@ -120,7 +120,7 @@ export const addToDailyFoodAPIMethod = (newFoodObj, success) => {
 export const updateUserByAPIMethod = (user, success) => {
 	return fetch(`/api/user`, {
 		...defaultHeaders,
-		method: "PUT", // The method defaults to GET
+		method: "POST", // The method defaults to GET
 		body: JSON.stringify(user),
 	})
 		.then(checkStatus)

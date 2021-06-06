@@ -47,10 +47,10 @@ export default function HeaderLinks(props) {
 	const responseGoogle = async (response) => {
 		// document.getElementById("googleLogin").style = "display:none";
 		// document.getElementById("googleHide").style = "display:block";
-		// document.getElementById("headerList").style = "display:block";
+		document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
 
-		const userProfile = JSON.parse(await getUserStateByEmailAPIMethod(response.profileObj.email));
+		const userProfile = await getUserStateByEmailAPIMethod(response.profileObj.email);
 
 		console.log(userProfile);
 		setImage(response.profileObj.imageUrl);
@@ -60,7 +60,7 @@ export default function HeaderLinks(props) {
 		//add expiration information
 		response.profileObj.expired_at = expired_at;
 		//store in session Storage
-		sessionStorage.setItem("userData", JSON.stringify(response.profileObj));
+		sessionStorage.setItem("userData", JSON.stringify(userProfile === null? response.profileObj : userProfile));
 
 		const timeOut = async () => {
 			const sessionClear = () => sessionStorage.removeItem("userData");
@@ -121,32 +121,6 @@ export default function HeaderLinks(props) {
 				</ListItem>
 			</List>
 
-			<div id="googleLogin" className="loginButton">
-				<GoogleLogin
-					clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
-					buttonText="Login"
-					onSuccess={responseGoogle}
-					onFailure={responseFailGoogle}
-					cookiePolicy={"single_host_origin"}
-					className="login"
-					isSignedIn={true}
-					id="google"
-					style={{ width: "100px" }}
-				/>
-				<p id="failure"></p>
-			</div>
-			<div id="googleHide">
-				{image === undefined ? (
-					<a href="./profile">
-						<img src={defaultImage} id="image" alt="User" />
-					</a>
-				) : (
-					<a href="./profile">
-						<img src={image} id="image" alt="User" />
-					</a>
-				)}
-			</div>
-
 			{props.loginState ?
 				<div id="googleHide" style={{display:'block'}}>
 						<a href="./profile">
@@ -155,7 +129,7 @@ export default function HeaderLinks(props) {
 						</a>
 				</div>
 				:
-				<div id="googleLogin" className="loginButton">
+				<div id="googleLogin" className="loginButton" style={{display:'block'}}>
 					<GoogleLogin
 						clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 						buttonText="Login"
