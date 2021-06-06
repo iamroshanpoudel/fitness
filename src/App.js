@@ -26,19 +26,6 @@ function App() {
 	// is the user information fetched from db ?
 	const [isUserLoading, setIsUserLoading] = useState(true);
 
-	// const [userState, setUserState] = useState(
-	// 	JSON.parse(sessionStorage.getItem("userData"))
-	// );
-
-	// useEffect(() => {
-	// 	getQuestionsAPIMethod((questions) => {
-	// 		setQuestionState(questions);
-	// 	});
-	// 	getUserByAPIMethod((user) => {
-	// 		setUserState(user);
-	// 	});
-	// }, [isDataState]);
-
 	useEffect(async () => {
 		if (isLoggedIn()) {
 			await getUserStateByEmailAPIMethod(

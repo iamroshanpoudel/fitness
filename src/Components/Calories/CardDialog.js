@@ -1,13 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
@@ -16,36 +15,6 @@ import { GiCupcake, GiMuscleFat } from "react-icons/gi";
 import { IconContext } from "react-icons";
 import { FaBreadSlice, FaCarrot } from "react-icons/fa";
 import { GiChickenOven } from "react-icons/gi";
-import InfoIcon from "@material-ui/icons/Info";
-import CloseIcon from "@material-ui/icons/Close";
-import { withStyles } from "@material-ui/core/styles";
-import Dialog from "@material-ui/core/Dialog";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		minWidth: "fit-content",
-		margin: "20px",
-
-		backgroundColor: "#f7f9fb",
-	},
-	media: {
-		height: 0,
-		paddingTop: "56.25%", // 16:9
-	},
-	expand: {
-		transform: "rotate(0deg)",
-		marginLeft: "auto",
-		transition: theme.transitions.create("transform", {
-			duration: theme.transitions.duration.shortest,
-		}),
-	},
-	expandOpen: {
-		transform: "rotate(180deg)",
-	},
-}));
 
 const styles = (theme) => ({
 	root: {
@@ -80,7 +49,6 @@ const DialogTitle = withStyles(styles)((props) => {
 
 const DialogContent = withStyles((theme) => ({
 	root: {
-		width: "250px",
 		padding: theme.spacing(2),
 	},
 }))(MuiDialogContent);
@@ -91,27 +59,8 @@ const DialogActions = withStyles((theme) => ({
 		padding: theme.spacing(1),
 	},
 }))(MuiDialogActions);
-const FoodCard = (props) => {
-	const classes = useStyles();
-	const [expanded, setExpanded] = React.useState(false);
 
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
-
-	const deleteFoodHandler = () => {
-		let copiedFoodStateByDate = { ...props.foodStateByDate };
-		for (let i = 0; i < copiedFoodStateByDate.foodIntake.length; i++) {
-			if (
-				copiedFoodStateByDate.foodIntake[i].foodName === props.food.foodName
-			) {
-				copiedFoodStateByDate.foodIntake.splice(i, 1);
-				props.setFoodStateByDate(copiedFoodStateByDate);
-				return;
-			}
-		}
-	};
-
+export default function CardDialog(props) {
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -120,46 +69,16 @@ const FoodCard = (props) => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	return (
-		<Card className={classes.root}>
-			<CardHeader
-				avatar={<RestaurantIcon />}
-				title={
-					<Typography gutterBottom variant="h5">
-						{props.food.foodName}
-					</Typography>
-				}
-				action={
-					<IconButton aria-label="delete item">
-						<DeleteIcon onClick={deleteFoodHandler} />
-					</IconButton>
-				}
-			/>
-			<CardMedia
-				className={classes.media}
-				image={props.food.image}
-				title={props.food.foodName}
-			/>
 
-			<CardActions disableSpacing>
-				<Typography gutterBottom variant="h6">
-					Nutritional Information:
-				</Typography>
-				<IconButton
-					onClick={handleClickOpen}
-					aria-label="show nutrition information"
-					style={{ marginLeft: "60px" }}
-				>
-					<InfoIcon />
-				</IconButton>
-			</CardActions>
+	return (
+		<div>
 			<Dialog
 				onClose={handleClose}
 				aria-labelledby="customized-dialog-title"
 				open={open}
 			>
 				<DialogTitle id="customized-dialog-title" onClose={handleClose}>
-					{props.food.foodName}
+					Food Name
 				</DialogTitle>
 				<DialogContent dividers>
 					<IconContext.Provider
@@ -203,8 +122,6 @@ const FoodCard = (props) => {
 					</IconContext.Provider>
 				</DialogContent>
 			</Dialog>
-		</Card>
+		</div>
 	);
-};
-
-export default FoodCard;
+}

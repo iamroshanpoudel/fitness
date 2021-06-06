@@ -271,6 +271,9 @@ label {
 	#nav {
 		width: 100vw !important;
 	}
+	.calorieCard {
+		width: "10vw" !important;
+	}
 }
 
 #edit-profile {
@@ -380,4 +383,18 @@ h3 {
 
 .makeStyles-appBar-6 {
 	margin: 0 !important;
+}
+
+.foodRow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.foodItem {
+	display: 50%;
+}
+
+.calorieCard {
+	padding: 10px;
 }

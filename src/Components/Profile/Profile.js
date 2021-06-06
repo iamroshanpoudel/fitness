@@ -353,7 +353,8 @@ const Profile = (props) => {
 										className="logout"
 										onLogoutSuccess={logout}
 									></GoogleLogout>
-									{CustomizedSnackbars("error", "This is the message")}
+
+									{CustomizedSnackbars("success", "Saved to database")}
 								</div>
 							</form>
 						</div>
