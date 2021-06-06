@@ -53,7 +53,7 @@ export default function HeaderLinks(props) {
 		//store in session Storage
 		getUserStateByEmailAPIMethod(response.profileObj.email).then( (r) =>{
 			console.log(r);
-			
+
 			//Timing to renew access token
 			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information
@@ -91,6 +91,10 @@ export default function HeaderLinks(props) {
 	}else{
 		color = '#ee0000';
 	}
+ 	let show = "none";
+	if(profile.address != null){
+		show = "block";
+	}
 
 	return (
 		<>
@@ -98,7 +102,7 @@ export default function HeaderLinks(props) {
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
 
-			<List className={classes.list} id="headerList" style={{display:'none'}}>
+			<List className={classes.list} id="headerList" style={{display:show}}>
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
