@@ -51,7 +51,7 @@ export default function HeaderLinks(props) {
 		// document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
 		const userProfile = await getUserStateByEmailAPIMethod(response.profileObj.email);
-
+		console.log(userProfile);
 		setImage(response.profileObj.imageUrl);
 		console.log(image);
 		//Timing to renew access token
@@ -72,9 +72,9 @@ export default function HeaderLinks(props) {
 		});
 		props.loginStateFunction(true)
 
-		// if(userProfile === null){
-		// 	window.location.href = '/getStart';
-		// }
+		if(userProfile === null){
+			window.location.href = '/getStart';
+		}
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
