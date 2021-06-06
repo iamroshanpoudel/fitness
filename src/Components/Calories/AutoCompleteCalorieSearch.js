@@ -3,6 +3,7 @@ import {
 	getNutritionInfoByFoodAPIMethod,
 	getAutoCompleteByFoodAPIMethod,
 	getRestaurantMenuByAPIMethod,
+	getPhotoFromUnsplashAPIMethod,
 	addToDailyFoodAPIMethod,
 } from "../../api/client.js";
 import CircularProgress from "@material-ui/core/CircularProgress";

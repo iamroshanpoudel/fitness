@@ -45,8 +45,10 @@ function App() {
 				JSON.parse(sessionStorage.getItem("userData")).email,
 				(response) => {
 					console.log(response);
-					setUserState(response);
-					setLoginState(true);
+					if(response !== null){
+						setUserState(response);
+						setLoginState(true);
+					}
 				}
 			);
 		}

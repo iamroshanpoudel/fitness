@@ -32,7 +32,7 @@ export default function Getstart(props) {
 	today = yyyy + "-" + mm + "-" + dd;
 
 	// backgroundImage: "url(" + Background + ")", backgroundSize: "100vw"
-	console.log(props);
+
 	// new user state to send to db
 	const [newUserState, setNewUserState] = useState({
 		name: props.userState.name,
@@ -110,8 +110,8 @@ export default function Getstart(props) {
 	// form submit handler
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
-		alert("Sije, add the handler hereg");
-	};
+		console.log();
+	}
 	return (
 		<div
 			style={{

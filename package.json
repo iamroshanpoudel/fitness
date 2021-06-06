@@ -1,6 +1,5 @@
 {
 	"name": "cse316",
-	"homepage": "https://iamroshanpoudel.github.io/cse316",
 	"version": "0.2.0",
 	"private": true,
 	"proxy": "https://fitness-plus-plus.herokuapp.com",
