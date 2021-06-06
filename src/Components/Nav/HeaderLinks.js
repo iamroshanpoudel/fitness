@@ -11,16 +11,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
-
+import {getUserStateByEmailAPIMethod} from "../../api/client"
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
 import logo from "../../images/logo-2.jpg";
 // core components
 import CustomDropdown from "./CustomDropdown.js";
 import Button from "./Button.js";
-
+import {getUserStateByEmailAPIMethod} from "../../api/client"
 import styles from "../../util/headerLinkStyle";
 import headerStyle from "../../util/headerStyle";
+
 
 const useStyles = makeStyles(styles);
 
@@ -40,9 +41,14 @@ export default function HeaderLinks(props) {
 		onLogoutSuccess: { logout },
 	});
 	//signIn response
-	const responseGoogle = (response) => {
+	const responseGoogle = async (response) => {
 		document.getElementById("googleLogin").style = "display:none";
 		document.getElementById("googleHide").style = "display:block";
+		document.getElementById("headerList").style = "display:block";
+		console.log(response.profileObj.email);
+		const userProfile = await getUserStateByEmailAPIMethod(response.profileObj.email);
+		console.log(userProfile);
+
 		setImage(response.profileObj.imageUrl);
 		//Timing to renew access token
 		let expired_at = 24 * 60 * 1000; //One Day
@@ -66,19 +72,10 @@ export default function HeaderLinks(props) {
 
 	return (
 		<>
-			<List className={classes.list}>
-				<ListItem className={classes.listItem}>
-					{/* <NavLink
-							to="/main"
-							activeClassName="active-link"
-							className="logo alink"
-						>
-							<img id="logo" style={style} src={logo} />
-						</NavLink> */}
-					<NavLink to="/" activeClassName="active-link" className="logo alink">
-						<h2 className="logo-text">Fitness++</h2>
-					</NavLink>
-				</ListItem>
+			<NavLink to="/" activeClassName="active-link" className="logo alink">
+				<h2 className="logo-text">Fitness++</h2>
+			</NavLink>
+			<List className={classes.list} id="headerList"Style="display:none">
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
