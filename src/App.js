@@ -152,18 +152,19 @@ function App() {
 						isLoggedIn() ? (
 							<Getstart
 								{...props}
+								loginState={loginState}
+								loginStateFunction = {setLoginStateFunction}
 								userState={userState}
 								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
 								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
 							/>
 						) : (
 							loginAlert()
 						)
 					}
-					render={(props) => <Getstart {...props}
-												 loginState={loginState}
-												 loginStateFunction = {setLoginStateFunction}
-					/>}
 				/>
 			</Switch>
 		</div>

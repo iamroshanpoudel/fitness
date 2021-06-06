@@ -30,8 +30,9 @@ export default function Getstart(props) {
 	var yyyy = today.getFullYear();
 
 	today = yyyy + "-" + mm + "-" + dd;
-	// backgroundImage: "url(" + Background + ")", backgroundSize: "100vw"
 
+	// backgroundImage: "url(" + Background + ")", backgroundSize: "100vw"
+	console.log(props);
 	// new user state to send to db
 	const [newUserState, setNewUserState] = useState({
 		name: props.userState.name,
