@@ -26,7 +26,7 @@ const Questions = (props) => {
 
 	return (
 		<div>
-			<Nav userState={props.userState} />
+			<Nav userState={props.userState} loginState={props.loginState} loginStateFunction ={props.loginStateFunction}/>
 			<div id="body-items">
 				<div id="questions-title">
 					<h2>{props.userState.name}'s Questions</h2>

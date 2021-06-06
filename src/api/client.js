@@ -4,20 +4,6 @@ const defaultHeaders = {
 	},
 };
 
-const UNSPLASH_ACCESS_KEY = "LOsqdwdgI0TWMgXS2vS8-ChLzScVHYpgn3bmpaTaAtM";
-
-export const getPhotoFromUnsplashAPIMethod = (query, success) => {
-	console.log(
-		`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&orientation=landscape&count=1&client_id=${UNSPLASH_ACCESS_KEY}`
-	);
-	return fetch(
-		`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&orientation=landscape&count=1&client_id=${UNSPLASH_ACCESS_KEY}`
-	)
-		.then(checkStatus)
-		.then(parseJSON)
-		.then(success);
-};
-
 export const getQuestionsAPIMethod = (success) => {
 	return fetch(`/api/v1/question`, {
 		...defaultHeaders,

@@ -28,7 +28,10 @@ export default function HeaderLinks(props) {
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
 
 	///////////////////////////////////////Google Login Function////////////////////////////////////////////////
-	const [image, setImage] = useState();
+	const profile = JSON.parse(sessionStorage.getItem('userData'));
+	console.log(profile);
+	const [image, setImage] = useState( profile == null? defaultImage: profile.imageUrl);
+	const [connection,setConnection] = useState(window.navigator.onLine);
 	//sign out hook
 	const { signOut, signOutLoaded } = useGoogleLogout({
 		clientId:
@@ -38,24 +41,27 @@ export default function HeaderLinks(props) {
 		className: "logout",
 		onLogoutSuccess: { logout },
 	});
+
+	// const isLoggined = window.location.pathname === '/' ? true : false;
 	//signIn response
 	const responseGoogle = async (response) => {
-		document.getElementById("googleLogin").style = "display:none";
-		document.getElementById("googleHide").style = "display:block";
-		document.getElementById("headerList").style = "display:block";
+		// document.getElementById("googleLogin").style = "display:none";
+		// document.getElementById("googleHide").style = "display:block";
+		// document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
 		const userProfile = await getUserStateByEmailAPIMethod(
 			response.profileObj.email
 		);
 		console.log(userProfile);
-
 		setImage(response.profileObj.imageUrl);
+		console.log(image);
 		//Timing to renew access token
 		let expired_at = 24 * 60 * 1000; //One Day
 		//add expiration information
 		response.profileObj.expired_at = expired_at;
 		//store in session Storage
 		sessionStorage.setItem("userData", JSON.stringify(response.profileObj));
+
 		const timeOut = async () => {
 			const sessionClear = () => sessionStorage.removeItem("userData");
 			await setTimeout(sessionClear, expired_at);
@@ -65,16 +71,34 @@ export default function HeaderLinks(props) {
 		timeOut().then((r) => {
 			console.log("session started");
 		});
+		props.loginStateFunction(true)
+
+		if(userProfile === null){
+			window.location.href = '/getStart';
+		}
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
+<<<<<<< HEAD
 
+=======
+	let color
+	if(connection){
+		color = '#19ce60';
+	}else{
+		color = '#ee0000';
+	}
+>>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 	return (
 		<>
 			<NavLink to="/" activeClassName="active-link" className="logo alink">
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
+<<<<<<< HEAD
 			<List className={classes.list} id="headerList" Style="display:none">
+=======
+			<List className={classes.list} id="headerList" style={{display:'none'}}>
+>>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -99,6 +123,7 @@ export default function HeaderLinks(props) {
 					</Button>
 				</ListItem>
 			</List>
+<<<<<<< HEAD
 			<div id="googleLogin" className="loginButton">
 				<GoogleLogin
 					clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
@@ -124,6 +149,31 @@ export default function HeaderLinks(props) {
 					</a>
 				)}
 			</div>
+=======
+			{props.loginState ?
+				<div id="googleHide" style={{display:'block'}}>
+						<a href="./profile">
+							<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>
+							<img src={image} id="image" alt="User"/>
+						</a>
+				</div>
+				:
+				<div id="googleLogin" className="loginButton">
+					<GoogleLogin
+						clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
+						buttonText="Login"
+						onSuccess={responseGoogle}
+						onFailure={responseFailGoogle}
+						cookiePolicy={"single_host_origin"}
+						className="login"
+						isSignedIn={true}
+						id="google"
+						style={{width: '100px'}}
+					/>
+					<p id="failure"></p>
+				</div>
+			}
+>>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 		</>
 	);
 }

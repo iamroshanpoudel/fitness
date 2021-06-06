@@ -2,13 +2,13 @@ import React from "react";
 import Nav from "./Nav/Nav";
 
 
-function Main() {
-
+function Main(props) {
+    console.log(props);
     return (
         <div>
             <div className="mainPage">
                 <div className="top">
-                    <Nav className="topNav" />
+                    <Nav className="topNav" loginState={props.loginState} loginStateFunction ={props.loginStateFunction}/>
                     {/* <img src={main_img} alt="main_photo" className="main_photo" /> */}
                 </div>
                 <div className="main_body">

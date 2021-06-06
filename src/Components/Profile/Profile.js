@@ -90,10 +90,9 @@ const Profile = (props) => {
 		updatedUser.address[0].fullAddress = e.target.value;
 		props.setUserState(updatedUser);
 	};
-
 	return (
 		<div>
-			<Nav userState={props.userState} />
+			<Nav userState={props.userState} loginState={props.loginState} loginStateFunction ={props.loginStateFunction}/>
 			<div id="body-items">
 				<div id="questions-title">
 					<h2>Edit Your Profile</h2>
@@ -107,7 +106,7 @@ const Profile = (props) => {
 							<div id="edit-image">
 								<img
 									src={userData.imageUrl || defaultImage}
-									id="image"
+									id="profileImage"
 									alt="User"
 								/>
 								<label htmlFor="file">Choose new image</label>

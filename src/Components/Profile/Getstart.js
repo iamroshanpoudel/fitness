@@ -109,7 +109,7 @@ export default function Getstart(props) {
 	// form submit handler
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
-		alert("Sije, add the handler here");
+		alert("Sije, add the handler hereg");
 	};
 	return (
 		<div

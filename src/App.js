@@ -12,23 +12,22 @@ import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
 
 function App() {
-	// const defaultUser = {
-	// 	name: "",
-	// 	email: "",
-	// 	address: [
-	// 		{
-	// 			streetAddress: "",
-	// 			fullAddress: "",
-	// 		},
-	// 	],
-	// 	profileImageURL: "",
-	// };
+	//question
 	const [questionState, setQuestionState] = useState([]);
+	//??
 	const [isDataState, setIsDataStale] = useState(false);
+	//userData
 	const [userState, setUserState] = useState(
 		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : ""
 	);
+<<<<<<< HEAD
 	const [isUserLoading, setIsUserLoading] = useState(true); // is the user information fetched from db ?
+=======
+	//loginStatus
+	const [loginState,setLoginState] = useState(false);
+	// is the user information fetched from db ?
+	const [isUserLoading, setIsUserLoading] = useState(true);
+>>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 
 	// const [userState, setUserState] = useState(
 	// 	JSON.parse(sessionStorage.getItem("userData"))
@@ -43,13 +42,14 @@ function App() {
 	// 	});
 	// }, [isDataState]);
 
-	useEffect(() => {
+	useEffect(async () => {
 		if (isLoggedIn()) {
-			getUserStateByEmailAPIMethod(
+			await getUserStateByEmailAPIMethod(
 				JSON.parse(sessionStorage.getItem("userData")).email,
 				(response) => {
 					console.log(response);
 					setUserState(response);
+					setLoginState(true);
 				}
 			);
 		}
@@ -63,10 +63,17 @@ function App() {
 		}
 	}, [userState]);
 
+	//loginStatus function
+	const setLoginStateFunction = (state) =>{setLoginState(state);}
+	
 	return (
 		<div className="App">
 			<Switch>
-				<Route path="/" exact render={(props) => <Main {...props} />} />
+				<Route path="/" exact render={(props) => <Main
+					{...props}
+					loginState={loginState}
+					loginStateFunction = {setLoginStateFunction}
+				/>} />
 				<Route
 					path="/calories"
 					exact
@@ -74,6 +81,8 @@ function App() {
 						<LogCalories
 							{...props}
 							userState={userState}
+							loginState={loginState}
+							loginStateFunction = {setLoginStateFunction}
 							setUserState={setUserState}
 							isUserLoading={isUserLoading}
 							setIsUserLoading={setIsUserLoading}
@@ -87,6 +96,8 @@ function App() {
 						isLoggedIn() ? (
 							<Questions
 								{...props}
+								loginState={loginState}
+								loginStateFunction = {setLoginStateFunction}
 								questionState={questionState}
 								setQuestionState={setQuestionState}
 								isDataState={isDataState}
@@ -106,6 +117,8 @@ function App() {
 						isLoggedIn() ? (
 							<Data
 								{...props}
+								loginState={loginState}
+								loginStateFunction = {setLoginStateFunction}
 								questionState={questionState}
 								userState={userState}
 								setUserState={setUserState}
@@ -122,6 +135,8 @@ function App() {
 						isLoggedIn() ? (
 							<Profile
 								{...props}
+								loginState={loginState}
+								loginStateFunction = {setLoginStateFunction}
 								userState={userState}
 								setUserState={setUserState}
 								isDataState={isDataState}
@@ -136,6 +151,7 @@ function App() {
 				/>
 				<Route
 					path="/getStart"
+<<<<<<< HEAD
 					render={(props) =>
 						isLoggedIn() ? (
 							<Getstart
@@ -148,6 +164,12 @@ function App() {
 							loginAlert()
 						)
 					}
+=======
+					render={(props) => <Getstart {...props}
+												 loginState={loginState}
+												 loginStateFunction = {setLoginStateFunction}
+					/>}
+>>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 				/>
 			</Switch>
 		</div>
