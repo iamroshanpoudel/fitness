@@ -71,7 +71,7 @@ export default function HeaderLinks(props) {
 		});
 		props.loginStateFunction(true)
 		if(userProfile === null){
-			window.location.href = './profile';
+			window.location.href = '/getStart';
 		}
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
