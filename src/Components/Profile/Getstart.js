@@ -23,7 +23,7 @@ import {
 } from "@material-ui/pickers";
 import {
 	getUserStateByEmailAPIMethod,
-	updateUserByAPIMethod,
+	createUserByAPIMethod,
 } from "../../api/client";
 import "date-fns";
 
@@ -115,7 +115,7 @@ export default function Getstart(props) {
 	const formSubmitHandler = async (e) => {
 		e.preventDefault();
 		console.log(newUserState);
-		await updateUserByAPIMethod(newUserState).then((r) => {
+		await createUserByAPIMethod(newUserState).then((r) => {
 			sessionStorage.removeItem("userData");
 			console.log(typeof r);
 			const userData = JSON.stringify(r);

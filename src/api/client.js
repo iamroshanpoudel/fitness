@@ -1,8 +1,8 @@
 const defaultHeaders = {
 	headers: {
 		"Content-Type": "application/json; charset=UTF-8",
-		'Accept': 'application/json'
-	}
+		Accept: "application/json",
+	},
 };
 
 export const getQuestionsAPIMethod = (success) => {
@@ -118,7 +118,19 @@ export const addToDailyFoodAPIMethod = (newFoodObj, success) => {
 		.then(parseJSON)
 		.then(success);
 };
+//update user
 export const updateUserByAPIMethod = (user, success) => {
+	return fetch(`/api/user`, {
+		...defaultHeaders,
+		method: "PUT", // The method defaults to GET
+		body: JSON.stringify(user),
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
+//create user
+export const createUserByAPIMethod = (user, success) => {
 	return fetch(`/api/user`, {
 		...defaultHeaders,
 		method: "POST", // The method defaults to GET
