@@ -15,7 +15,7 @@
 	position: absolute;
 	height: 20px;
 	width: 20px;
-	z-index: 1;
+	z-index: 2;
 	border-radius: 50%;
 	display: inline-block;
 }
@@ -40,6 +40,7 @@ body {
 	width: 50px;
 	top: 10px;
 	right: 50px;
+	z-index: 1;
 }
 
 #calendar {
@@ -206,12 +207,12 @@ input[type="number"] {
 }
 
 .alink:hover {
-	transform: scale(1.1);
+	color:rgba(41,98,255,0.97);
 }
 
 .active-link {
 	color: var(--activeColor);
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 #temp-page {
@@ -246,10 +247,19 @@ label {
 	border-radius: 7px;
 	background-color: var(--activeColor);
 } */
-
-@media only screen and (max-width: 600px) {
+header{
+	min-height: 70px;
+}
+@media only screen and (max-width:959.95px) {
+	.outer-menu{
+		position: fixed;
+		top: 1vh;
+		left: 1vh;
+		z-index: 1;
+		display: block !important;
+	}
 	.logo {
-		display: none;
+
 	}
 	#headerList{
 		display: none !important;
@@ -358,171 +368,217 @@ h3 {
 }
 
 .logo-text {
-	width: 200px;
-	margin-left: 30px;
-	margin-right: 30px;
+	position: absolute;
+	width: 250px;
+	top: 0px;
 	color: white;
 	text-decoration: none;
-	margin: 20px;
 }
 
 #navMain {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	height: 55px;
-	padding: 15px;
-	color: white;
-	background-color: transparent;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+height: 55px;
+padding: 15px;
+color: white;
+background-color: transparent;
 }
 #googleLogin {
-	position: absolute;
-	top: 10px;
-	right: 50px;
+position: absolute;
+top: 10px;
+right: 50px;
 }
 
 .makeStyles-appBar-6 {
-	margin: 0 !important;
+margin: 0 !important;
 }
 
-#menuToggle
-{
-	display: block;
-	position: absolute;
-	top: 30px;
-	left: 50px;
-	z-index: 1;
-	-webkit-user-select: none;
-	user-select: none;
+@import url("https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300");
+.flex-center {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+* {
+box-sizing: border-box;
+font-family: "Open Sans", sans-serif;
+font-weight: 300;
+}
+a, a:visited, a:hover, a:active {
+color: inherit;
+text-decoration: none;
+}
+h1 {
+font-family: "Pacifico", cursive;
+font-weight: 400;
+font-size: 3em;
+text-align: center;
+}
+.outer-menu {
+position: fixed;
+top: 1vh;
+left: 1vh;
+z-index: 1;
+display: none;
 }
 
-#menuToggle a
-{
-	text-decoration: none;
-	color: #232323;
+.outer-menu .checkbox-toggle {
+position: absolute;
+top: 0;
+left: 0;
+z-index: 2;
+cursor: pointer;
+width: 60px;
+height: 60px;
+opacity: 0;
+}
+.outer-menu .checkbox-toggle:checked + .hamburger > div {
+transform: rotate(135deg);
+}
+.outer-menu .checkbox-toggle:checked + .hamburger > div:before, .outer-menu .checkbox-toggle:checked + .hamburger > div:after {
+top: 0;
+transform: rotate(90deg);
+}
+.outer-menu .checkbox-toggle:checked + .hamburger > div:after {
+opacity: 0;
+}
+.outer-menu .checkbox-toggle:checked ~ .menu {
+pointer-events: auto;
+visibility: visible;
+}
+.outer-menu .checkbox-toggle:checked ~ .menu > div {
+transform: scale(1);
+transition-duration: 0.75s;
+}
+.outer-menu .checkbox-toggle:checked ~ .menu > div > div {
+opacity: 1;
+transition: opacity 0.4s ease 0.4s;
+}
+.outer-menu .checkbox-toggle:hover + .hamburger {
+box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+.outer-menu .checkbox-toggle:checked:hover + .hamburger > div {
+transform: rotate(225deg);
+}
+.outer-menu .hamburger {
+position: absolute;
+top: 0;
+left: 0;
+z-index: 1;
+width: 60px;
+height: 60px;
+padding: 0.5em 1em;
 
-	transition: color 0.3s ease;
+border-radius: 0 0.12em 0.12em 0;
+cursor: pointer;
+transition: box-shadow 0.4s ease;
+backface-visibility: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.outer-menu .hamburger > div {
+position: relative;
+flex: none;
+width: 100%;
+height: 2px;
+background: #fefefe;
+transition: all 0.4s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.outer-menu .hamburger > div:before, .outer-menu .hamburger > div:after {
+content: "";
+position: absolute;
+z-index: 1;
+top: -10px;
+left: 0;
+width: 100%;
+height: 2px;
+background: inherit;
+transition: all 0.4s ease;
+}
+.outer-menu .hamburger > div:after {
+top: 10px;
+}
+.outer-menu .menu {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+visibility: hidden;
+overflow: hidden;
+backface-visibility: hidden;
+outline: 1px solid transparent;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.outer-menu .menu > div {
+width: 200vw;
+height: 200vw;
+color: #fefefe;
+background: rgba(41,98,255,0.97);
+border-radius: 50%;
+transition: all 0.4s ease;
+flex: none;
+transform: scale(0);
+backface-visibility: hidden;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.outer-menu .menu > div > div {
+text-align: center;
+max-width: 90vw;
+max-height: 100vh;
+opacity: 0;
+transition: opacity 0.4s ease;
+overflow-y: auto;
+flex: none;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.outer-menu .menu > div > div > ul {
+list-style: none;
+padding: 0 1em;
+margin: 0;
+display: block;
+max-height: 100vh;
+}
+.outer-menu .menu > div > div > ul > li {
+padding: 0;
+margin: 1em;
+font-size: 24px;
+display: block;
+}
+.outer-menu .menu > div > div > ul > li > a {
+position: relative;
+display: inline;
+cursor: pointer;
+transition: color 0.4s ease;
+}
+.outer-menu .menu > div > div > ul > li > a:hover {
+color: #e5e5e5;
+}
+.outer-menu .menu > div > div > ul > li > a:hover:after {
+width: 100%;
+}
+.outer-menu .menu > div > div > ul > li > a:after {
+content: "";
+position: absolute;
+z-index: 1;
+bottom: -0.15em;
+left: 0;
+width: 0;
+height: 2px;
+background: #e5e5e5;
+transition: width 0.4s ease;
 }
 
-#menuToggle a:hover
-{
-	color: tomato;
-}
-header{
-	min-height:80px;
-}
-
-#menuToggle input
-{
-	display: block;
-	width: 40px;
-	height: 32px;
-	position: absolute;
-	top: -7px;
-	left: -5px;
-
-	cursor: pointer;
-
-	opacity: 0; /* hide this */
-	z-index: 2; /* and place it over the hamburger */
-
-	-webkit-touch-callout: none;
-}
-
-/*
- * Just a quick hamburger
- */
-#menuToggle span
-{
-	display: block;
-	width: 33px;
-	height: 4px;
-	margin-bottom: 5px;
-	position: relative;
-
-	background: #cdcdcd;
-	border-radius: 3px;
-
-	z-index: 1;
-
-	transform-origin: 4px 0px;
-
-	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-	background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-	opacity 0.55s ease;
-}
-
-#menuToggle span:first-child
-{
-	transform-origin: 0% 0%;
-}
-
-#menuToggle span:nth-last-child(2)
-{
-	transform-origin: 0% 100%;
-}
-
-/*
- * Transform all the slices of hamburger
- * into a crossmark.
- */
-#menuToggle input:checked ~ span
-{
-	opacity: 1;
-	transform: rotate(45deg) translate(-2px, -1px);
-	background: #232323;
-}
-
-/*
- * But let's hide the middle one.
- */
-#menuToggle input:checked ~ span:nth-last-child(3)
-{
-	opacity: 0;
-	transform: rotate(0deg) scale(0.2, 0.2);
-}
-
-/*
- * Ohyeah and the last one should go the other direction
- */
-#menuToggle input:checked ~ span:nth-last-child(2)
-{
-	transform: rotate(-45deg) translate(0, -1px);
-}
-
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
-#menu
-{
-	position: absolute;
-	width: 300px;
-	margin: -100px 0 0 -50px;
-	padding: 50px;
-	padding-top: 125px;
-
-	background: #ededed;
-	list-style-type: none;
-	-webkit-font-smoothing: antialiased;
-	/* to stop flickering of text in safari */
-
-	transform-origin: 0% 0%;
-	transform: translate(-100%, 0);
-
-	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-
-#menu li
-{
-	padding: 10px 0;
-	font-size: 22px;
-}
-
-/*
- * And let's slide it in from the left
- */
-#menuToggle input:checked ~ ul
-{
-	transform: none;
-}

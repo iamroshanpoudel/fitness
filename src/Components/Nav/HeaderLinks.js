@@ -102,24 +102,30 @@ export default function HeaderLinks(props) {
 
 	return (
 		<>
-
-			<NavLink to="/" activeClassName="active-link" className="logo alink" >
-				<h2 className="logo-text">Fitness++</h2>
-			</NavLink>
-			<nav role="navigation">
-				<div id="menuToggle">
-					<input type="checkbox" />
-					<span></span>
-					<span></span>
-					<span></span>
-					<ul id="menu">
-						<a href="/calories"><li>LOG CALORIES</li></a>
-						<a href="/questions"><li>LOG WORKOUT</li></a>
-						<a href="/view"><li>VIEW DATA</li></a>
-						<a href="/admin"><li>ADMIN</li></a>
-					</ul>
+			<div className="outer-menu">
+				<input className="checkbox-toggle" type="checkbox"/>
+				<div className="hamburger">
+					<div></div>
 				</div>
-			</nav>
+				<div className="menu">
+					<div>
+						<div>
+							<ul>
+								<li><a href="/calories">Log Calories</a></li>
+								<li><a href="/questions">Log Workout</a></li>
+								<li><a href="/view">View Data</a></li>
+								{isAdmin ?
+									<li><a href="/admin">Admin</a></li>
+									: <></>
+								}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<NavLink to="/" activeClassName="active-link" className="logo alink" >
+				<h2 className="logo-text" >Fitness++</h2>
+			</NavLink>
 			<List className={classes.list} id="headerList" style={{display:show}}>
 
 				<ListItem className={classes.listItem}>
