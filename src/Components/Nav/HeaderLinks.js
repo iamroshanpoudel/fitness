@@ -32,6 +32,7 @@ export default function HeaderLinks(props) {
 	const profile = JSON.parse(sessionStorage.getItem('userData'));
 	console.log(profile);
 	const [image, setImage] = useState( profile == null? defaultImage: profile.imageUrl);
+	const [connection,setConnection] = useState(window.navigator.onLine);
 	//sign out hook
 	const { signOut, signOutLoaded } = useGoogleLogout({
 		clientId:
@@ -47,7 +48,7 @@ export default function HeaderLinks(props) {
 	const responseGoogle = async (response) => {
 		// document.getElementById("googleLogin").style = "display:none";
 		// document.getElementById("googleHide").style = "display:block";
-		document.getElementById("headerList").style = "display:block";
+		// document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
 		const userProfile = await getUserStateByEmailAPIMethod(response.profileObj.email);
 
@@ -70,19 +71,25 @@ export default function HeaderLinks(props) {
 			console.log("session started");
 		});
 		props.loginStateFunction(true)
-		if(userProfile === null){
-			window.location.href = '/getStart';
-		}
+
+		// if(userProfile === null){
+		// 	window.location.href = '/getStart';
+		// }
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
-
+	let color
+	if(connection){
+		color = '#19ce60';
+	}else{
+		color = '#ee0000';
+	}
 	return (
 		<>
 			<NavLink to="/" activeClassName="active-link" className="logo alink">
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
-			<List className={classes.list} id="headerList" style={{display:props.loginState ? 'block':'none'}}>
+			<List className={classes.list} id="headerList" style={{display:'none'}}>
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -110,6 +117,7 @@ export default function HeaderLinks(props) {
 			{props.loginState ?
 				<div id="googleHide" style={{display:'block'}}>
 						<a href="./profile">
+							<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>
 							<img src={image} id="image" alt="User"/>
 						</a>
 				</div>

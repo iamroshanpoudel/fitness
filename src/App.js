@@ -12,27 +12,19 @@ import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart"
 
 function App() {
-	// const defaultUser = {
-	// 	name: "",
-	// 	email: "",
-	// 	address: [
-	// 		{
-	// 			streetAddress: "",
-	// 			fullAddress: "",
-	// 		},
-	// 	],
-	// 	profileImageURL: "",
-	// };
+	//question
 	const [questionState, setQuestionState] = useState([]);
+	//??
 	const [isDataState, setIsDataStale] = useState(false);
+	//userData
 	const [userState, setUserState] = useState(
 		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : ""
 	);
-	const [loginState,setLoginState] = useState(isLoggedIn());
-	const [isUserLoading, setIsUserLoading] = useState(true); // is the user information fetched from db ?
-	const setLoginStateFunction = (state) =>{
-		setLoginState(state);
-	}
+	//loginStatus
+	const [loginState,setLoginState] = useState(false);
+	// is the user information fetched from db ?
+	const [isUserLoading, setIsUserLoading] = useState(true);
+
 	// const [userState, setUserState] = useState(
 	// 	JSON.parse(sessionStorage.getItem("userData"))
 	// );
@@ -53,6 +45,7 @@ function App() {
 				(response) => {
 					console.log(response);
 					setUserState(response);
+					setLoginState(true);
 				}
 			);
 		}
@@ -66,6 +59,9 @@ function App() {
 		}
 	}, [userState]);
 
+	//loginStatus function
+	const setLoginStateFunction = (state) =>{setLoginState(state);}
+	
 	return (
 		<div className="App">
 			<Switch>

@@ -139,6 +139,5 @@ export default function Getstart() {
                 </Grid>
             </React.Fragment>
         </div>
-
     );
 }
