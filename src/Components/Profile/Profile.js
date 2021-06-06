@@ -36,13 +36,11 @@ const Profile = (props) => {
 	const defaultImage =
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
 
+
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		updateUserByAPIMethod(props.userState, (response) => {
-
-			sessionStorage.setItem("userData", props.userState);
-
-			console.log(response);
+			window.location.reload();
 		});
 	};
 
