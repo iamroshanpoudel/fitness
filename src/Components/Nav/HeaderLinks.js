@@ -102,11 +102,26 @@ export default function HeaderLinks(props) {
 
 	return (
 		<>
-			<NavLink to="/" activeClassName="active-link" className="logo alink">
+
+			<NavLink to="/" activeClassName="active-link" className="logo alink" >
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
-
+			<nav role="navigation">
+				<div id="menuToggle">
+					<input type="checkbox" />
+					<span></span>
+					<span></span>
+					<span></span>
+					<ul id="menu">
+						<a href="/calories"><li>LOG CALORIES</li></a>
+						<a href="/questions"><li>LOG WORKOUT</li></a>
+						<a href="/view"><li>VIEW DATA</li></a>
+						<a href="/admin"><li>ADMIN</li></a>
+					</ul>
+				</div>
+			</nav>
 			<List className={classes.list} id="headerList" style={{display:show}}>
+
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -118,7 +133,7 @@ export default function HeaderLinks(props) {
 				</ListItem>
 				<ListItem className={classes.listItem}>
 					<Button
-						href="./questions"
+						href="/questions"
 						color="transparent"
 						className={classes.navLink}
 					>
