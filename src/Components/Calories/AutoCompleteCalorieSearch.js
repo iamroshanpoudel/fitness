@@ -81,14 +81,17 @@ const AutoCompleteCalorieSearch = (props) => {
 			alert("passed");
 			getNutritionInfoByFoodAPIMethod(newFoodToAdd, (response) => {
 				getPhotoFromUnsplashAPIMethod(newFoodToAdd, (response2) => {
+					response.hints[0].label = newFoodToAdd;
+					response.parsed[0].label = newFoodToAdd;
+
 					if (response.parsed[0]) {
-						response.parsed[0].label = newFoodToAdd;
+						// response.parsed[0].label = newFoodToAdd;
 						response.parsed[0].image = response2.results[0].links.download;
 						console.log("reponse to save");
 						console.log(response.parsed[0]);
 						setNewFoodState(response.parsed[0]);
 					} else {
-						response.hints[0].label = newFoodToAdd;
+						// response.hints[0].label = newFoodToAdd;
 						response.hints[0].image = response2.results[0].links.download;
 						setNewFoodState(response.hints[0]);
 						console.log("reponse to save");
@@ -174,7 +177,7 @@ const AutoCompleteCalorieSearch = (props) => {
 			const currFoodState = { ...props.foodStateByDate };
 
 			const newFoodObj = {
-				foodName: newFoodState.food.label || "",
+				foodName: newFoodState.label || "",
 				calories: newFoodState.food.nutrients.ENERC_KCAL || 0,
 				image:
 					newFoodState.image ||

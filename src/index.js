@@ -5,14 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
-const app = (
-	<BrowserRouter basename={process.env.PUBLIC_URL}>
-		<App />
-	</BrowserRouter>
-);
+// const app = (
+// 	<BrowserRouter basename={process.env.PUBLIC_URL}>
+// 		<App />
+// 	</BrowserRouter>
+// );
 
 ReactDOM.render(
-	<React.StrictMode>{app}</React.StrictMode>,
+	// <React.StrictMode>{app}</React.StrictMode>,
+	<BrowserRouter basename={process.env.PUBLIC_URL}>
+		<App />
+	</BrowserRouter>,
+
 	document.getElementById("root")
 );
 

@@ -11,17 +11,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
-import {getUserStateByEmailAPIMethod} from "../../api/client"
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
 import logo from "../../images/logo-2.jpg";
 // core components
 import CustomDropdown from "./CustomDropdown.js";
 import Button from "./Button.js";
-import {getUserStateByEmailAPIMethod} from "../../api/client"
+import { getUserStateByEmailAPIMethod } from "../../api/client";
 import styles from "../../util/headerLinkStyle";
 import headerStyle from "../../util/headerStyle";
-
 
 const useStyles = makeStyles(styles);
 
@@ -46,7 +44,9 @@ export default function HeaderLinks(props) {
 		document.getElementById("googleHide").style = "display:block";
 		document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
-		const userProfile = await getUserStateByEmailAPIMethod(response.profileObj.email);
+		const userProfile = await getUserStateByEmailAPIMethod(
+			response.profileObj.email
+		);
 		console.log(userProfile);
 
 		setImage(response.profileObj.imageUrl);
@@ -68,14 +68,13 @@ export default function HeaderLinks(props) {
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
-	
 
 	return (
 		<>
 			<NavLink to="/" activeClassName="active-link" className="logo alink">
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
-			<List className={classes.list} id="headerList"Style="display:none">
+			<List className={classes.list} id="headerList" Style="display:none">
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -110,7 +109,7 @@ export default function HeaderLinks(props) {
 					className="login"
 					isSignedIn={true}
 					id="google"
-					style={{width:'100px'}}
+					style={{ width: "100px" }}
 				/>
 				<p id="failure"></p>
 			</div>

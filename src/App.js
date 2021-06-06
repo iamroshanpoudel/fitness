@@ -9,7 +9,7 @@ import { isLoggedIn, loginAlert } from "./util/googleLogin";
 import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
-import Getstart from "./Components/Profile/Getstart"
+import Getstart from "./Components/Profile/Getstart";
 
 function App() {
 	// const defaultUser = {
@@ -29,7 +29,7 @@ function App() {
 		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : ""
 	);
 	const [isUserLoading, setIsUserLoading] = useState(true); // is the user information fetched from db ?
-	
+
 	// const [userState, setUserState] = useState(
 	// 	JSON.parse(sessionStorage.getItem("userData"))
 	// );
@@ -134,9 +134,20 @@ function App() {
 						)
 					}
 				/>
-				<Route 
+				<Route
 					path="/getStart"
-					render={(props) => <Getstart {...props}/>}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Getstart
+								{...props}
+								userState={userState}
+								setUserState={setUserState}
+								isUserLoading={isUserLoading}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 			</Switch>
 		</div>
