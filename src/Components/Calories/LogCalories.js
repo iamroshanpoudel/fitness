@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 		strokeWidth: 1,
 	},
 }));
+
 const LogCalories = (props) => {
 	// Returns current date as string
 	const addDate = () => {
