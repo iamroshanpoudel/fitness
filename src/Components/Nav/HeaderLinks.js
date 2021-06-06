@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React, { useState } from "react";
+import { Offline, Online } from "react-detect-offline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
@@ -140,7 +141,15 @@ export default function HeaderLinks(props) {
 				:
 				<div id="googleHide" style={{display:'block'}}>
 					<a href="./profile">
-						<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>
+						<Online
+							enabled = {true}
+							interval = {5000}
+						><div className="dot" style={{backgroundColor: '#19ce60',boxShadow: '0px 0px 9px #19ce60' }}/></Online>
+						<Offline
+							enabled = {true}
+							interval = {5000}
+						><div className="dot" style={{backgroundColor: '#ee0000',boxShadow: '0px 0px 9px #ee0000' }}/></Offline>
+						{/*<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>*/}
 						<img src={image} id="image" alt="User"/>
 					</a>
 				</div>
