@@ -98,6 +98,7 @@ export default function HeaderLinks(props) {
 			show = "block";
 		}
 	}
+	const isAdmin = profile==null ? false: profile.isAdmin;
 
 	return (
 		<>
@@ -129,6 +130,14 @@ export default function HeaderLinks(props) {
 						View Data
 					</Button>
 				</ListItem>
+				{isAdmin ?
+					<ListItem className={classes.listItem}>
+						<Button color="transparent" href="/admin" className={classes.navLink}>
+							Admin Page
+						</Button>
+					</ListItem>
+					:<></>
+				}
 			</List>
 			{sessionStorage.getItem('userData') === null ?
 				<div id="googleLogin" className="loginButton" >
