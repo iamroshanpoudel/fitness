@@ -33,6 +33,7 @@ export default function HeaderLinks(props) {
 	console.log(profile);
 	const [image, setImage] = useState( profile == null? defaultImage: profile.imageUrl);
 	const [connection,setConnection] = useState(window.navigator.onLine);
+	
 	//sign out hook
 	const { signOut, signOutLoaded } = useGoogleLogout({
 		clientId:
