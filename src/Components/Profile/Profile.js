@@ -38,7 +38,9 @@ const Profile = (props) => {
 
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
-		updateUserByAPIMethod(props.userState, (response) => {});
+		updateUserByAPIMethod(props.userState, (response) => {
+			window.location.reload();
+		});
 	};
 
 	const imageChangeHandler = async (e) => {
