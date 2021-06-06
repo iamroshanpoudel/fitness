@@ -39,7 +39,10 @@ const Profile = (props) => {
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		updateUserByAPIMethod(props.userState, (response) => {
+
 			sessionStorage.setItem("userData", props.userState);
+
+			console.log(response);
 		});
 	};
 
