@@ -53,14 +53,14 @@ export default function HeaderLinks(props) {
 		//store in session Storage
 		getUserStateByEmailAPIMethod(response.profileObj.email).then( (r) =>{
 			console.log(r);
-			const result = JSON.parse(r);
-			console.log(result)
+
+
 			//Timing to renew access token
 			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information
-			if(result !== null){
-				setImage(result.imageUrl);
-				sessionStorage.setItem("userData", JSON.stringify(result));
+			if(r !== null){
+				setImage(r.imageUrl);
+				sessionStorage.setItem("userData", JSON.stringify(r));
 			}else{
 				response.profileObj.expired_at = expired_at;
 				setImage(response.profileObj.imageUrl);
@@ -78,7 +78,7 @@ export default function HeaderLinks(props) {
 			});
 			props.loginStateFunction(true)
 
-			if(result === null){
+			if(r === null){
 				window.location.href = '/getStart';
 			}
 		});
