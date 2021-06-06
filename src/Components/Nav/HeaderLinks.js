@@ -86,8 +86,6 @@ export default function HeaderLinks(props) {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
 
-
-
 	let color
 	if(connection){
 		color = '#19ce60';
@@ -127,7 +125,7 @@ export default function HeaderLinks(props) {
 				</ListItem>
 			</List>
 			{sessionStorage.getItem('userData') === null ?
-				<div id="googleLogin" className="loginButton" style={{display:'none'}}>
+				<div id="googleLogin" className="loginButton" >
 					<GoogleLogin
 						clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 						buttonText="Login"
