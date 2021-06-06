@@ -56,31 +56,31 @@ export default function HeaderLinks(props) {
 
 
 			//Timing to renew access token
-			// let expired_at = 24 * 60 * 1000; //One Day
+			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information
-			// if(r !== null){
-			// 	setImage(r.imageUrl);
-			// 	sessionStorage.setItem("userData", JSON.stringify(r));
-			// }else{
-			// 	response.profileObj.expired_at = expired_at;
-			// 	setImage(response.profileObj.imageUrl);
-			// 	sessionStorage.setItem("userData", JSON.stringify(response.profileObj));
-			// }
+			if(r !== null){
+				setImage(r.imageUrl);
+				sessionStorage.setItem("userData", JSON.stringify(r));
+			}else{
+				response.profileObj.expired_at = expired_at;
+				setImage(response.profileObj.imageUrl);
+				sessionStorage.setItem("userData", JSON.stringify(response.profileObj));
+			}
 
-			// const timeOut = async () => {
-			// 	const sessionClear = () => sessionStorage.removeItem("userData");
-			// 	await setTimeout(sessionClear, expired_at);
-			// 	await setTimeout(signOut, expired_at);
-			// };
+			const timeOut = async () => {
+				const sessionClear = () => sessionStorage.removeItem("userData");
+				await setTimeout(sessionClear, expired_at);
+				await setTimeout(signOut, expired_at);
+			};
 			//start Counting
-			// timeOut().then((result) => {
-			// 	console.log("session started");
-			// });
-			// props.loginStateFunction(true)
-			//
-			// if(r === null){
-			// 	window.location.href = '/getStart';
-			// }
+			timeOut().then((result) => {
+				console.log("session started");
+			});
+			props.loginStateFunction(true)
+
+			if(r === null){
+				window.location.href = '/getStart';
+			}
 		});
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
