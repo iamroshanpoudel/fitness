@@ -101,7 +101,7 @@ export const getPhotoFromUnsplashAPIMethod = (query, success) => {
 		.then(success);
 };
 export const getUserStateByEmailAPIMethod = (email, success) => {
-	return fetch(`/api/user/${email}`, {
+	return fetch(`https://fitness-plus-plus.herokuapp.com/api/user/${email}`, {
 		...defaultHeaders,
 	})
 		.then(checkStatus)
@@ -119,7 +119,7 @@ export const addToDailyFoodAPIMethod = (newFoodObj, success) => {
 		.then(success);
 };
 export const updateUserByAPIMethod = (user, success) => {
-	return fetch(`/api/user`, {
+	return fetch(`https://fitness-plus-plus.herokuapp.com/api/user`, {
 		...defaultHeaders,
 		method: "POST", // The method defaults to GET
 		body: JSON.stringify(user),
