@@ -49,9 +49,9 @@ export default function HeaderLinks(props) {
 		// document.getElementById("googleHide").style = "display:block";
 		// document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
-		const userProfile = await getUserStateByEmailAPIMethod(
-			response.profileObj.email
-		);
+
+		const userProfile = JSON.parse(await getUserStateByEmailAPIMethod(response.profileObj.email));
+
 		console.log(userProfile);
 		setImage(response.profileObj.imageUrl);
 		console.log(image);
@@ -79,26 +79,23 @@ export default function HeaderLinks(props) {
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
-<<<<<<< HEAD
 
-=======
+
+
 	let color
 	if(connection){
 		color = '#19ce60';
 	}else{
 		color = '#ee0000';
 	}
->>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
+
 	return (
 		<>
 			<NavLink to="/" activeClassName="active-link" className="logo alink">
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
-<<<<<<< HEAD
-			<List className={classes.list} id="headerList" Style="display:none">
-=======
+
 			<List className={classes.list} id="headerList" style={{display:'none'}}>
->>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -123,7 +120,7 @@ export default function HeaderLinks(props) {
 					</Button>
 				</ListItem>
 			</List>
-<<<<<<< HEAD
+
 			<div id="googleLogin" className="loginButton">
 				<GoogleLogin
 					clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
@@ -149,7 +146,7 @@ export default function HeaderLinks(props) {
 					</a>
 				)}
 			</div>
-=======
+
 			{props.loginState ?
 				<div id="googleHide" style={{display:'block'}}>
 						<a href="./profile">
@@ -173,7 +170,6 @@ export default function HeaderLinks(props) {
 					<p id="failure"></p>
 				</div>
 			}
->>>>>>> 006e35bdd1f65d543e9f3ea3e28947bb7a5ea52f
 		</>
 	);
 }
