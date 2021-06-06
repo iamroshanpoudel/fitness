@@ -49,11 +49,9 @@ export default function HeaderLinks(props) {
 		// document.getElementById("googleHide").style = "display:block";
 		document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
-
-
-
 		//store in session Storage
 		await getUserStateByEmailAPIMethod(response.profileObj.email).then( (r) =>{
+			console.log(r);
 			//Timing to renew access token
 			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information
