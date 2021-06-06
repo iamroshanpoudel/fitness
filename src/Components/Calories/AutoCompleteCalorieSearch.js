@@ -33,6 +33,11 @@ const AutoCompleteCalorieSearch = (props) => {
 				nutritionList[2] += food.nutrients.PRTN;
 				nutritionList[3] += food.nutrients.CARBS;
 			});
+
+			nutritionList[0] = (nutritionList[0] / 30) * 100;
+			nutritionList[1] = (nutritionList[1] / 20) * 100;
+			nutritionList[2] = (nutritionList[2] / 50) * 100;
+			nutritionList[3] = (nutritionList[3] / 300) * 100;
 		}
 
 		return nutritionList;
@@ -65,7 +70,14 @@ const AutoCompleteCalorieSearch = (props) => {
 						label: "Food Requirements",
 						formatter: function (w) {
 							// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-							return "incomplete";
+							if (
+								series[0] >= 100 &&
+								series[1] >= 100 &&
+								series[2] >= 100 &&
+								series[3] >= 100
+							)
+								return "complete";
+							else return "incomplete";
 						},
 					},
 				},
@@ -212,6 +224,7 @@ const AutoCompleteCalorieSearch = (props) => {
 					backgroundColor: "#fffff",
 					width: "95vw",
 					height: "fit-content",
+					padding: "10px",
 				}}
 				className="calorieCard"
 			>
@@ -223,11 +236,7 @@ const AutoCompleteCalorieSearch = (props) => {
 							type="radialBar"
 							height={350}
 						/>
-						<Typography
-							gutterBottom
-							variant="h5"
-							style={{ marginLeft: "50px" }}
-						>
+						<Typography gutterBottom variant="h6" style={{}}>
 							Add new Food item for today:
 						</Typography>
 						<form onSubmit={formSubmitHandler}>
@@ -257,7 +266,7 @@ const AutoCompleteCalorieSearch = (props) => {
 											{...params}
 											id="standard-full-width"
 											label="Food name"
-											style={{ marginLeft: "50px" }}
+											style={{}}
 											placeholder="What did you eat today?"
 											helperText=""
 											fullWidth
@@ -287,8 +296,12 @@ const AutoCompleteCalorieSearch = (props) => {
 
 					<div id="form-section">
 						<div>
-							<Typography gutterBottom variant="h5" style={{ margin: "30px" }}>
-								Food Items in Database for current date:
+							<Typography
+								gutterBottom
+								variant="h6"
+								style={{ marginTop: "30px" }}
+							>
+								Food Items in Database for today:
 							</Typography>
 
 							{JSON.stringify(props.foodStateByDate) !== "{}" ? (

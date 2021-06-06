@@ -78,7 +78,7 @@ export default function CardDialog(props) {
 				open={open}
 			>
 				<DialogTitle id="customized-dialog-title" onClose={handleClose}>
-					Food Name
+					{props.food.foodName}
 				</DialogTitle>
 				<DialogContent dividers>
 					<IconContext.Provider

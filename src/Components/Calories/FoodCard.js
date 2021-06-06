@@ -26,8 +26,8 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		minWidth: "fit-content",
-		margin: "20px",
+		maxWidth: "300px",
+		marginTop: "20px",
 
 		backgroundColor: "#f7f9fb",
 	},
@@ -148,7 +148,6 @@ const FoodCard = (props) => {
 				<IconButton
 					onClick={handleClickOpen}
 					aria-label="show nutrition information"
-					style={{ marginLeft: "60px" }}
 				>
 					<InfoIcon />
 				</IconButton>

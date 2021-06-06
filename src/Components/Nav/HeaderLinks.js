@@ -98,14 +98,36 @@ export default function HeaderLinks(props) {
 			show = "block";
 		}
 	}
+	const isAdmin = profile==null ? false: profile.isAdmin;
 
 	return (
 		<>
-			<NavLink to="/" activeClassName="active-link" className="logo alink">
-				<h2 className="logo-text">Fitness++</h2>
+			<div className="outer-menu">
+				<input className="checkbox-toggle" type="checkbox"/>
+				<div className="hamburger">
+					<div></div>
+				</div>
+				<div className="menu">
+					<div>
+						<div>
+							<ul>
+								<li><a href="/calories">Log Calories</a></li>
+								<li><a href="/questions">Log Workout</a></li>
+								<li><a href="/view">View Data</a></li>
+								{isAdmin ?
+									<li><a href="/admin">Admin</a></li>
+									: <></>
+								}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<NavLink to="/" activeClassName="active-link" className="logo alink" >
+				<h2 className="logo-text" >Fitness++</h2>
 			</NavLink>
-
 			<List className={classes.list} id="headerList" style={{display:show}}>
+
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -117,7 +139,7 @@ export default function HeaderLinks(props) {
 				</ListItem>
 				<ListItem className={classes.listItem}>
 					<Button
-						href="./questions"
+						href="/questions"
 						color="transparent"
 						className={classes.navLink}
 					>
@@ -129,6 +151,14 @@ export default function HeaderLinks(props) {
 						View Data
 					</Button>
 				</ListItem>
+				{isAdmin ?
+					<ListItem className={classes.listItem}>
+						<Button color="transparent" href="/admin" className={classes.navLink}>
+							Admin Page
+						</Button>
+					</ListItem>
+					:<></>
+				}
 			</List>
 			{sessionStorage.getItem('userData') === null ?
 				<div id="googleLogin" className="loginButton" >
