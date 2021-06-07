@@ -12,17 +12,24 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import deleteIcon from "../../images/delete.png";
 const AdminPage = (props) => {
 	let [userData, setUserData] = useState([]);
+	let [count, setCount] = useState([]);
 	let counts = [];
 	let index = -1;
-	getAllUsersAPIMethod().then((r) => {
-		setUserData(r);
-		r.forEach((e) => {
-			numberOfFoodRecordAPIMethod(e._id).then((r) => {
-				console.log(r);
-				counts.push(r);
+	if(userData.length <= 0){
+		getAllUsersAPIMethod().then((r) => {
+
+			r.forEach((e) => {
+				console.log(e._id);
+				numberOfFoodRecordAPIMethod(e._id).then((r) => {
+					counts.push(r);
+				});
 			});
+			r.count = counts;
+			setUserData(r);
 		});
-	});
+	}
+	console.log(userData);
+
 	const deleteFunction = (e) => {
 		deleteUserByEmailAPIMethod(e.target.attributes.item(1).value).then((r) => {
 			console.log(r);
@@ -65,6 +72,7 @@ const AdminPage = (props) => {
 				{/*Data table*/}
 				{userData.map((e) => {
 					index++;
+					console.log(index);
 					return (
 						<tr>
 							<th>
@@ -74,7 +82,7 @@ const AdminPage = (props) => {
 								<h5>{e.email}</h5>
 							</th>
 							<th>
-								<h5>{counts[index]}</h5>
+								<h5>{userData.count[3]}</h5>
 							</th>
 
 							<th>

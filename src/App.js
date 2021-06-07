@@ -15,7 +15,7 @@ import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
-import AdminPage from "./Components/Admin/AdminPage";
+import AdminPage from "./Components/Admin/adminPage";
 import ViewData from "./Components/ViewData/ViewData";
 
 function App() {
