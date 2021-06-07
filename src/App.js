@@ -44,7 +44,6 @@ function App() {
 			await getUserStateByEmailAPIMethod(
 				JSON.parse(sessionStorage.getItem("userData")).email,
 				(response) => {
-					console.log(response);
 					if (response !== null) {
 						setUserState(response);
 						setLoginState(true);
@@ -57,7 +56,6 @@ function App() {
 	useEffect(() => {
 		if (userState && userState._id) {
 			console.log("userState updated from db");
-			console.log(userState);
 			setIsUserLoading(false);
 			sessionStorage.removeItem("userData");
 			sessionStorage.setItem("userData", JSON.stringify(userState));
