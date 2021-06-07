@@ -5,12 +5,12 @@ import Questions from "./Components/Workout/Questions";
 import { Route, Switch } from "react-router-dom";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
-import { isLoggedIn, loginAlert } from "./util/googleLogin";
+import { isLoggedIn, loginAlert,isAdmin,adminAlert } from "./util/googleLogin";
 import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
-
+import Admin from "./Components/Admin/adminPage";
 function App() {
 	//question
 	const [questionState, setQuestionState] = useState([]);
@@ -25,19 +25,6 @@ function App() {
 	const [loginState, setLoginState] = useState(false);
 	// is the user information fetched from db ?
 	const [isUserLoading, setIsUserLoading] = useState(true);
-
-	// const [userState, setUserState] = useState(
-	// 	JSON.parse(sessionStorage.getItem("userData"))
-	// );
-
-	// useEffect(() => {
-	// 	getQuestionsAPIMethod((questions) => {
-	// 		setQuestionState(questions);
-	// 	});
-	// 	getUserByAPIMethod((user) => {
-	// 		setUserState(user);
-	// 	});
-	// }, [isDataState]);
 
 	useEffect(async () => {
 		if (isLoggedIn()) {
@@ -157,7 +144,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/getStart"
+					path="/getStarted"
 					render={(props) =>
 						isLoggedIn() ? (
 							<Getstart
@@ -173,6 +160,26 @@ function App() {
 							/>
 						) : (
 							loginAlert()
+						)
+					}
+				/>
+				<Route
+					path="/admin"
+					render={(props) =>
+						isAdmin() ? (
+							<Admin
+								{...props}
+								loginState={loginState}
+								loginStateFunction={setLoginStateFunction}
+								userState={userState}
+								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
+							/>
+						) : (
+							adminAlert()
 						)
 					}
 				/>

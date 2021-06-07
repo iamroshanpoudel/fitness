@@ -29,10 +29,13 @@ export default function HeaderLinks(props) {
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
 
 	///////////////////////////////////////Google Login Function////////////////////////////////////////////////
-	const profile = JSON.parse(sessionStorage.getItem('userData'));
-	const [image, setImage] = useState( profile == null? defaultImage: profile.imageUrl);
-	const [connection,setConnection] = useState(window.navigator.onLine);
-	
+	const profile = JSON.parse(sessionStorage.getItem("userData"));
+	console.log(profile);
+	const [image, setImage] = useState(
+		profile == null ? defaultImage : profile.imageUrl
+	);
+	const [connection, setConnection] = useState(window.navigator.onLine);
+
 	//sign out hook
 	const { signOut, signOutLoaded } = useGoogleLogout({
 		clientId:
@@ -51,16 +54,16 @@ export default function HeaderLinks(props) {
 		document.getElementById("headerList").style = "display:block";
 		console.log(response.profileObj.email);
 		//store in session Storage
-		getUserStateByEmailAPIMethod(response.profileObj.email).then( (r) =>{
+		getUserStateByEmailAPIMethod(response.profileObj.email).then((r) => {
 			console.log(r);
 
 			//Timing to renew access token
 			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information
-			if(r !== null){
+			if (r !== null) {
 				setImage(r.imageUrl);
 				sessionStorage.setItem("userData", JSON.stringify(r));
-			}else{
+			} else {
 				response.profileObj.expired_at = expired_at;
 				setImage(response.profileObj.imageUrl);
 				sessionStorage.setItem("userData", JSON.stringify(response.profileObj));
@@ -75,36 +78,66 @@ export default function HeaderLinks(props) {
 			timeOut().then((result) => {
 				console.log("session started");
 			});
-			props.loginStateFunction(true)
+			props.loginStateFunction(true);
 
-			if(r === null){
-				window.location.href = '/getStart';
+			if (r === null) {
+				window.location.href = "/getStarted";
 			}
 		});
 	};
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	const classes = useStyles();
 
-	let color
-	if(connection){
-		color = '#19ce60';
-	}else{
-		color = '#ee0000';
+	let color;
+	if (connection) {
+		color = "#19ce60";
+	} else {
+		color = "#ee0000";
 	}
- 	let show = "none";
-	if(profile != null){
-		if(profile.address != null){
+	let show = "none";
+	if (profile != null) {
+		if (profile.address != null) {
 			show = "block";
 		}
 	}
+	const isAdmin = profile == null ? false : profile.isAdmin;
 
 	return (
 		<>
+			<div className="outer-menu">
+				<input className="checkbox-toggle" type="checkbox" />
+				<div className="hamburger">
+					<div></div>
+				</div>
+				<div className="menu">
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="/calories">Log Calories</a>
+								</li>
+								<li>
+									<a href="/questions">Log Workout</a>
+								</li>
+								<li>
+									<a href="/view">View Data</a>
+								</li>
+								{isAdmin ? (
+									<li>
+										<a href="/admin">Admin</a>
+									</li>
+								) : (
+									<></>
+								)}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 			<NavLink to="/" activeClassName="active-link" className="logo alink">
 				<h2 className="logo-text">Fitness++</h2>
 			</NavLink>
-
-			<List className={classes.list} id="headerList" style={{display:show}}>
+			<List className={classes.list} id="headerList" style={{ display: show }}>
 				<ListItem className={classes.listItem}>
 					<Button
 						href="/calories"
@@ -116,7 +149,7 @@ export default function HeaderLinks(props) {
 				</ListItem>
 				<ListItem className={classes.listItem}>
 					<Button
-						href="./questions"
+						href="/questions"
 						color="transparent"
 						className={classes.navLink}
 					>
@@ -128,9 +161,22 @@ export default function HeaderLinks(props) {
 						View Data
 					</Button>
 				</ListItem>
+				{isAdmin ? (
+					<ListItem className={classes.listItem}>
+						<Button
+							color="transparent"
+							href="/admin"
+							className={classes.navLink}
+						>
+							Admin Page
+						</Button>
+					</ListItem>
+				) : (
+					<></>
+				)}
 			</List>
-			{sessionStorage.getItem('userData') === null ?
-				<div id="googleLogin" className="loginButton" >
+			{sessionStorage.getItem("userData") === null ? (
+				<div id="googleLogin" className="loginButton">
 					<GoogleLogin
 						clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 						buttonText="Login"
@@ -140,27 +186,36 @@ export default function HeaderLinks(props) {
 						className="login"
 						isSignedIn={true}
 						id="google"
-						style={{width: '100px'}}
+						style={{ width: "100px" }}
 					/>
 					<p id="failure"></p>
 				</div>
-				:
-				<div id="googleHide" style={{display:'block'}}>
+			) : (
+				<div id="googleHide" style={{ display: "block" }}>
 					<a href="./profile">
-						<Online
-							enabled = {true}
-							interval = {5000}
-						><div className="dot" style={{backgroundColor: '#19ce60',boxShadow: '0px 0px 9px #19ce60' }}/></Online>
-						<Offline
-							enabled = {true}
-							interval = {5000}
-						><div className="dot" style={{backgroundColor: '#ee0000',boxShadow: '0px 0px 9px #ee0000' }}/></Offline>
+						<Online enabled={true} interval={5000}>
+							<div
+								className="dot"
+								style={{
+									backgroundColor: "#19ce60",
+									boxShadow: "0px 0px 9px #19ce60",
+								}}
+							/>
+						</Online>
+						<Offline enabled={true} interval={5000}>
+							<div
+								className="dot"
+								style={{
+									backgroundColor: "#ee0000",
+									boxShadow: "0px 0px 9px #ee0000",
+								}}
+							/>
+						</Offline>
 						{/*<div className="dot" style={{backgroundColor: color,boxShadow: '0px 0px 9px '+ color +'' }}/>*/}
-						<img src={image} id="image" alt="User"/>
+						<img src={image} id="image" alt="User" />
 					</a>
 				</div>
-
-			}
+			)}
 		</>
 	);
 }

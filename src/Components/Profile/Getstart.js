@@ -6,6 +6,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { getContrastRatio } from "@material-ui/core";
 // import Background from "../../images/workout.jpg";
+import Nav from "../Nav/Nav";
+
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
@@ -133,10 +135,12 @@ export default function Getstart(props) {
 				backgroundColor: "#fffff",
 			}}
 		>
-			{/* <meta
-				name="viewport"
-				content="width=device-width, initial-scale=1.0"
-			></meta> */}
+			<Nav
+				userState={props.userState}
+				loginState={props.loginState}
+				loginStateFunction={props.loginStateFunction}
+			/>
+
 			<React.Fragment>
 				<Typography
 					variant="h6"
@@ -308,17 +312,13 @@ export default function Getstart(props) {
 					<Button
 						variant="contained"
 						type="submit"
-						style={{
-							color: "white",
-							backgroundColor: "#f76b8a",
-							fontSize: "12px",
-						}}
+						color="primary"
 						// onClick={(e) => {
 						// 	e.preventDefault();
 						// 	alert(JSON.stringify(newUserState));
 						// }}
 					>
-						Submit
+						Lets go!
 					</Button>
 				</form>
 			</React.Fragment>

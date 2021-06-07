@@ -15,7 +15,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import ReactApexChart from "react-apexcharts";
 import moment from "moment";
 import FoodCard from "./FoodCard";
-
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 const AutoCompleteCalorieSearch = (props) => {
 	// changes 2021/5/4 to 2021-5-4
 	const dashedDate = (date) => {
@@ -32,6 +33,11 @@ const AutoCompleteCalorieSearch = (props) => {
 				nutritionList[2] += food.nutrients.PRTN;
 				nutritionList[3] += food.nutrients.CARBS;
 			});
+
+			nutritionList[0] = (nutritionList[0] / 30) * 100;
+			nutritionList[1] = (nutritionList[1] / 20) * 100;
+			nutritionList[2] = (nutritionList[2] / 50) * 100;
+			nutritionList[3] = (nutritionList[3] / 300) * 100;
 		}
 
 		return nutritionList;
@@ -64,7 +70,14 @@ const AutoCompleteCalorieSearch = (props) => {
 						label: "Food Requirements",
 						formatter: function (w) {
 							// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-							return "incomplete";
+							if (
+								series[0] >= 100 &&
+								series[1] >= 100 &&
+								series[2] >= 100 &&
+								series[3] >= 100
+							)
+								return "complete";
+							else return "incomplete";
 						},
 					},
 				},
@@ -75,9 +88,7 @@ const AutoCompleteCalorieSearch = (props) => {
 
 	const formSubmitHandler = (event, newFoodToAdd) => {
 		event.preventDefault();
-		alert("new food " + newFoodToAdd);
 		if (newFoodToAdd && newFoodToAdd !== "") {
-			alert("passed");
 			getNutritionInfoByFoodAPIMethod(newFoodToAdd, (response) => {
 				getPhotoFromUnsplashAPIMethod(newFoodToAdd, (response2) => {
 					response.hints[0].label = newFoodToAdd;
@@ -177,6 +188,7 @@ const AutoCompleteCalorieSearch = (props) => {
 
 			const newFoodObj = {
 				foodName: newFoodState.label || "",
+				image: newFoodState.image,
 				calories: newFoodState.food.nutrients.ENERC_KCAL || 0,
 				nutrients: {
 					CARBS: newFoodState.food.nutrients.CHOCDF || 0,
@@ -207,82 +219,109 @@ const AutoCompleteCalorieSearch = (props) => {
 	}, [newFoodState]);
 	return (
 		<div>
-			<Card style={{ backgroundColor: "#fffff", width: "50vw" }}>
+			<Card
+				style={{
+					backgroundColor: "#fffff",
+					width: "95vw",
+					height: "fit-content",
+					padding: "10px",
+				}}
+				className="calorieCard"
+			>
 				<CardContent>
-					<div id="chart">
+					<div>
 						<ReactApexChart
 							options={chartOptions}
 							series={series}
 							type="radialBar"
 							height={350}
 						/>
+						<Typography gutterBottom variant="h6" style={{}}>
+							Add new Food item for today:
+						</Typography>
+						<form onSubmit={formSubmitHandler}>
+							<div>
+								<Autocomplete
+									id="asynchronous-demo"
+									style={{ width: 300 }}
+									open={open}
+									onOpen={() => {
+										setOpen(true);
+									}}
+									onClose={() => {
+										setOpen(false);
+									}}
+									// getOptionSelected={(option, value) => option === value}
+									getOptionSelected={(option) => option}
+									getOptionLabel={(option) => option}
+									options={options}
+									loading={loading}
+									onChange={(event, newValue) => {
+										setFoodToAdd("");
+										formSubmitHandler(event, newValue);
+									}}
+									value={foodToAdd}
+									renderInput={(params) => (
+										<TextField
+											{...params}
+											id="standard-full-width"
+											label="Food name"
+											style={{}}
+											placeholder="What did you eat today?"
+											helperText=""
+											fullWidth
+											margin="normal"
+											value={foodToAdd}
+											onChange={foodTypingHandler}
+											InputProps={{
+												...params.InputProps,
+												endAdornment: (
+													<React.Fragment>
+														{loading ? (
+															<CircularProgress color="inherit" size={20} />
+														) : null}
+														{params.InputendAdornment}
+													</React.Fragment>
+												),
+											}}
+										/>
+									)}
+								/>
+							</div>
+						</form>
 					</div>
-					{options ? options : []}
-					<form onSubmit={formSubmitHandler}>
-						<div>
-							<Autocomplete
-								id="asynchronous-demo"
-								style={{ width: 300 }}
-								open={open}
-								onOpen={() => {
-									setOpen(true);
-								}}
-								onClose={() => {
-									setOpen(false);
-								}}
-								// getOptionSelected={(option, value) => option === value}
-								getOptionSelected={(option) => option}
-								getOptionLabel={(option) => option}
-								options={options}
-								loading={loading}
-								onChange={(event, newValue) => {
-									setFoodToAdd("");
-									formSubmitHandler(event, newValue);
-								}}
-								value={foodToAdd}
-								renderInput={(params) => (
-									<TextField
-										{...params}
-										id="standard-full-width"
-										label="Food name"
-										style={{ margin: 8 }}
-										placeholder="What did you eat today?"
-										helperText=""
-										fullWidth
-										margin="normal"
-										value={foodToAdd}
-										onChange={foodTypingHandler}
-										InputProps={{
-											...params.InputProps,
-											endAdornment: (
-												<React.Fragment>
-													{loading ? (
-														<CircularProgress color="inherit" size={20} />
-													) : null}
-													{params.InputendAdornment}
-												</React.Fragment>
-											),
-										}}
-									/>
-								)}
-							/>
-						</div>
-					</form>
+					<br />
+					<br />
+					<Divider light />
+
 					<div id="form-section">
 						<div>
-							Food Items in Database for current date: <br />
-							{JSON.stringify(props.foodStateByDate) !== "{}"
-								? props.foodStateByDate.foodIntake.map((food, index) => {
+							<Typography
+								gutterBottom
+								variant="h6"
+								style={{ marginTop: "30px" }}
+							>
+								Food Items in Database for today:
+							</Typography>
+
+							{JSON.stringify(props.foodStateByDate) !== "{}" ? (
+								<div className="foodRow">
+									{props.foodStateByDate.foodIntake.map((food, index) => {
 										return (
-											<FoodCard
-												food={food}
-												key={index}
-												foodStateByDate={props.foodStateByDate}
-												setFoodStateByDate={props.setFoodStateByDate}
-											/>
+											<div className="foodItem">
+												<FoodCard
+													food={food}
+													key={index}
+													foodStateByDate={props.foodStateByDate}
+													setFoodStateByDate={props.setFoodStateByDate}
+												/>
+											</div>
 										);
-								  })
-								: "Nothing availalbe"}
+									})}
+								</div>
+							) : (
+								"Nothing available"
+							)}
 						</div>
 					</div>
 				</CardContent>

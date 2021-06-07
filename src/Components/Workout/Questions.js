@@ -15,6 +15,8 @@ import { set } from "lodash";
 import { WorkOutline } from "@material-ui/icons";
 import { card } from "../../util/material-kit-react";
 
+import Calendar from "../Calendar/Calendar";
+
 const Questions = (props) => {
 	// console.log(props);
 	// Adds a question to the form
@@ -35,6 +37,7 @@ const Questions = (props) => {
 		}, 50);
 	};
 
+	// Selection Box
 
 	const colourStyles = {
 		control: styles => ({ ...styles, backgroundColor: 'white' }),
@@ -85,7 +88,6 @@ const Questions = (props) => {
 			},
 		}),
 	};
-
 
 	const [exerciseList, setexerciseList] = useState([]);
 	const [user, setUser] = useState([]);
@@ -144,6 +146,24 @@ const Questions = (props) => {
 
 	}
 
+	// Calendar
+
+	const addDate = () => {
+		let date = new Date();
+		date =
+			date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+		return date;
+	};
+
+
+	const flipHandler = (e) => {
+		e.preventDefault();
+		setIsFlipped(!isFlipped);
+	};
+
+	const [isFlipped, setIsFlipped] = useState(false); // card flip state
+	const [dateState, setDateState] = useState(addDate());
+
 
 	return (
 		<div>
@@ -151,7 +171,14 @@ const Questions = (props) => {
 			<div id="body-items">
 				<div id="questions-title">
 					{/* <h2>{props.userState.name}'s Questions</h2> */}
-					<AddCircleOutlineIcon id="add-btn" onClick={addBtnHandler} />
+					<Calendar
+						dateState={dateState}
+						setDateState={setDateState}
+						userState={props.userState}
+						setUserState={props.setUserState}
+						setIsUserLoading={props.setIsUserLoading}
+						flipHandler={flipHandler}
+					/>
 				</div>
 
 				<form action="#" method="">

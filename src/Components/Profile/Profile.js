@@ -37,7 +37,6 @@ const Profile = (props) => {
 	const defaultImage =
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
 
-
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		updateUserByAPIMethod(props.userState, (response) => {
@@ -156,6 +155,7 @@ const Profile = (props) => {
 		rowElement: {
 			padding: "20px",
 			display: "flex",
+			flexWrap: "wrap",
 			flexDirection: "row",
 			justifyContent: "space-between",
 			alignItems: "center",
@@ -176,7 +176,11 @@ const Profile = (props) => {
 			/>
 
 			<div id="body-items">
-				<Card className={classes.root} variant="outlined">
+				<Card
+					className={classes.root}
+					variant="outlined"
+					className="profileCard"
+				>
 					<CardContent>
 						<div id="questions-title">
 							<h2>Edit Your Profile</h2>
@@ -354,7 +358,8 @@ const Profile = (props) => {
 										className="logout"
 										onLogoutSuccess={logout}
 									></GoogleLogout>
-									{CustomizedSnackbars()}
+
+									{CustomizedSnackbars("success", "Saved to database")}
 								</div>
 							</form>
 						</div>

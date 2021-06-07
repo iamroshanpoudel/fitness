@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function CustomizedSnackbars() {
+export default function CustomizedSnackbars(type, msg) {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
 
@@ -41,13 +41,13 @@ export default function CustomizedSnackbars() {
 				variant="contained"
 				color="primary"
 				onClick={handleClick}
-				style={{ "margin-left": "20px", width: "100px",    float: "right"}}
+				style={{ "margin-left": "20px", width: "100px", float: "right" }}
 			>
 				Save
 			</Button>
-			<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-				<Alert onClose={handleClose} severity="success">
-					Successfully Save!!
+			<Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+				<Alert onClose={handleClose} severity={type}>
+					{msg}
 				</Alert>
 			</Snackbar>
 			{/*<Alert severity="error">This is an error message!</Alert>*/}
