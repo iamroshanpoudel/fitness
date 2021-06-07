@@ -27,6 +27,7 @@ const ViewData = (props) => {
 		root: {
 			width: "50vw",
 			padding: "20px",
+			height: "100%",
 		},
 		rowElement: {
 			padding: "20px",
@@ -57,13 +58,8 @@ const ViewData = (props) => {
 					isUserLoading={props.isUserLoading}
 					setIsUserLoading={props.setIsUserLoading}
 				/>
-				<Card
-					className={classes.root}
-					variant="outlined"
-					className="viewDataCard"
-				>
-					<Last7Chart userState={props.userState} dateState={dateState} />
-				</Card>
+
+				<Last7Chart userState={props.userState} dateState={dateState} />
 			</div>
 		</div>
 	);

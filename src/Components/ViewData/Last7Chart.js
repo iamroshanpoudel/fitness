@@ -37,7 +37,7 @@ const Last7Chart = (props) => {
 		}
 	}, [props.dateState]);
 	return (
-		<div id="body-items">
+		<div id="body-itemsChart">
 			<>
 				<Typography gutterBottom variant="h6">
 					Nutrition Consumption (gm) in the last 7 days:
