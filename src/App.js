@@ -5,12 +5,12 @@ import Questions from "./Components/Workout/Questions";
 import { Route, Switch } from "react-router-dom";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
-import { isLoggedIn, loginAlert } from "./util/googleLogin";
+import { isLoggedIn, loginAlert,isAdmin,adminAlert } from "./util/googleLogin";
 import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
-
+import Admin from "./Components/Admin/adminPage";
 function App() {
 	//question
 	const [questionState, setQuestionState] = useState([]);
@@ -162,6 +162,26 @@ function App() {
 							/>
 						) : (
 							loginAlert()
+						)
+					}
+				/>
+				<Route
+					path="/admin"
+					render={(props) =>
+						isAdmin() ? (
+							<Admin
+								{...props}
+								loginState={loginState}
+								loginStateFunction={setLoginStateFunction}
+								userState={userState}
+								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
+							/>
+						) : (
+							adminAlert()
 						)
 					}
 				/>

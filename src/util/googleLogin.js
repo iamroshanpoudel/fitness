@@ -21,6 +21,24 @@ export const isLoggedIn = () => {
 		return true;
 	}
 };
+export const isAdmin = () =>{
+	const userData = JSON.parse(sessionStorage.getItem("userData"));
+	console.log(userData.isAdmin);
+	if(userData === null){
+		return false;
+	}else{
+		if(userData.isAdmin === null) {
+			return false;
+		}else if( userData.isAdmin === true){
+			return true;
+		}
+		return false
+	}
+}
+export const adminAlert = () =>{
+	window.location.href = "/";
+	alert("Not Authorized User!!");
+}
 export const loginAlert = () => {
 	window.location.href = "/";
 	alert("Please Login");
