@@ -39,7 +39,7 @@ const Last7Chart = (props) => {
 	return (
 		<div id="body-itemsChart">
 			<>
-				<Typography gutterBottom variant="h6">
+				<Typography gutterBottom variant="h6" style={{ margin: "20px" }}>
 					Nutrition Consumption (gm) in the last 7 days:
 				</Typography>
 				<LineChart
@@ -85,7 +85,7 @@ const Last7Chart = (props) => {
 				<br />
 			</>
 			<>
-				<Typography gutterBottom variant="h6">
+				<Typography gutterBottom variant="h6" style={{ margin: "20px" }}>
 					Calorie Consumption (KCal) in the last 7 days:
 				</Typography>
 				<BarChart

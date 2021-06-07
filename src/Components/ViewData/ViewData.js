@@ -58,7 +58,6 @@ const ViewData = (props) => {
 					isUserLoading={props.isUserLoading}
 					setIsUserLoading={props.setIsUserLoading}
 				/>
-
 				<Last7Chart userState={props.userState} dateState={dateState} />
 			</div>
 		</div>
