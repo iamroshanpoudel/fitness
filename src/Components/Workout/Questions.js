@@ -116,9 +116,11 @@ const Questions = (props) => {
 		// setUser([...user, {value: {value}, color :{color}, calories:{calories}}])
 
 		var tem = { value: value, color: color, calories: calories }
+		console.log("type checking" + typeof (calories));
 		setUser([...user, tem])
 		console.log(user);
-		setTotalCal(parseFloat(totalCal) + parseFloat(calories))
+		var newCal = parseFloat(totalCal) + parseFloat(calories)
+		setTotalCal(newCal.toFixed(2))
 	}
 
 	const handleUser = (index) => {
@@ -131,17 +133,48 @@ const Questions = (props) => {
 			}
 		}
 		setUser(tepo)
-		setTotalCal(parseFloat(totalCal) - parseFloat(user[index].calories))
+		var tempCalorie = parseFloat(totalCal) - parseFloat(user[index].calories)
+		setTotalCal(tempCalorie.toFixed(2))
+		if (index == 0) {
+			setTotalCal(0)
+		}
 	}
 
-	const sendCaltoParent = (calorie, check) => {
+	const sendCaltoParent = (calorie, check, value) => {
 		if (check == 1) {
 			var tempCal = (parseFloat(totalCal) + parseFloat(calorie)).toFixed(2)
 			setTotalCal(tempCal)
+			var tempUser = []
+			for (var m = 0; m < user.length; m++) {
+				if (user[m].value == value) {
+					var checking = parseFloat(user[m].calories) + calorie
+					var checkingPar = String(checking)
+					var tempList = { value: user[m].value, color: user[m].color, calories: checkingPar }
+					tempUser[m] = tempList
+				}
+				else {
+					tempUser[m] = user[m]
+				}
+			}
+			setUser(tempUser)
+			console.log(user);
 		}
 		else {
 			var tempCal = (parseFloat(totalCal) - parseFloat(calorie)).toFixed(2)
 			setTotalCal(tempCal)
+			var tempUser = []
+			for (var m = 0; m < user.length; m++) {
+				if (user[m].value == value) {
+					var checking = parseFloat(user[m].calories) - calorie
+					var checkingPar = String(checking)
+					var tempList = { value: user[m].value, color: user[m].color, calories: checkingPar }
+					tempUser[m] = tempList
+				}
+				else {
+					tempUser[m] = user[m]
+				}
+			}
+			setUser(tempUser)
 		}
 
 	}
@@ -171,14 +204,14 @@ const Questions = (props) => {
 			<div id="body-items">
 				<div id="questions-title">
 					{/* <h2>{props.userState.name}'s Questions</h2> */}
-					<Calendar
+					{/*	<Calendar
 						dateState={dateState}
 						setDateState={setDateState}
 						userState={props.userState}
 						setUserState={props.setUserState}
 						setIsUserLoading={props.setIsUserLoading}
 						flipHandler={flipHandler}
-					/>
+					/> */}
 				</div>
 
 				<form action="#" method="">

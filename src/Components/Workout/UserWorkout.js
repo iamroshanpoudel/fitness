@@ -8,6 +8,7 @@ function UserworkOut(props) {
 
     const [time, setTime] = useState(1);
     const [calorie, setCalorie] = useState(parseFloat(props.calories))
+    const [initialCal, setInitialCal] = useState(parseFloat(props.calories))
 
     const barstyle = {
         width: "450px",
@@ -33,22 +34,21 @@ function UserworkOut(props) {
         width: "100px",
         height: "200px",
         top: "3px",
-
     }
 
     const handleTime = (e) => {
         if (e.target.value > time) {
-            setCalorie((parseFloat(props.calories) * e.target.value).toFixed(2))
-            props.sendCaltoParent(props.calories, 1)
+            setCalorie((initialCal * e.target.value).toFixed(2))
+            console.log(parseFloat(calorie));
+            props.sendCaltoParent(initialCal, 1, props.value)
             setTime(e.target.value)
         }
         else if (e.target.value < time) {
-            setCalorie((parseFloat(props.calories) * e.target.value).toFixed(2))
-            props.sendCaltoParent(props.calories, 0)
+            setCalorie((initialCal * e.target.value).toFixed(2))
+            console.log(parseFloat(calorie));
+            props.sendCaltoParent(initialCal, 0, props.value)
             setTime(e.target.value)
         }
-       
-
     }
 
     return (
