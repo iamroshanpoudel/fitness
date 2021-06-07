@@ -15,7 +15,7 @@ import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
-import Admin from "./Components/Admin/AdminPage";
+import AdminPage from "./Components/Admin/AdminPage";
 import ViewData from "./Components/ViewData/ViewData";
 
 function App() {
@@ -177,7 +177,7 @@ function App() {
 					path="/admin"
 					render={(props) =>
 						isAdmin() ? (
-							<Admin
+							<AdminPage
 								{...props}
 								loginState={loginState}
 								loginStateFunction={setLoginStateFunction}
