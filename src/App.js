@@ -10,7 +10,7 @@ import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
-
+import Admin from "./Components/Admin/adminPage";
 function App() {
 	//question
 	const [questionState, setQuestionState] = useState([]);
@@ -150,6 +150,26 @@ function App() {
 					render={(props) =>
 						isLoggedIn() ? (
 							<Getstart
+								{...props}
+								loginState={loginState}
+								loginStateFunction={setLoginStateFunction}
+								userState={userState}
+								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
+				/>
+				<Route
+					path="/admin"
+					render={(props) =>
+						isLoggedIn() ? (
+							<Admin
 								{...props}
 								loginState={loginState}
 								loginStateFunction={setLoginStateFunction}
