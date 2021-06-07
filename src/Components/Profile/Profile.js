@@ -17,6 +17,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import DateFnsUtils from "@date-io/date-fns";
+import CustomizedSnackbars from "../../util/Alert";
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
@@ -35,7 +36,6 @@ import IconButton from "@material-ui/core/IconButton";
 const Profile = (props) => {
 	const defaultImage =
 		"https://res.cloudinary.com/roshanpoudel/image/upload/v1620734424/userProfileImages/defaultImage.svg";
-
 
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
@@ -155,6 +155,7 @@ const Profile = (props) => {
 		rowElement: {
 			padding: "20px",
 			display: "flex",
+			flexWrap: "wrap",
 			flexDirection: "row",
 			justifyContent: "space-between",
 			alignItems: "center",
@@ -175,7 +176,11 @@ const Profile = (props) => {
 			/>
 
 			<div id="body-items">
-				<Card className={classes.root} variant="outlined">
+				<Card
+					className={classes.root}
+					variant="outlined"
+					className="profileCard"
+				>
 					<CardContent>
 						<div id="questions-title">
 							<h2>Edit Your Profile</h2>
@@ -353,14 +358,8 @@ const Profile = (props) => {
 										className="logout"
 										onLogoutSuccess={logout}
 									></GoogleLogout>
-									<Button
-										type="submit"
-										variant="contained"
-										color="primary"
-										style={{ "margin-left": "20px", width: "100px" }}
-									>
-										Save
-									</Button>
+
+									{CustomizedSnackbars("success", "Saved to database")}
 								</div>
 							</form>
 						</div>

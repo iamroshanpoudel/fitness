@@ -5,6 +5,8 @@ import AutoCompleteCalorieSearch from "./AutoCompleteCalorieSearch";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LoadingCard from "../Loading/LoadingCard";
+import { getDailyFoodInfoByAPIMethod } from "../../api/client.js";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -50,9 +52,38 @@ const LogCalories = (props) => {
 		setChecked((prev) => !prev);
 	};
 
+	// changes 2021/5/4 to 2021-5-4
+	const dashedDate = (date) => {
+		return moment(new Date(date).toISOString()).format("YYYY-MM-DD");
+	};
+
+	useEffect(async () => {
+		// when date changes, set current daily food state to empty
+		setIsFoodStateLoading(true);
+		setChecked(true);
+
+		// fetch food data for current date if user id is stored in userState
+		if (!props.isUserLoading) {
+			getDailyFoodInfoByAPIMethod(
+				props.userState._id,
+				dashedDate(dateState),
+				(response) => {
+					if (response) {
+						setFoodStateByDate(response);
+						setIsFoodStateLoading(false);
+					}
+				}
+			);
+		}
+	}, [dateState, props.isUserLoading]);
+
 	return (
 		<div>
-			<Nav userState={props.userState} loginState={props.loginState} loginStateFunction ={props.loginStateFunction}/>
+			<Nav
+				userState={props.userState}
+				loginState={props.loginState}
+				loginStateFunction={props.loginStateFunction}
+			/>
 			<div id="body-items">
 				<Calendar
 					dateState={dateState}
