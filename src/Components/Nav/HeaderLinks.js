@@ -30,7 +30,6 @@ export default function HeaderLinks(props) {
 
 	///////////////////////////////////////Google Login Function////////////////////////////////////////////////
 	const profile = JSON.parse(sessionStorage.getItem("userData"));
-	console.log(profile);
 	const [image, setImage] = useState(
 		profile == null ? defaultImage : profile.imageUrl
 	);

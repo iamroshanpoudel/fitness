@@ -1,17 +1,36 @@
 import React,{useState} from "react";
 import Nav from "../Nav/Nav";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import {getAllUsersAPIMethod} from "../../api/client"
+import {getAllUsersAPIMethod,deleteUserByEmailAPIMethod,deleteWorkoutRecordAPIMethod,deleteIntakeRecordAPIMethod,numberOfFoodRecordAPIMethod} from "../../api/client"
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import deleteIcon from "../../images/delete.png"
 const AdminPage = (props) => {
-    console.log(props);
 
     let [userData, setUserData] = useState([]);
+    let counts = []
+    let index = -1;
     getAllUsersAPIMethod().then( (r) =>{
         setUserData(r);
+        r.forEach( (e) =>{
+            numberOfFoodRecordAPIMethod(e._id).then( (r) =>{
+                console.log(r);
+                counts.push(r);
+            })
+        })
     })
+    const deleteFunction = (e) =>{
 
+        deleteUserByEmailAPIMethod(e.target.attributes.item(1).value).then( (r) => {
+            console.log(r);
+            //     deleteIntakeRecordAPIMethod(e.target.attributes.item(2).value).then( (r) =>{
+            //         console.log(r);
+            //         deleteWorkoutRecordAPIMethod(e.target.attributes.item(2).value).then( (r)=>{
+            //             console.log(r);
+            //         }
+            //     })
+            // })
+        })
+    }
     return (
     <>
         <Nav
@@ -36,6 +55,7 @@ const AdminPage = (props) => {
             </tr>
             {/*Data table*/}
             {userData.map( (e) =>{
+                index++;
                 return(
                     <tr>
                         <th>
@@ -45,17 +65,11 @@ const AdminPage = (props) => {
                             <h5>{e.email}</h5>
                         </th>
                         <th>
-                            <h5></h5>
+                            <h5>{counts[index]}</h5>
                         </th>
 
                         <th>
-                            <DeleteIcon
-                                variant="outlined"
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                style={{ float: "right" }}
-                            ></DeleteIcon>
+                            <img src={deleteIcon} style={{width:"30px"}} onClick={deleteFunction} value={e.email} userid={e._id}/>
                         </th>
                     </tr>
                 )

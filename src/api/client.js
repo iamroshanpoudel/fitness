@@ -202,6 +202,33 @@ export const getRestaurantMenuByAPIMethod = (searchText, zip, success) => {
 		.then(parseJSON)
 		.then(success);
 };
+
+export const deleteIntakeRecordAPIMethod= (userid,success) =>{
+	return fetch(`/api/food/${userid}`, {
+		...defaultHeaders,
+		method:"DELETE",
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
+export const deleteWorkoutRecordAPIMethod= (userid,success) =>{
+	return fetch(`/api/workout/${userid}`, {
+		...defaultHeaders,
+		method:"DELETE",
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
+export const numberOfFoodRecordAPIMethod= (userid,success) =>{
+	return fetch(`/api/food/number/${userid}`, {
+		...defaultHeaders,
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
 function checkStatus(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response;
@@ -215,6 +242,5 @@ function checkStatus(response) {
 }
 
 function parseJSON(response) {
-	console.log(response);
 	return response.json();
 }
