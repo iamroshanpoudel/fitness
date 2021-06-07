@@ -146,7 +146,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/getStart"
+					path="/getStarted"
 					render={(props) =>
 						isLoggedIn() ? (
 							<Getstart

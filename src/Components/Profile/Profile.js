@@ -155,6 +155,7 @@ const Profile = (props) => {
 		rowElement: {
 			padding: "20px",
 			display: "flex",
+			flexWrap: "wrap",
 			flexDirection: "row",
 			justifyContent: "space-between",
 			alignItems: "center",
@@ -175,7 +176,11 @@ const Profile = (props) => {
 			/>
 
 			<div id="body-items">
-				<Card className={classes.root} variant="outlined">
+				<Card
+					className={classes.root}
+					variant="outlined"
+					className="profileCard"
+				>
 					<CardContent>
 						<div id="questions-title">
 							<h2>Edit Your Profile</h2>
