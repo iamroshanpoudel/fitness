@@ -108,6 +108,24 @@ export const getUserStateByEmailAPIMethod = (email, success) => {
 		.then(parseJSON)
 		.then(success);
 };
+export const deleteUserByEmailAPIMethod = (email,success) =>{
+	return fetch(`/api/user/${email}`, {
+		...defaultHeaders,
+		method: "DELETE", // The method defaults to GET
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
+
+export const getAllUsersAPIMethod  = (success) =>{
+	return fetch(`/api/user`, {
+		...defaultHeaders,
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
 export const addToDailyFoodAPIMethod = (newFoodObj, success) => {
 	return fetch(`/api/food`, {
 		...defaultHeaders,
@@ -184,6 +202,33 @@ export const getRestaurantMenuByAPIMethod = (searchText, zip, success) => {
 		.then(parseJSON)
 		.then(success);
 };
+
+export const deleteIntakeRecordAPIMethod= (userid,success) =>{
+	return fetch(`/api/food/${userid}`, {
+		...defaultHeaders,
+		method:"DELETE",
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
+export const deleteWorkoutRecordAPIMethod= (userid,success) =>{
+	return fetch(`/api/workout/${userid}`, {
+		...defaultHeaders,
+		method:"DELETE",
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
+export const numberOfFoodRecordAPIMethod= (userid,success) =>{
+	return fetch(`/api/food/number/${userid}`, {
+		...defaultHeaders,
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
 function checkStatus(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response;
@@ -197,6 +242,5 @@ function checkStatus(response) {
 }
 
 function parseJSON(response) {
-	console.log(response);
 	return response.json();
 }
