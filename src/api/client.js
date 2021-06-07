@@ -108,6 +108,24 @@ export const getUserStateByEmailAPIMethod = (email, success) => {
 		.then(parseJSON)
 		.then(success);
 };
+export const deleteUserByEmailAPIMethod = (email,success) =>{
+	return fetch(`/api/user/${email}`, {
+		...defaultHeaders,
+		method: "DELETE", // The method defaults to GET
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
+
+export const getAllUsersAPIMethod  = (success) =>{
+	return fetch(`/api/user`, {
+		...defaultHeaders,
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+}
 export const addToDailyFoodAPIMethod = (newFoodObj, success) => {
 	return fetch(`/api/food`, {
 		...defaultHeaders,
