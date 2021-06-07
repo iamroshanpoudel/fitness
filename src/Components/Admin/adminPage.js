@@ -15,9 +15,8 @@ const AdminPage = (props) => {
 	let [count, setCount] = useState([]);
 	let counts = [];
 	let index = -1;
-	if(userData.length <= 0){
+	if (userData.length <= 0) {
 		getAllUsersAPIMethod().then((r) => {
-
 			r.forEach((e) => {
 				console.log(e._id);
 				numberOfFoodRecordAPIMethod(e._id).then((r) => {
@@ -62,9 +61,9 @@ const AdminPage = (props) => {
 					<th>
 						<h3>Email</h3>
 					</th>
-					<th>
+					{/* <th>
 						<h3>Number Of Responses</h3>
-					</th>
+					</th> */}
 					<th>
 						<h3>Delete User</h3>
 					</th>
@@ -82,7 +81,7 @@ const AdminPage = (props) => {
 								<h5>{e.email}</h5>
 							</th>
 							<th>
-								<h5>{userData.count[3]}</h5>
+								<h5>10</h5>
 							</th>
 
 							<th>
