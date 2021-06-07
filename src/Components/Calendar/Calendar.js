@@ -14,7 +14,6 @@ const Calendar = (props) => {
 			date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 		if (date <= currDate) {
 			props.setDateState(newDate);
-			props.flipHandler(e);
 		}
 	};
 
@@ -26,7 +25,6 @@ const Calendar = (props) => {
 			date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
 		props.setDateState(newDate);
-		props.flipHandler(e);
 	};
 
 	// changes 2021/5/4 to 2021-5-4
@@ -34,26 +32,25 @@ const Calendar = (props) => {
 		return moment(new Date(date).toISOString()).format("YYYY-MM-DD");
 	};
 
-	useEffect(async () => {
-		// when date changes, set current daily food state to empty
-		props.setIsFoodStateLoading(true);
-		props.setChecked(true);
+	// useEffect(async () => {
+	// 	// when date changes, set current daily food state to empty
+	// 	props.setIsFoodStateLoading(true);
+	// 	props.setChecked(true);
 
-		// fetch food data for current date if user id is stored in userState
-		if (!props.isUserLoading) {
-			getDailyFoodInfoByAPIMethod(
-				props.userState._id,
-				dashedDate(props.dateState),
-				(response) => {
-					if (response) {
-						props.setFoodStateByDate(response);
-						props.setIsFoodStateLoading(false);
-					}
-				}
-			);
-		}
-	}, [props.dateState, props.isUserLoading]);
-
+	// 	// fetch food data for current date if user id is stored in userState
+	// 	if (!props.isUserLoading) {
+	// 		getDailyFoodInfoByAPIMethod(
+	// 			props.userState._id,
+	// 			dashedDate(props.dateState),
+	// 			(response) => {
+	// 				if (response) {
+	// 					props.setFoodStateByDate(response);
+	// 					props.setIsFoodStateLoading(false);
+	// 				}
+	// 			}
+	// 		);
+	// 	}
+	// }, [props.dateState, props.isUserLoading]);
 	return (
 		<div id="calendar">
 			<div onClick={decreaseDate}>

@@ -130,8 +130,8 @@ const FoodCard = (props) => {
 					</Typography>
 				}
 				action={
-					<IconButton aria-label="delete item">
-						<DeleteIcon onClick={deleteFoodHandler} />
+					<IconButton aria-label="delete item" onClick={deleteFoodHandler}>
+						<DeleteIcon />
 					</IconButton>
 				}
 			/>
@@ -142,7 +142,7 @@ const FoodCard = (props) => {
 			/>
 
 			<CardActions disableSpacing>
-				<Typography gutterBottom variant="h6">
+				<Typography gutterBottom variant="h7">
 					Nutritional Information:
 				</Typography>
 				<IconButton

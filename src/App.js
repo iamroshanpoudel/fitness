@@ -5,12 +5,19 @@ import Questions from "./Components/Workout/Questions";
 import { Route, Switch } from "react-router-dom";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
-import { isLoggedIn, loginAlert,isAdmin,adminAlert } from "./util/googleLogin";
+import {
+	isLoggedIn,
+	loginAlert,
+	isAdmin,
+	adminAlert,
+} from "./util/googleLogin";
 import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
 import Getstart from "./Components/Profile/Getstart";
-import Admin from "./Components/Admin/adminPage";
+import Admin from "./Components/Admin/AdminPage";
+import ViewData from "./Components/ViewData/ViewData";
+
 function App() {
 	//question
 	const [questionState, setQuestionState] = useState([]);
@@ -31,7 +38,6 @@ function App() {
 			await getUserStateByEmailAPIMethod(
 				JSON.parse(sessionStorage.getItem("userData")).email,
 				(response) => {
-					console.log(response);
 					if (response !== null) {
 						setUserState(response);
 						setLoginState(true);
@@ -43,8 +49,6 @@ function App() {
 
 	useEffect(() => {
 		if (userState && userState._id) {
-			console.log("userState updated from db");
-			console.log(userState);
 			setIsUserLoading(false);
 			sessionStorage.removeItem("userData");
 			sessionStorage.setItem("userData", JSON.stringify(userState));
@@ -106,24 +110,7 @@ function App() {
 						)
 					}
 				/>
-				<Route
-					path="/view"
-					exact
-					render={(props) =>
-						isLoggedIn() ? (
-							<Data
-								{...props}
-								loginState={loginState}
-								loginStateFunction={setLoginStateFunction}
-								questionState={questionState}
-								userState={userState}
-								setUserState={setUserState}
-							/>
-						) : (
-							loginAlert()
-						)
-					}
-				/>
+
 				<Route
 					path="/profile"
 					exact
@@ -150,6 +137,27 @@ function App() {
 					render={(props) =>
 						isLoggedIn() ? (
 							<Getstart
+								{...props}
+								loginState={loginState}
+								loginStateFunction={setLoginStateFunction}
+								userState={userState}
+								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
+				/>
+
+				<Route
+					path="/viewdata"
+					render={(props) =>
+						isLoggedIn() ? (
+							<ViewData
 								{...props}
 								loginState={loginState}
 								loginStateFunction={setLoginStateFunction}

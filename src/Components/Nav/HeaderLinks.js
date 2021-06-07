@@ -30,7 +30,6 @@ export default function HeaderLinks(props) {
 
 	///////////////////////////////////////Google Login Function////////////////////////////////////////////////
 	const profile = JSON.parse(sessionStorage.getItem("userData"));
-	console.log(profile);
 	const [image, setImage] = useState(
 		profile == null ? defaultImage : profile.imageUrl
 	);
@@ -52,11 +51,8 @@ export default function HeaderLinks(props) {
 		// document.getElementById("googleLogin").style = "display:none";
 		// document.getElementById("googleHide").style = "display:block";
 		document.getElementById("headerList").style = "display:block";
-		console.log(response.profileObj.email);
 		//store in session Storage
 		getUserStateByEmailAPIMethod(response.profileObj.email).then((r) => {
-			console.log(r);
-
 			//Timing to renew access token
 			let expired_at = 24 * 60 * 1000; //One Day
 			//add expiration information
@@ -120,7 +116,7 @@ export default function HeaderLinks(props) {
 									<a href="/questions">Log Workout</a>
 								</li>
 								<li>
-									<a href="/view">View Data</a>
+									<a href="/viewdata">View Data</a>
 								</li>
 								{isAdmin ? (
 									<li>
@@ -157,7 +153,11 @@ export default function HeaderLinks(props) {
 					</Button>
 				</ListItem>
 				<ListItem className={classes.listItem}>
-					<Button color="transparent" href="/view" className={classes.navLink}>
+					<Button
+						color="transparent"
+						href="/viewdata"
+						className={classes.navLink}
+					>
 						View Data
 					</Button>
 				</ListItem>

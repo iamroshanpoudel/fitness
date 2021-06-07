@@ -140,7 +140,16 @@ export const createUserByAPIMethod = (user, success) => {
 		.then(parseJSON)
 		.then(success);
 };
-
+// get nutrition info for last 7 days for graphs in view data page
+export const last7DaysNutritionAPIMethod = (uid, date, success) => {
+	return fetch(`/api/food/last7/${uid}/${date}`, {
+		...defaultHeaders,
+		method: "GET", // The method defaults to GET
+	})
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(success);
+};
 export const getDailyFoodInfoByAPIMethod = (uid, date, success) => {
 	return fetch(`/api/food/${uid}/${date}`, {
 		...defaultHeaders,

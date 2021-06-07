@@ -308,10 +308,9 @@ const AutoCompleteCalorieSearch = (props) => {
 								<div className="foodRow">
 									{props.foodStateByDate.foodIntake.map((food, index) => {
 										return (
-											<div className="foodItem">
+											<div className="foodItem" key={index}>
 												<FoodCard
 													food={food}
-													key={index}
 													foodStateByDate={props.foodStateByDate}
 													setFoodStateByDate={props.setFoodStateByDate}
 												/>
