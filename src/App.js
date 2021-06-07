@@ -5,7 +5,7 @@ import Questions from "./Components/Workout/Questions";
 import { Route, Switch } from "react-router-dom";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
-import { isLoggedIn, loginAlert } from "./util/googleLogin";
+import { isLoggedIn, loginAlert,isAdmin,adminAlert } from "./util/googleLogin";
 import Main from "./Components/Main";
 import LogCalories from "./Components/Calories/LogCalories";
 import { getUserStateByEmailAPIMethod } from "./api/client.js";
@@ -168,7 +168,7 @@ function App() {
 				<Route
 					path="/admin"
 					render={(props) =>
-						isLoggedIn() ? (
+						isAdmin() ? (
 							<Admin
 								{...props}
 								loginState={loginState}
@@ -181,7 +181,7 @@ function App() {
 								setIsUserLoading={setIsUserLoading}
 							/>
 						) : (
-							loginAlert()
+							adminAlert()
 						)
 					}
 				/>
